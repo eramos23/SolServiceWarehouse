@@ -1,18 +1,15 @@
-import {
+﻿import {
     MenuFoldOutlined,
     MenuUnfoldOutlined,
     UploadOutlined,
     UserOutlined,
     VideoCameraOutlined,
 } from '@ant-design/icons';
-
-import '../css/home.css';
-
 import { Layout, Menu } from 'antd';
 import React, { useState } from 'react';
 const { Header, Sider, Content } = Layout;
 
-export function Home() {
+const Main = () => {
     const [collapsed, setCollapsed] = useState(false);
     return (
         <Layout>
@@ -53,7 +50,7 @@ export function Home() {
                         onClick: () => setCollapsed(!collapsed),
                     })}
                 </Header>
-                <Content    
+                <Content
                     className="site-layout-background"
                     style={{
                         margin: '24px 16px',
@@ -67,3 +64,5 @@ export function Home() {
         </Layout>
     );
 };
+
+export default Main;
