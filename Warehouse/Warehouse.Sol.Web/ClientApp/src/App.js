@@ -11,7 +11,7 @@ import {
 
 import './css/home.css';
 
-import { Layout, Menu, Breadcrumb, Avatar } from 'antd';
+import { Layout, Menu, Breadcrumb, Avatar, Space } from 'antd';
 import React, { useState } from 'react';
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -49,10 +49,17 @@ export default function Home() {
                     top: 0,
                     bottom: 0
                 }}
+                onBreakpoint={(broken) => {
+                    console.log(broken);
+                }}
+                onCollapse={(collapsed, type) => {
+                    console.log(collapsed, type);
+                }}
                 width={250} trigger={null} collapsible collapsed={collapsed}>
                 <div className="logo" />
                 <Menu
                     theme="dark"
+                    mode="inline"
                     defaultSelectedKeys={['1']}
                     items={items}
                 />
@@ -60,7 +67,7 @@ export default function Home() {
             <Layout
                 style={{
                     marginLeft: collapsed ? '80px' : '250px',
-                    transition: collapsed ? 'all 0.2s' : 'all 0.35s'
+                    transition: 'all 0.2s'
                 }}
                 className="site-layout">
                 <Header
@@ -71,9 +78,18 @@ export default function Home() {
                 >
                     {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
                         className: 'trigger',
+                        style: { color: '#fff' },
                         onClick: () => setCollapsed(!collapsed),
                     })}
-                    <Avatar style={{ marginLeft: '71%'}} icon={<UserOutlined />} />
+                    <Space size={10} className='header-right'>
+                        <Avatar size={28} icon={<UserOutlined />} />
+                        <Avatar size={28} icon={<UserOutlined />} />
+                        <Avatar
+                            size={28}
+                            style={{ verticalAlign: "middle" }}
+                            icon={<UserOutlined />}
+                        />
+                    </Space>
                 </Header>
                 <Content className="site-layout"
                     style={{
@@ -99,7 +115,7 @@ export default function Home() {
                         className="site-layout-background"
                         style={{
                             padding: 24,
-                            minHeight: 360,
+                            minHeight: 760,
                         }}
                     >
                         Bill is a cat.Bill is a cat.Bill is a cat.Bill is a cat.Bill is a cat.Bill is a cat.
