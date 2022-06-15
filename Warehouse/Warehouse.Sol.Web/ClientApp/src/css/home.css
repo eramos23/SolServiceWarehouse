@@ -50,3 +50,48 @@
     display: flex; 
     align-items: center;
 }
+
+.logo-header {
+    height: 64px;
+    padding-left: 40px;
+    overflow: hidden;
+    color: #000000d9;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 64px;
+    letter-spacing: -.18px;
+    white-space: nowrap;
+    text-decoration: none;
+}
+
+
+
+
+.a-center {
+    align-items: center;
+}
+
+.centered {
+    display: block;
+    float: none;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.flex-centered {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.flex {
+    display: flex;
+    display: -webkit-flex;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+}
+
+.white {
+    color: #fff;
+}

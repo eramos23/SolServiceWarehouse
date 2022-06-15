@@ -11,7 +11,7 @@ import {
 
 import './css/home.css';
 
-import { Layout, Menu, Breadcrumb, Avatar, Space } from 'antd';
+import { Layout, Menu, Breadcrumb, Avatar, Space, Col, Row, Dropdown, Icon } from 'antd';
 import React, { useState } from 'react';
 const { Header, Sider, Content, Footer } = Layout;
 
@@ -36,27 +36,51 @@ const items = [
     getItem('Files', '9', <FileOutlined />),
 ];
 
+
+
 export default function Home() {
     const [collapsed, setCollapsed] = useState(false);
     return (
         <Layout style={{ minHeight: '100vh' }}>
+            <Header
+                style={{
+                    background: '#fff',
+                    position: 'fixed', width: '100%', zIndex: 1
+                }}
+            >
+                <Row>
+                    <Col span={18}>
+                        <div className="white p2 a-center" >
+                            <img className={[collapsed && 'centered']} src='https://gw.alipayobjects.com/zos/rmsportal/KDpgvguMpGfqaHPjicRK.svg' width='40px' />
+                        </div>
+                    </Col>
+                    <Col span={6} pull={18}>
+                        <Space size={10} className='header-right'>
+                            <Avatar size={28} icon={<UserOutlined />} />
+                            <Avatar size={28} icon={<UserOutlined />} />
+                            <Avatar
+                                size={28}
+                                style={{ verticalAlign: "middle" }}
+                                icon={<UserOutlined />}
+                            />
+                        </Space>
+                    </Col>
+                </Row>
+                
+            </Header>
             <Sider
                 style={{
                     overflow: 'auto',
                     height: '100vh',
                     position: 'fixed',
                     left: 0,
-                    top: 0,
-                    bottom: 0
+                    top: 60,
+                    bottom: 0,
                 }}
-                onBreakpoint={(broken) => {
-                    console.log(broken);
-                }}
-                onCollapse={(collapsed, type) => {
-                    console.log(collapsed, type);
-                }}
-                width={250} trigger={null} collapsible collapsed={collapsed}>
-                <div className="logo" />
+                //breakpoint="md"
+                //collapsedWidth="0"
+                collapsible collapsed={collapsed} onCollapse={(value) => setCollapsed(value)}
+                width={250} >
                 <Menu
                     theme="dark"
                     mode="inline"
@@ -65,36 +89,16 @@ export default function Home() {
                 />
             </Sider>
             <Layout
-                style={{
-                    marginLeft: collapsed ? '80px' : '250px',
-                    transition: 'all 0.2s'
-                }}
                 className="site-layout">
-                <Header
-                    style={{
-                        padding: 0,
-                        position: 'fixed', width: '100%', zIndex: 1
-                    }}
-                >
-                    {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                        className: 'trigger',
-                        style: { color: '#fff' },
-                        onClick: () => setCollapsed(!collapsed),
-                    })}
-                    <Space size={10} className='header-right'>
-                        <Avatar size={28} icon={<UserOutlined />} />
-                        <Avatar size={28} icon={<UserOutlined />} />
-                        <Avatar
-                            size={28}
-                            style={{ verticalAlign: "middle" }}
-                            icon={<UserOutlined />}
-                        />
-                    </Space>
-                </Header>
+                
                 <Content className="site-layout"
                     style={{
                         padding: '0 50px',
-                        marginTop: 64
+                        marginTop: 64,
+                        marginLeft: collapsed ? 80 : 250,
+                        transition: 'all 0.2s',
+                        overflow: 'auto',
+                        height: '100vh'
                     }}
                 >
                     <Breadcrumb
