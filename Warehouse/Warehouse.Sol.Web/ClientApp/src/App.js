@@ -112,7 +112,7 @@ export default function Home() {
                     }}
                 >
                     <Row>
-                        <Col span={18} className="flex">
+                        <Col xs={12} sm={12} md={12} lg={10} xl={8} className="flex">
                             <div className="white p2 a-center" >
                                 <img src='https://www.zarla.com/images/zarla-soluciona-1x1-2400x2400-20210603-xv6xrmkbpk3ggkjb6869.png?crop=1:1,smart&width=250&dpr=2' width='40px' />
                             </div>
@@ -121,7 +121,7 @@ export default function Home() {
                                 onClick: () => setCollapsed(!collapsed),
                             })}
                         </Col>
-                        <Col span={6} className='header-right'>
+                        <Col xs={12} sm={12} md={12} lg={14} xl={16} className='header-right'>
                             <Space size={10} className="mr10">
                                 <div>
                                     <div className="local-layout-header">raicer1996@gmail.com</div>
@@ -149,8 +149,8 @@ export default function Home() {
                         overflow: 'auto',
                         padding: '0 35px',
                         marginTop: 64,
-                        marginLeft: (collapsed && appMode == MODES.movil) ? 0
-                            : collapsed ? 80 : 200,
+                        
+                        marginLeft: (collapsed && appMode == MODES.movil) ? 0 : collapsed ? 80 : 200,
                         transition: 'all 0.2s'
                     }}
                     /*
@@ -162,29 +162,36 @@ export default function Home() {
                     }}
                     */
                 >
-                    <Breadcrumb
-                        style={{
-                            margin: '16px 0',
-                        }}
-                    >
-                        <Breadcrumb.Item href="#">
-                            <HomeOutlined />
-                        </Breadcrumb.Item>
-                        <Breadcrumb.Item href="#">
-                            <span>Application List</span>
-                        </Breadcrumb.Item>
-                        <Breadcrumb.Item>Application</Breadcrumb.Item>
-                    </Breadcrumb>
-                 
-                    <div
-                        className="site-layout-background"
-                        style={{
-                            padding: 24,
-                            minHeight: 760,
-                        }}
-                    >
-                        Bill is a cat.Bill is a cat.Bill is a cat.Bill is a cat.Bill is a cat.Bill is a cat.
+                    <div style={{
+                        maxWidth: 1280,
+                        marginLeft: 'auto',
+                        marginRight: 'auto'
+                    }}>
+                        <Breadcrumb
+                            style={{
+                                margin: '16px 0',
+                            }}
+                        >
+                            <Breadcrumb.Item href="#">
+                                <HomeOutlined />
+                            </Breadcrumb.Item>
+                            <Breadcrumb.Item href="#">
+                                <span>Application List</span>
+                            </Breadcrumb.Item>
+                            <Breadcrumb.Item>Application</Breadcrumb.Item>
+                        </Breadcrumb>
+
+                        <div
+                            className="site-layout-background"
+                            style={{
+                                padding: 24,
+                                minHeight: 760,
+                            }}
+                        >
+                            Bill is a cat.Bill is a cat.Bill is a cat.Bill is a cat.Bill is a cat.Bill is a cat.
+                        </div>
                     </div>
+                    
                 </Content>
                 <Footer
                     style={{
