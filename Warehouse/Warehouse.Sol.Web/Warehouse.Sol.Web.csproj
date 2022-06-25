@@ -21,8 +21,15 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="ClientApp\src\area\" />
+    <Folder Include="ClientApp\src\config\router\" />
     <Folder Include="ClientApp\src\login\" />
+    <Folder Include="ClientApp\src\assets\" />
+    <Folder Include="ClientApp\src\hooks\" />
+    <Folder Include="ClientApp\src\contexts\" />
+    <Folder Include="ClientApp\src\consts\" />
+    <Folder Include="ClientApp\src\utils\" />
+    <Folder Include="ClientApp\src\pages\" />
+    <Folder Include="ClientApp\src\resources\" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
@@ -50,5 +57,7 @@
       </ResolvedFileToPublish>
     </ItemGroup>
   </Target>
+
+  <ProjectExtensions><VisualStudio><UserProperties clientapp_4package_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>
 
 </Project>
