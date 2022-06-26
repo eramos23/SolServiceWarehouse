@@ -1,69 +1,35 @@
-import {
-    MenuFoldOutlined,
-    MenuUnfoldOutlined,
-    UploadOutlined,
-    UserOutlined,
-    VideoCameraOutlined,
-} from '@ant-design/icons';
+import React from 'react';
+import { HomeOutlined } from '@ant-design/icons';
 
-import '../css/home.css';
+import { Breadcrumb } from 'antd';
 
-import { Layout, Menu } from 'antd';
-import React, { useState } from 'react';
-const { Header, Sider, Content } = Layout;
-
-export function Home() {
-    const [collapsed, setCollapsed] = useState(false);
+export default function Home () {
+    
     return (
-        <Layout>
-            <Sider trigger={null} collapsible collapsed={collapsed}>
-                <div className="logo" />
-                <Menu
-                    theme="dark"
-                    mode="inline"
-                    defaultSelectedKeys={['1']}
-                    items={[
-                        {
-                            key: '1',
-                            icon: <UserOutlined />,
-                            label: 'nav 1',
-                        },
-                        {
-                            key: '2',
-                            icon: <VideoCameraOutlined />,
-                            label: 'nav 2',
-                        },
-                        {
-                            key: '3',
-                            icon: <UploadOutlined />,
-                            label: 'nav 3',
-                        },
-                    ]}
-                />
-            </Sider>
-            <Layout className="site-layout">
-                <Header
-                    className="site-layout-background"
-                    style={{
-                        padding: 0,
-                    }}
-                >
-                    {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined, {
-                        className: 'trigger',
-                        onClick: () => setCollapsed(!collapsed),
-                    })}
-                </Header>
-                <Content    
-                    className="site-layout-background"
-                    style={{
-                        margin: '24px 16px',
-                        padding: 24,
-                        minHeight: 280,
-                    }}
-                >
-                    Content
-                </Content>
-            </Layout>
-        </Layout>
+        <div>
+            <Breadcrumb
+                style={{
+                    margin: '16px 0',
+                }}
+            >
+                <Breadcrumb.Item href="#">
+                    <HomeOutlined />
+                </Breadcrumb.Item>
+                <Breadcrumb.Item href="#">
+                    <span>Application List</span>
+                </Breadcrumb.Item>
+                <Breadcrumb.Item>Application</Breadcrumb.Item>
+            </Breadcrumb>
+
+            <div
+                className="site-layout-background"
+                style={{
+                    padding: 24,
+                    minHeight: 760,
+                }}
+            >
+                Bill is a cat.Bill is a cat.Bill is a cat.Bill is a cat.Bill is a cat.Bill is a cat.
+            </div>
+        </div>
     );
 };
