@@ -104,6 +104,31 @@
 .local-layout-header {
     line-height: 15px;
 }
+
+.pr-1 {
+    padding-right: 5px;
+}
+
+.pr-2 {
+    padding-right: 10px;
+}
+
+.pb-1 {
+    padding-bottom: 5px;
+}
+
+.pb-2 {
+    padding-bottom: 10px;
+}
+
+
+.input-pr-pb-2 {
+    padding-right: 10px;
+    padding-bottom: 5px;
+}
+
+
+
 /*
 .ant-layout-header {
     padding: 0

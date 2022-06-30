@@ -10,7 +10,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="11.0.1" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.SpaServices.Extensions" Version="5.0.15" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.17">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
   </ItemGroup>
 
   <ItemGroup>
@@ -27,9 +33,15 @@
     <Folder Include="ClientApp\src\hooks\" />
     <Folder Include="ClientApp\src\contexts\" />
     <Folder Include="ClientApp\src\consts\" />
+    <Folder Include="ClientApp\src\pages\administration\" />
     <Folder Include="ClientApp\src\utils\" />
-    <Folder Include="ClientApp\src\pages\" />
     <Folder Include="ClientApp\src\resources\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Warehouse.Solution.Core\Warehouse.Solution.Core.csproj" />
+    <ProjectReference Include="..\Warehouse.Solution.Domain\Warehouse.Solution.Domain.csproj" />
+    <ProjectReference Include="..\Warehouse.Solution.Dto\Warehouse.Solution.Dto.csproj" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
