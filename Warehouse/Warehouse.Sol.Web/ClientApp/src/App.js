@@ -4,6 +4,8 @@ import { LayoutLocal } from './components/Layout';
 import Home from './components/Home';
 import Counter from './components/Counter';
 import Demo from './pages/demo/demo-list'
+import ProviderList from './pages/management/provider/provider-list'
+import ProviderCreate from './pages/management/provider/provider-create'
 import axios from 'axios'
 
 import './custom.css'
@@ -18,6 +20,8 @@ const AppRoute = () => {
                 <Route path='/' element={<Home />} />
                 <Route path='/counter' element={<Counter />} />
                 <Route path='/Demo' element={<Demo />} />
+                <Route path='/Management/Provider' element={<ProviderList />} />
+                <Route path='/Management/Provider/Create' element={<ProviderCreate />} />
             </Routes>
         </LayoutLocal>
     );

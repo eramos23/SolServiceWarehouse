@@ -128,7 +128,17 @@
 }
 
 
+.ant-form-item-label {
+    padding: 0 0 3px !important;
+}
 
+.ant-form-item {
+    margin-bottom: 10px
+}
+
+.width100 {
+    width: 100%;
+}
 /*
 .ant-layout-header {
     padding: 0

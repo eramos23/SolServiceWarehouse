@@ -1,7 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { HomeOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import { Breadcrumb, Typography, Input, Select, Col, Row, Space, Table, Card, Button } from 'antd';
+import { Breadcrumb, Typography, Input, Select, Col, Row, Space, Table, Card, Button, Divider } from 'antd';
 import axios from 'axios'
 
 const { Search } = Input;
@@ -101,7 +101,7 @@ const Demo = () => {
                 <Breadcrumb.Item>Demo</Breadcrumb.Item>
             </Breadcrumb>
             <Title level={3}>Listado de Demostración</Title>
-            <Card>
+            <Card size="small">
                 <Row>
                     <Col sx={24} lg={12}>
                         <Search className="input-pr-pb-2" placeholder="Ingrese texto a buscar" loading={searching} onSearch={onSearch} enterButton />
@@ -135,17 +135,20 @@ const Demo = () => {
             </Card>
 
             <br />
-
-
-            <Table
-                rowSelection={{
-                    type: 'checkbox',
-                    ...rowSelection,
-                }}
-                columns={columns}
-                dataSource={data}
-                onChange={onChangeTable}
-            />
+            <Card size="small">
+                <Divider />
+                <h1>Holi</h1>
+                <Table
+                    rowSelection={{
+                        type: 'checkbox',
+                        ...rowSelection,
+                    }}
+                    columns={columns}
+                    dataSource={data}
+                    size="small"
+                    onChange={onChangeTable}
+                />
+            </Card>
         </div>
     );
 };

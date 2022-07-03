@@ -23,14 +23,17 @@ function getItem(label, key, icon, children) {
 
 const items = [
     getItem(<Link to='/'>Home</Link>, '1', <PieChartOutlined />),
-    getItem(<Link to='/counter'>counter</Link>, '2', <DesktopOutlined />),
-    getItem('User', 'sub1', <UserOutlined />, [
-        getItem('Tom', '3'),
-        getItem('Bill', '4'),
-        getItem('Alex', '5'),
+    getItem('Usuario', '2', <UserOutlined />),
+    getItem('Administración', 'sub1', <DesktopOutlined />, [
+        getItem(<Link to='/Management/Provider'>Proveedor</Link>, '3'),
+        getItem('Entidad Financiera', '4'),
+        getItem('Producto', '5'),
+        getItem('Categoria de Producto', '6'),
+        getItem('Marca', '7'),
+        getItem('Unidad', '8')
     ]),
-    getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '6'), getItem('Team 2', '8')]),
-    getItem(<Link to='/Demo'>Demo</Link>, '9', <FileOutlined />),
+    getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '9'), getItem('Team 2', '10')]),
+    getItem(<Link to='/Demo'>Demo</Link>, '11', <FileOutlined />),
 ];
 
 const MODES = {
@@ -41,7 +44,7 @@ const MODES = {
 
 export default function SiderLocal({ ...props }) {
     const location = useLocation()
-    console.log(location)
+
     return (
         <Sider
             style={{
