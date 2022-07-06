@@ -8,7 +8,7 @@ namespace Warehouse.Solution.Core.Interfaces
 {
     public interface ITemplateReadOnly<T>
     {
-        Task<List<T>> GetAllAsync();
+        Task<IEnumerable<T>> GetAllAsync();
         Task<T> GetByIdAsync(string id);
 
     }

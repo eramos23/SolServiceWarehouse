@@ -12,7 +12,9 @@ const { Title } = Typography;
 
 const ProviderList = () => {
     const [searching, setSearching] = useState(false);
-    const [entidadesFinancieras, setEntidadesFinancieras] = useState([]);
+    const [companies, setCompanies] = useState([]);
+    const [companiBranchs, setCompaniBranchs] = useState([]);
+
     const [form] = Form.useForm();
 
     const onSearch = (value) => {
@@ -97,11 +99,21 @@ const ProviderList = () => {
         console.log('params', pagination, filters, sorter, extra);
     };
 
+    const handleChangeCompanies = (value) => {
+        debugger
+        axios.get(`Management/compani-branchs?id=`+value)
+            .then(res => {
+                debugger
+                setCompaniBranchs(res.data.data)
+            })
+        
+    }
 
     useEffect(() => {
-        axios.get(`EntidadFinanciera`)
+        axios.get(`Management/companies`)
             .then(res => {
-                setEntidadesFinancieras(res.data.data)
+                debugger
+                setCompanies(res.data.data)
             })
     }, [])
     return (
@@ -137,13 +149,14 @@ const ProviderList = () => {
                                     placeholder="Buscar empresa"
                                     optionFilterProp="children"
                                     filterOption={(input, option) => option.children.includes(input)}
-                                    filterSort={(optionA, optionB) =>
+                                    filterSort={(optionA, optionB) => 
                                         optionA.children.toLowerCase().localeCompare(optionB.children.toLowerCase())
                                     }
+                                    onChange={handleChangeCompanies}
                                 >
                                     {
-                                        entidadesFinancieras.map((item) =>
-                                            <Option key={item.id} value={item.id}>{item.descripcion}</Option>
+                                        companies.map((item) =>
+                                            <Option key={item.id} value={item.id}>{item.nombre}</Option>
                                         )
                                     }
                                 </Select>
@@ -162,7 +175,7 @@ const ProviderList = () => {
                                     }
                                 >
                                     {
-                                        entidadesFinancieras.map((item) =>
+                                        companiBranchs.map((item) =>
                                             <Option key={item.id} value={item.id}>{item.descripcion}</Option>
                                         )
                                     }

@@ -19,7 +19,7 @@ namespace Warehouse.Solution.Core
             _dataManager = dataManager;
         }
 
-        public async Task<List<EntidadFinanciera>> GetAllAsync()
+        public async Task<IEnumerable<EntidadFinanciera>> GetAllAsync()
         {
             return  _dataManager.EntidadFinanciera.ToList();
         }

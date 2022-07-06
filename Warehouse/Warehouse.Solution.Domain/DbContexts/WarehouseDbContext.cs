@@ -10,7 +10,8 @@ namespace Warehouse.Solution.Domain.DbContexts
 {
     public partial class WarehouseDbContext : DbContext
     {
-        public WarehouseDbContext(DbContextOptions<WarehouseDbContext> options) : base(options)
+        public WarehouseDbContext(DbContextOptions<WarehouseDbContext> options) 
+            : base(options)
         {
 
         }
@@ -19,7 +20,7 @@ namespace Warehouse.Solution.Domain.DbContexts
         public DbSet<UnidadMedida> UnidadMedida { get; set; }
 
         public DbSet<Empresa> Empresa { get; set; }
-        public DbSet<Empresa> EmpresaSucursal { get; set; }
+        public DbSet<EmpresaSucursal> EmpresaSucursal { get; set; }
         public DbSet<Proveedor> Proveedor { get; set; }
         
 
@@ -118,6 +119,20 @@ namespace Warehouse.Solution.Domain.DbContexts
                 new UnidadMedida { Id = "14", Descripcion ="METROS CÚBICOS" },
                 new UnidadMedida { Id = "15", Descripcion ="METROS" },
                 new UnidadMedida { Id = "99", Descripcion ="OTROS (ESPECIFICAR)" }
+            });
+
+            modelBuilder.Entity<Empresa>().HasData(new Empresa[]
+            {
+                new Empresa{ Id = new Guid("9d79cde1-babd-44dc-ac5a-9379afa68a75"), Nombre = "FARMACIA RAMOS S.A."},
+                new Empresa{ Id = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"), Nombre = "MINIMARKETS RAMOS S.A."}
+            });
+
+            modelBuilder.Entity<EmpresaSucursal>().HasData(new EmpresaSucursal[]
+            {
+                new EmpresaSucursal{ Id = new Guid("e84ee21d-48bc-4ef7-978a-a0ae02520904"), IdEmpresa = new Guid("9d79cde1-babd-44dc-ac5a-9379afa68a75"), Direccion = "Av. Los angeles 232", Descripcion = "Farmacia Principal de Los Olivos"},
+                new EmpresaSucursal{ Id = new Guid("4649554b-ab5e-4647-866e-1cc4e4b50ffa"), IdEmpresa = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"), Direccion = "Av. Caceres de Hurre 122", Descripcion = "Minimarket los Olivos 1"},
+                new EmpresaSucursal{ Id = new Guid("9414a1d9-c237-4e95-9d76-3290ecb1c551"), IdEmpresa = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"), Direccion = "Av. Proceres 121", Descripcion = "Minimarket los Olivos 2"}
+
             });
         }
     }

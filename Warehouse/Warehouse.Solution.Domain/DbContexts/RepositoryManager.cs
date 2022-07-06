@@ -16,12 +16,22 @@ namespace Warehouse.Solution.Domain.DbContexts
 
         private readonly IRepository<Proveedor> _proveedorRepository;
         private readonly IRepository<EntidadFinanciera> _entidadFinancieraRepository;
-        public WarehouseDbContext DbContext => this.Context;
+        private readonly IRepository<Empresa> _empresaRepository;
+        private readonly IRepository<EmpresaSucursal> _empresaSucursalRepository;
 
-
+        public RepositoryManager(WarehouseDbContext context)
+        {
+            this.Context = context;
+        }
 
         public IRepository<Proveedor> ProveedorRepository => this._proveedorRepository ?? new Respository<Proveedor>(this.Context);
         public IRepository<EntidadFinanciera> EntidadFinancieraRepository => this._entidadFinancieraRepository ?? new Respository<EntidadFinanciera>(this.Context);
+
+        public IRepository<Empresa> EmpresaRepository => this._empresaRepository ?? new Respository<Empresa>(this.Context);
+
+        public IRepository<EmpresaSucursal> EmpresaSucursalRepository => this._empresaSucursalRepository ?? new Respository<EmpresaSucursal>(this.Context);
+
+        public WarehouseDbContext DbContext => this.Context;
 
         public void Dispose()
         {
