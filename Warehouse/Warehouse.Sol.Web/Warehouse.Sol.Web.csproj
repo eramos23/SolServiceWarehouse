@@ -44,6 +44,12 @@
     <ProjectReference Include="..\Warehouse.Solution.Dto\Warehouse.Solution.Dto.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="SKJ.Shared.Data">
+      <HintPath>..\External\SKJ.Shared.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
     <!-- Ensure Node.js is installed -->
     <Exec Command="node --version" ContinueOnError="true">

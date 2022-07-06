@@ -13,4 +13,10 @@
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="5.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Reference Include="SKJ.Shared.Data">
+      <HintPath>..\External\SKJ.Shared.Data.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
 </Project>

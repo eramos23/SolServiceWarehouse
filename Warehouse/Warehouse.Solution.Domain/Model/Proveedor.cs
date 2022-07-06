@@ -35,6 +35,7 @@ namespace Warehouse.Solution.Domain.Model
         public string Telefono { get; set; }
 
         public int TipoProveedor { get; set; }
+        public string NombreTipoProveedor { get; set; }
 
         [ForeignKey("IdEmpresa")]
         public Empresa Empresa { get; set; }

@@ -11,9 +11,14 @@ const ProviderList = () => {
     
     const [entidadesFinancieras, setEntidadesFinancieras] = useState([]);
     const [form] = Form.useForm();
-    
+
+    const onFinish = (values) => {
+        console.log(values);
+    };
+
     useEffect(() => {
-        axios.get(`EntidadFinanciera`)
+
+        axios.get(`/Provider/GetAll`, {params:{ Nombre: 'Holi' }})
             .then(res => {
                 setEntidadesFinancieras(res.data.data)
             })
@@ -38,6 +43,7 @@ const ProviderList = () => {
                 <Form
                     layout='vertical'
                     form={form}
+                    onFinish={onFinish}
                     initialValues={{
                         layout: 'vertical',
                     }}
@@ -157,7 +163,7 @@ const ProviderList = () => {
                         <Col sx={24} lg={3} className="width100">
                             <Form.Item>
                                 <Link to='#'>
-                                    <Button style={{ float: 'right', width: '100%' }} type="primary" icon={<SaveOutlined />}>
+                                    <Button htmlType="submit" style={{ float: 'right', width: '100%' }} type="primary" icon={<SaveOutlined />}>
                                         Guardar
                                     </Button>
                                 </Link>

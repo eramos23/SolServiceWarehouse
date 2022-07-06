@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
@@ -10,6 +10,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Warehouse.Solution.Domain\Warehouse.Solution.Domain.csproj" />
+    <ProjectReference Include="..\Warehouse.Solution.Dto\Warehouse.Solution.Dto.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="SKJ.Shared.Data">
+      <HintPath>..\External\SKJ.Shared.Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
 </Project>

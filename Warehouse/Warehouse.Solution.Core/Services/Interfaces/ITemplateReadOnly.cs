@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Warehouse.Solution.Domain.Model;
 
 namespace Warehouse.Solution.Core.Interfaces
 {
-    public interface IEntidadFinancieraService : IReadOnly<EntidadFinanciera>
+    public interface ITemplateReadOnly<T>
     {
-        
+        Task<List<T>> GetAllAsync();
+        Task<T> GetByIdAsync(string id);
+
     }
 }

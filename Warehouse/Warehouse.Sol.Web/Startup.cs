@@ -29,7 +29,7 @@ namespace Warehouse.Sol.Web
 
             var ConnectionString = this.Configuration.GetConnectionString("DbConnetion");            
             services.AddDbContextPool<WarehouseDbContext>(options => options.UseMySql(ConnectionString, ServerVersion.AutoDetect(ConnectionString)));
-
+            
             // In production, the React files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
