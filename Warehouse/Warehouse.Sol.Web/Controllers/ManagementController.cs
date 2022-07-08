@@ -15,9 +15,9 @@ namespace Warehouse.Sol.Web.Controllers
     [Produces("application/json")]
     public class ManagementController : BaseController
     {
-        private readonly IEmpresaService _empresaService;
-        private readonly IEmpresaSucursalService _empresaSucursalService;
-        public ManagementController(IEmpresaService empresaService, IEmpresaSucursalService empresaSucursalService, IMapper mapper) : base(mapper)
+        private readonly ICompanyService _empresaService;
+        private readonly ICompanyBranchService _empresaSucursalService;
+        public ManagementController(ICompanyService empresaService, ICompanyBranchService empresaSucursalService, IMapper mapper) : base(mapper)
         {
             _empresaService = empresaService;
             _empresaSucursalService = empresaSucursalService;

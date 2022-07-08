@@ -18,6 +18,7 @@ namespace Warehouse.Solution.Domain.DbContexts
         private readonly IRepository<EntidadFinanciera> _entidadFinancieraRepository;
         private readonly IRepository<Empresa> _empresaRepository;
         private readonly IRepository<EmpresaSucursal> _empresaSucursalRepository;
+        private readonly IRepository<Catalogo> _catalogoRepository;
 
         public RepositoryManager(WarehouseDbContext context)
         {
@@ -31,6 +32,7 @@ namespace Warehouse.Solution.Domain.DbContexts
 
         public IRepository<EmpresaSucursal> EmpresaSucursalRepository => this._empresaSucursalRepository ?? new Respository<EmpresaSucursal>(this.Context);
 
+        public IRepository<Catalogo> CatalogoRepository => this._catalogoRepository ?? new Respository<Catalogo>(this.Context);
         public WarehouseDbContext DbContext => this.Context;
 
         public void Dispose()

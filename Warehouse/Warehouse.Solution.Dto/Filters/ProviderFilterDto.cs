@@ -8,6 +8,8 @@ namespace Warehouse.Solution.Dto.Filters
 {
     public class ProviderFilterDto
     {
-        public string Nombre { get; set; }
+        public string? IdEmpresa { get; set; }
+        public string? IdEmpresaSucursal { get; set; }
+        public string? Texto { get; set; }
     }
 }

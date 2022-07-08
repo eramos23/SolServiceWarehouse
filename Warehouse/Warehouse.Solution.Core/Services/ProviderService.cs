@@ -44,7 +44,21 @@ namespace Warehouse.Solution.Core.Services
         public async Task<List<Proveedor>> GetAllAsync(ProviderFilterDto filterDto)
         {
             IQueryable<Proveedor> query = DataManager.ProveedorRepository.GetQueryable()
-                                                    .Include(c => c.TipoDocumentoIdentidad);
+                                                    .Include(c => c.TipoDocumentoIdentidad)
+                                                    .Include(c => c.Estado);
+
+            if (!string.IsNullOrEmpty(filterDto.IdEmpresa))
+                query = query.Where(c => c.IdEmpresa == new Guid(filterDto.IdEmpresa));
+
+            if (!string.IsNullOrEmpty(filterDto.IdEmpresaSucursal))
+                query = query.Where(c => c.IdEmpresaSucursal == new Guid(filterDto.IdEmpresaSucursal));
+
+            if (!string.IsNullOrEmpty(filterDto.Texto))
+                query = query.Where(c => c.Nombre.Contains(filterDto.Texto)
+                || c.Docuemto.Contains(filterDto.Texto)
+                || c.Direccion.Contains(filterDto.Texto)
+                || c.Correo.Contains(filterDto.Texto)
+                || c.Telefono.Contains(filterDto.Texto));
 
             return await query.ToListAsync();
         }

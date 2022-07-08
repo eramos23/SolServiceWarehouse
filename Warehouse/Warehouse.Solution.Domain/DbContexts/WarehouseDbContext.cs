@@ -22,7 +22,7 @@ namespace Warehouse.Solution.Domain.DbContexts
         public DbSet<Empresa> Empresa { get; set; }
         public DbSet<EmpresaSucursal> EmpresaSucursal { get; set; }
         public DbSet<Proveedor> Proveedor { get; set; }
-        
+        public DbSet<Catalogo> Catalogo { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -133,6 +133,32 @@ namespace Warehouse.Solution.Domain.DbContexts
                 new EmpresaSucursal{ Id = new Guid("4649554b-ab5e-4647-866e-1cc4e4b50ffa"), IdEmpresa = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"), Direccion = "Av. Caceres de Hurre 122", Descripcion = "Minimarket los Olivos 1"},
                 new EmpresaSucursal{ Id = new Guid("9414a1d9-c237-4e95-9d76-3290ecb1c551"), IdEmpresa = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"), Direccion = "Av. Proceres 121", Descripcion = "Minimarket los Olivos 2"}
 
+            });
+
+            modelBuilder.Entity<Catalogo>().HasData(new Catalogo[]
+            {
+                new Catalogo{ Id=1, Abreviatura = "ACT", Nombre="Activo", Descripcion = "Registro activo"},
+                new Catalogo{ Id=2, Abreviatura = "IACT", Nombre="Inactivo", Descripcion = "Registro inactivo"},
+
+            });
+
+
+            modelBuilder.Entity<Proveedor>().HasData(new Proveedor[]
+            {
+                new Proveedor{
+                    Id = new Guid("4e7da830-71a2-4758-9b21-ec7d0dda7984"),
+                    IdEmpresa = new Guid("9d79cde1-babd-44dc-ac5a-9379afa68a75"),
+                    IdEmpresaSucursal = new Guid("e84ee21d-48bc-4ef7-978a-a0ae02520904"),
+                    Nombre = "Proveedor de mecicamentos S.A.",
+                    IdTipoDocumento = "6",
+                    Docuemto = "20718623451",
+                    Direccion = "Jr. Mira flores, calle 2 pabellon 52",
+                    Correo = "proveedordemedicamentos@gmail.com",
+                    Telefono = "10-12222-22",
+                    TipoProveedor = 1,
+                    NombreTipoProveedor = "FACTURACION-STOCK",
+                    IdEstado = 1
+                }
             });
         }
     }

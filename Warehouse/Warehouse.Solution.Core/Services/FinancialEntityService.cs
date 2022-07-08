@@ -10,11 +10,11 @@ using Warehouse.Solution.Domain.Model;
 
 namespace Warehouse.Solution.Core
 {
-    public class EntidadFinancieraService : IEntidadFinancieraService
+    public class FinancialEntityService : IFinancialEntityService
     {
         private readonly WarehouseDbContext _dataManager;
 
-        public EntidadFinancieraService(WarehouseDbContext dataManager)
+        public FinancialEntityService(WarehouseDbContext dataManager)
         {
             _dataManager = dataManager;
         }

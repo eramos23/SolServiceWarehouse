@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Warehouse.Solution.Core.Interfaces;
 using Warehouse.Solution.Domain.Model;
 
-namespace Warehouse.Solution.Core.Services.Interfaces
+namespace Warehouse.Solution.Core.Interfaces
 {
-    public interface IEmpresaService : ITemplateReadOnly<Empresa>
+    public interface IFinancialEntityService : ITemplateReadOnly<EntidadFinanciera>
     {
-
+        
     }
 }

@@ -13,9 +13,9 @@ namespace Warehouse.Sol.Web.Configuration
         public static void AddCoreServices(this IServiceCollection services)
         {
             services.AddTransient<IDataManager, RepositoryManager>();
-            services.AddScoped<IEntidadFinancieraService, EntidadFinancieraService>();
-            services.AddScoped<IEmpresaService, EmpresaService>();
-            services.AddScoped<IEmpresaSucursalService, EmpresaSucursalService>();
+            services.AddScoped<IFinancialEntityService, FinancialEntityService>();
+            services.AddScoped<ICompanyService, CompanyService>();
+            services.AddScoped<ICompanyBranchService, CompanyBranchService>();
             services.AddScoped<IProviderService, ProviderService>();
         }
     }

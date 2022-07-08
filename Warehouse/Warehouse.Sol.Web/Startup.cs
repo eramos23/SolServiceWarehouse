@@ -36,7 +36,7 @@ namespace Warehouse.Sol.Web
                 configuration.RootPath = "ClientApp/build";
             });
             services.AddCoreServices();
-            services.AddAutoMapper(typeof(EntidadFinancieraProfile));
+            //services.AddAutoMapper(typeof(EntidadFinancieraProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -70,6 +70,8 @@ namespace Warehouse.Sol.Web
                 if (env.IsDevelopment())
                 {
                     spa.UseReactDevelopmentServer(npmScript: "start");
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:32553");
+                    //spa.UseProxyToSpaDevelopmentServer("http://localhost:32553/");
                 }
             });
         }

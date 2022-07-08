@@ -10,10 +10,10 @@ using Warehouse.Solution.Domain.Model;
 
 namespace Warehouse.Solution.Core.Services
 {
-    public class EmpresaSucursalService : IEmpresaSucursalService
+    public class CompanyBranchService : ICompanyBranchService
     {
         private readonly IDataManager _dataManager;
-        public EmpresaSucursalService(IDataManager dataManager)
+        public CompanyBranchService(IDataManager dataManager)
         {
             _dataManager = dataManager;
         }

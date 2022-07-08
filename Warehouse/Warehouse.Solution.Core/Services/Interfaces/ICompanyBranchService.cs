@@ -8,7 +8,7 @@ using Warehouse.Solution.Domain.Model;
 
 namespace Warehouse.Solution.Core.Services.Interfaces
 {
-    public interface IEmpresaSucursalService : ITemplateReadOnly<EmpresaSucursal>
+    public interface ICompanyBranchService : ITemplateReadOnly<EmpresaSucursal>
     {
         Task<IEnumerable<EmpresaSucursal>> GetAllByIdCompanyAsync(string idCompany);
     }

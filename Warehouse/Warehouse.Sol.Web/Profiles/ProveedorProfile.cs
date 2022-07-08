@@ -4,9 +4,9 @@ using Warehouse.Solution.Dto;
 
 namespace Warehouse.Sol.Web.Profiles
 {
-    public class Proveedor : Profile
+    public class ProveedorProfile : Profile
     {
-        public Proveedor()
+        public ProveedorProfile()
         {
             CreateMap<ProveedorDto, Proveedor>();
             CreateMap<Proveedor, ProveedorDto>();

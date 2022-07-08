@@ -3,7 +3,7 @@ import { HomeOutlined, SearchOutlined, PlusOutlined, EditTwoTone, DeleteTwoTone 
 import { Link } from 'react-router-dom';
 import FloatInput from "../../../components/FloatInput";
 import { Breadcrumb, Typography, Input, Select, Col, Row, Space, Table, Card, Button, Form, Divider, Tag } from 'antd';
-import axios from 'axios'
+//import axios from 'axios'
 
 const { Search } = Input;
 const { Option } = Select;
@@ -13,6 +13,7 @@ const { Title } = Typography;
 const ProviderList = () => {
     const [searching, setSearching] = useState(false);
     const [companies, setCompanies] = useState([]);
+    const [providers, setProviders] = useState([]);
     const [companiBranchs, setCompaniBranchs] = useState([]);
 
     const [form] = Form.useForm();
@@ -33,17 +34,20 @@ const ProviderList = () => {
         },
         {
             title: 'Tipo Proveedor',
-            dataIndex: 'tipoProveedor',
+            dataIndex: 'nombreTipoProveedor',
             sorter: (a, b) => a.tipoProveedor.length - b.tipoProveedor.length
         },
         {
             title: 'Tipo Documento',
-            dataIndex: 'tipoDocumento',
+            dataIndex: 'tipoDocumentoIdentidad',
+            render: (tipoDocumento) => (
+                tipoDocumento.descripcion
+            ),
             sorter: (a, b) => a.tipoDocumento.length - b.tipoDocumento.length
         },
         {
             title: 'Número Documento',
-            dataIndex: 'numeroDocumento',
+            dataIndex: 'docuemto',
             sorter: (a, b) => a.numeroDocumento.length - b.numeroDocumento.length
         },
         {
@@ -52,8 +56,8 @@ const ProviderList = () => {
             sorter: (a, b) => a.estado.length - b.estado.length,
             align: 'center',
             render: (estado) => (
-                <Tag color={estado == 'Activo' ? 'success' : 'error'} key={estado}>
-                    {estado}
+                <Tag color={estado.nombre == 'Activo' ? 'success' : 'error'} key={estado.nombre}>
+                    {estado.nombre}
                 </Tag>
             )
         },
@@ -65,56 +69,41 @@ const ProviderList = () => {
             render: (text) => <><Button size="small" icon={<EditTwoTone />} href="#" /> {"  "} <Button size="small" icon={<DeleteTwoTone twoToneColor="#ff4d4f" />} /></>
         },
     ];
-    const data = [
-        {
-            key: '1',
-            nombre: 'A Sunarp S.A.C.',
-            tipoProveedor: 'Gastos',
-            tipoDocumento: 'Ruc',
-            numeroDocumento: '20718634761',
-            estado: 'Activo'
-        },
-        {
-            key: '2',
-            nombre: 'Bonilla Proveedores S.A.C.',
-            tipoProveedor: 'Facturación-Stok',
-            tipoDocumento: 'Otros',
-            numeroDocumento: '71863476',
-            estado: 'Inactivo'
-        }
-    ];
-
-    const rowSelection = {
-        onChange: (selectedRowKeys, selectedRows) => {
-            console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
-        },
-        getCheckboxProps: (record) => ({
-            disabled: record.name === 'Disabled User',
-            // Column configuration not to be checked
-            name: record.name,
-        }),
-    };
-
+    
     const onChangeTable = (pagination, filters, sorter, extra) => {
         console.log('params', pagination, filters, sorter, extra);
     };
 
     const handleChangeCompanies = (value) => {
-        debugger
+        form.resetFields(["sucursal"]);
         axios.get(`Management/compani-branchs?id=`+value)
             .then(res => {
-                debugger
                 setCompaniBranchs(res.data.data)
             })
         
     }
 
+    const handleSeach = (value) => {
+        debugger
+        axios.get(`Provider/get-list`, { params: { value } })
+            .then(res => {
+                console.log(res.data.data)
+                setProviders(res.data.data.map((item, i) => {
+                    return {
+                        key: i,
+                        ...item
+                    }
+                }))
+            })
+
+    }
+
     useEffect(() => {
         axios.get(`Management/companies`)
             .then(res => {
-                debugger
                 setCompanies(res.data.data)
             })
+        handleSeach()
     }, [])
     return (
         <div>
@@ -136,13 +125,15 @@ const ProviderList = () => {
                 <Form
                     layout='vertical'
                     form={form}
+                    name="control-hooks"
                     initialValues={{
                         layout: 'vertical',
                     }}
+                    onFinish = {handleSeach}
                 >
                     <Row gutter={[10, 0]}>
                         <Col sx={24} lg={12} className="width100">
-                            <Form.Item label="Empresa">
+                            <Form.Item label="Empresa" name="IdEmpresa">
                                 <Select
                                     className="width100"
                                     showSearch
@@ -163,7 +154,7 @@ const ProviderList = () => {
                             </Form.Item>
                         </Col>
                         <Col sx={24} lg={12} className="width100">
-                            <Form.Item label="Sucursal">
+                            <Form.Item label="Sucursal" name="IdEmpresaSucursal">
                                 <Select
                                     className="width100"
                                     showSearch
@@ -183,7 +174,7 @@ const ProviderList = () => {
                             </Form.Item>
                         </Col>
                         <Col sx={24} lg={21} className="width100">
-                            <Form.Item>
+                            <Form.Item name="Texto">
                                 <Input placeholder="Ingrese texto a buscar" allowClear />
                             </Form.Item>
                         </Col>
@@ -215,7 +206,7 @@ const ProviderList = () => {
             <Card size="small">
                 <Table
                     columns={columns}
-                    dataSource={data}
+                    dataSource={providers}
                     size="small"
                     showSorterTooltip={false}
                 onChange={onChangeTable}

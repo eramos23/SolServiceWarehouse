@@ -17,8 +17,8 @@ namespace Warehouse.Sol.Web.Controllers
     [Produces("application/json")]
     public class EntidadFinancieraController : BaseController
     {
-        private readonly IEntidadFinancieraService _service;
-        public EntidadFinancieraController(IEntidadFinancieraService service, IMapper mapper): base(mapper)
+        private readonly IFinancialEntityService _service;
+        public EntidadFinancieraController(IFinancialEntityService service, IMapper mapper): base(mapper)
         {
             _service = service;
         }

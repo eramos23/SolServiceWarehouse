@@ -26,7 +26,7 @@ namespace Warehouse.Sol.Web.Controllers
             _service = service;
         }
 
-        [HttpGet]
+        [HttpGet("get-list")]
         [ProducesResponseType(typeof(DataQuery<List<ProveedorDto>>), 200)]
         public async Task<ActionResult> GetAll([FromQuery] ProviderFilterDto filterDto)
         {

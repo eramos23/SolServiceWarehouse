@@ -9,6 +9,7 @@ namespace Warehouse.Solution.Domain.DbContexts.Interface
         IRepository<EntidadFinanciera> EntidadFinancieraRepository { get; }
         IRepository<Empresa> EmpresaRepository { get; }
         IRepository<EmpresaSucursal> EmpresaSucursalRepository { get; }
+        IRepository<Catalogo> CatalogoRepository { get; }
         WarehouseDbContext DbContext { get; }
     }
 }

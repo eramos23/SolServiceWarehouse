@@ -11,6 +11,7 @@ namespace Warehouse.Solution.Dto
         public Guid Id { get; set; }
         public Guid IdEmpresa { get; set; }
         public Guid IdEmpresaSucursal { get; set; }
+        public string Nombre { get; set; }
         public string IdTipoDocumento { get; set; }
         public string Docuemto { get; set; }        
         public string Direccion { get; set; }        
@@ -21,6 +22,7 @@ namespace Warehouse.Solution.Dto
         public EmpresaDto Empresa { get; set; }
         public EmpresaSucursalDto EmpresaSucursal { get; set; }
         public TipoDocumentoIdentidadDto TipoDocumentoIdentidad { get; set; }
+        public CatalogoDto Estado { get; set; }
 
     }
 }
