@@ -6,7 +6,7 @@ import Counter from './components/Counter';
 import Demo from './pages/demo/demo-list'
 import ProviderList from './pages/management/provider/provider-list'
 import ProviderCreate from './pages/management/provider/provider-create'
-//import axios from 'axios'
+import axios from 'axios'
 
 import './custom.css'
 

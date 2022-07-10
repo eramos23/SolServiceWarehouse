@@ -36,7 +36,7 @@ namespace Warehouse.Sol.Web
                 configuration.RootPath = "ClientApp/build";
             });
             services.AddCoreServices();
-            //services.AddAutoMapper(typeof(EntidadFinancieraProfile));
+            services.AddAutoMapper(typeof(EntidadFinancieraProfile));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

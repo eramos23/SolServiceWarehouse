@@ -1,9 +1,9 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { HomeOutlined, SearchOutlined, PlusOutlined, EditTwoTone, DeleteTwoTone } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
-import FloatInput from "../../../components/FloatInput";
-import { Breadcrumb, Typography, Input, Select, Col, Row, Space, Table, Card, Button, Form, Divider, Tag } from 'antd';
-//import axios from 'axios'
+import CustomEmpty from "../../../components/Empty/NoData";
+import { Breadcrumb, Typography, Input, Select, Col, Row, Space, Table, Card, Button, Form, Divider, Tag, ConfigProvider } from 'antd';
+import axios from 'axios'
 
 const { Search } = Input;
 const { Option } = Select;
@@ -18,13 +18,6 @@ const ProviderList = () => {
 
     const [form] = Form.useForm();
 
-    const onSearch = (value) => {
-        setSearching(true)
-        setTimeout(() => {
-            setSearching(false)
-        }, 1000);
-        
-    }
 
     const columns = [
         {
@@ -75,7 +68,7 @@ const ProviderList = () => {
     };
 
     const handleChangeCompanies = (value) => {
-        form.resetFields(["sucursal"]);
+        form.resetFields(["IdEmpresaSucursal"]);
         axios.get(`Management/compani-branchs?id=`+value)
             .then(res => {
                 setCompaniBranchs(res.data.data)
@@ -85,9 +78,10 @@ const ProviderList = () => {
 
     const handleSeach = (value) => {
         debugger
-        axios.get(`Provider/get-list`, { params: { value } })
+        setSearching(true)
+        axios.get(`Provider/get-list`, { params: value })
             .then(res => {
-                console.log(res.data.data)
+                setSearching(false)
                 setProviders(res.data.data.map((item, i) => {
                     return {
                         key: i,
@@ -120,8 +114,8 @@ const ProviderList = () => {
                 <Breadcrumb.Item>Listar</Breadcrumb.Item>
             </Breadcrumb>
             <Title level={3}>Listado de Proveedorees</Title>
+            <ConfigProvider renderEmpty={CustomEmpty}>
             <Card size="small">
-
                 <Form
                     layout='vertical'
                     form={form}
@@ -180,7 +174,7 @@ const ProviderList = () => {
                         </Col>
                         <Col sx={24} lg={3} className="width100">
                             <Form.Item>
-                                <Button style={{ float: 'right', width: '100%' }} type="primary" icon={<SearchOutlined />}>
+                                <Button style={{ float: 'right', width: '100%' }} htmlType="submit" type="primary" icon={<SearchOutlined />} loading={searching}>
                                     Buscar
                                 </Button>
                             </Form.Item>
@@ -200,9 +194,9 @@ const ProviderList = () => {
                 </Form>
 
             </Card>
-
+            </ConfigProvider>
             <br />
-
+            <ConfigProvider renderEmpty={CustomEmpty}>
             <Card size="small">
                 <Table
                     columns={columns}
@@ -211,7 +205,8 @@ const ProviderList = () => {
                     showSorterTooltip={false}
                 onChange={onChangeTable}
                 />
-            </Card>
+                </Card>
+            </ConfigProvider>
         </div>
     );
 };
