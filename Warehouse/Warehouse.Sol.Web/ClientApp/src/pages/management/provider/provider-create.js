@@ -96,7 +96,8 @@ const ProviderList = () => {
                             </Form.Item>
                         </Col>
                         <Col sx={24} lg={8} className="width100">
-                            <Form.Item label="Tipo Documento">
+                            <Form.Item label="Tipo 
+">
                                 <Select className="width100" >
                                     {
                                         entidadesFinancieras.map((item) =>

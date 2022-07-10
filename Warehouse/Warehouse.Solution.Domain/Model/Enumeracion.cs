@@ -7,19 +7,24 @@ using System.Threading.Tasks;
 
 namespace Warehouse.Solution.Domain.Model
 {
-    public class ProductoCategoria : HistoryModel
+    public class Enumeracion : HistoryModel
     {
-        public ProductoCategoria()
+        public Enumeracion()
         {
 
         }
+
+        [Key]
         public Guid Id { get; set; }
         public Guid IdEmpresa { get; set; }
         public Guid IdEmpresaSucursal { get; set; }
         [StringLength(50)]
-        public string Nombre { get; set; }
+        public string TipoComprobante { get; set; }
+        [StringLength(5)]
+        //Serie(F001)
+        public string Identificador { get; set; }
+        public int Correlativo { get; set; }
         [StringLength(200)]
         public string Observacion { get; set; }
-        public List<Producto> Productos { get; set; }
     }
 }

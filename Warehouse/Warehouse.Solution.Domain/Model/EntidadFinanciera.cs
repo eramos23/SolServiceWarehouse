@@ -13,7 +13,7 @@ namespace Warehouse.Solution.Domain.Model
         [Key]
         [Column("Id", TypeName = "char(2)")]
         public string Id { get; set; }
-        [StringLength(50)]
-        public string Descripcion { get; set; }
+        [StringLength(100)]
+        public string Nombre { get; set; }
     }
 }

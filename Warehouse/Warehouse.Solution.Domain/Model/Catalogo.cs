@@ -19,7 +19,7 @@ namespace Warehouse.Solution.Domain.Model
         public int Id { get; set; }
         [StringLength(10)]
         public string Abreviatura { get; set; }
-        [StringLength(50)]
+        [StringLength(100)]
         public string Nombre { get; set; }
         [StringLength(200)]
         public string Descripcion { get; set; }

@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Warehouse.Solution.Domain.DbContexts;
 
 namespace Warehouse.Solution.Domain.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    partial class WarehouseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220710062644_creacion-tablas-maestras")]
+    partial class creaciontablasmaestras
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -260,7 +262,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         new
                         {
                             Id = new Guid("9d79cde1-babd-44dc-ac5a-9379afa68a75"),
-                            FechaCreacion = new DateTime(2022, 7, 10, 1, 32, 8, 578, DateTimeKind.Local).AddTicks(7955),
+                            FechaCreacion = new DateTime(2022, 7, 10, 1, 26, 44, 405, DateTimeKind.Local).AddTicks(8257),
                             FechaInicio = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "FARMACIA RAMOS S.A.",
                             Vigente = true
@@ -268,7 +270,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         new
                         {
                             Id = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"),
-                            FechaCreacion = new DateTime(2022, 7, 10, 1, 32, 8, 583, DateTimeKind.Local).AddTicks(9242),
+                            FechaCreacion = new DateTime(2022, 7, 10, 1, 26, 44, 410, DateTimeKind.Local).AddTicks(8584),
                             FechaInicio = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "MINIMARKETS RAMOS S.A.",
                             Vigente = true
@@ -318,7 +320,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         {
                             Id = new Guid("e84ee21d-48bc-4ef7-978a-a0ae02520904"),
                             Direccion = "Av. Los angeles 232",
-                            FechaCreacion = new DateTime(2022, 7, 10, 1, 32, 8, 584, DateTimeKind.Local).AddTicks(70),
+                            FechaCreacion = new DateTime(2022, 7, 10, 1, 26, 44, 410, DateTimeKind.Local).AddTicks(9799),
                             IdEmpresa = new Guid("9d79cde1-babd-44dc-ac5a-9379afa68a75"),
                             Nombre = "Farmacia Principal de Los Olivos",
                             Vigente = true
@@ -327,7 +329,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         {
                             Id = new Guid("4649554b-ab5e-4647-866e-1cc4e4b50ffa"),
                             Direccion = "Av. Caceres de Hurre 122",
-                            FechaCreacion = new DateTime(2022, 7, 10, 1, 32, 8, 584, DateTimeKind.Local).AddTicks(1718),
+                            FechaCreacion = new DateTime(2022, 7, 10, 1, 26, 44, 411, DateTimeKind.Local).AddTicks(1618),
                             IdEmpresa = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"),
                             Nombre = "Minimarket los Olivos 1",
                             Vigente = true
@@ -336,7 +338,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         {
                             Id = new Guid("9414a1d9-c237-4e95-9d76-3290ecb1c551"),
                             Direccion = "Av. Proceres 121",
-                            FechaCreacion = new DateTime(2022, 7, 10, 1, 32, 8, 584, DateTimeKind.Local).AddTicks(1740),
+                            FechaCreacion = new DateTime(2022, 7, 10, 1, 26, 44, 411, DateTimeKind.Local).AddTicks(1638),
                             IdEmpresa = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"),
                             Nombre = "Minimarket los Olivos 2",
                             Vigente = true
@@ -570,7 +572,7 @@ namespace Warehouse.Solution.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("forma_pago");
+                    b.ToTable("FormaPago");
                 });
 
             modelBuilder.Entity("Warehouse.Solution.Domain.Model.ImpuestoMoneda", b =>
@@ -617,7 +619,7 @@ namespace Warehouse.Solution.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("impuesto_moneda");
+                    b.ToTable("ImpuestoMoneda");
                 });
 
             modelBuilder.Entity("Warehouse.Solution.Domain.Model.Laboratorio", b =>
@@ -668,7 +670,7 @@ namespace Warehouse.Solution.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("motivo_nota_credito");
+                    b.ToTable("MotivoNotaCredito");
                 });
 
             modelBuilder.Entity("Warehouse.Solution.Domain.Model.Producto", b =>
@@ -789,7 +791,7 @@ namespace Warehouse.Solution.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("producto_categoria");
+                    b.ToTable("ProductoCategoria");
                 });
 
             modelBuilder.Entity("Warehouse.Solution.Domain.Model.ProductoMarca", b =>
@@ -814,7 +816,7 @@ namespace Warehouse.Solution.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("producto_marca");
+                    b.ToTable("ProductoMarca");
                 });
 
             modelBuilder.Entity("Warehouse.Solution.Domain.Model.ProductoUso", b =>
@@ -839,7 +841,7 @@ namespace Warehouse.Solution.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("producto_uso");
+                    b.ToTable("ProductoUso");
                 });
 
             modelBuilder.Entity("Warehouse.Solution.Domain.Model.Proveedor", b =>
@@ -920,7 +922,7 @@ namespace Warehouse.Solution.Domain.Migrations
                             Id = new Guid("4e7da830-71a2-4758-9b21-ec7d0dda7984"),
                             Correo = "proveedordemedicamentos@gmail.com",
                             Direccion = "Jr. Mira flores, calle 2 pabellon 52",
-                            FechaCreacion = new DateTime(2022, 7, 10, 1, 32, 8, 584, DateTimeKind.Local).AddTicks(4348),
+                            FechaCreacion = new DateTime(2022, 7, 10, 1, 26, 44, 411, DateTimeKind.Local).AddTicks(4718),
                             IdEmpresa = new Guid("9d79cde1-babd-44dc-ac5a-9379afa68a75"),
                             IdEmpresaSucursal = new Guid("e84ee21d-48bc-4ef7-978a-a0ae02520904"),
                             IdEstado = 1,
@@ -1075,7 +1077,7 @@ namespace Warehouse.Solution.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tipo_nota_credito");
+                    b.ToTable("TipoNotaCredito");
                 });
 
             modelBuilder.Entity("Warehouse.Solution.Domain.Model.TipoOperacion", b =>
@@ -1100,7 +1102,7 @@ namespace Warehouse.Solution.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("tipo_operacion");
+                    b.ToTable("TipoOperacion");
                 });
 
             modelBuilder.Entity("Warehouse.Solution.Domain.Model.Ubigeo", b =>

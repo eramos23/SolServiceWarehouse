@@ -14,6 +14,6 @@ namespace Warehouse.Solution.Domain.Model
         [Column("Id", TypeName = "char(2)")]
         public string Id { get; set; }
         [StringLength(100)]
-        public string Descripcion { get; set; }
+        public string Nombre { get; set; }
     }
 }

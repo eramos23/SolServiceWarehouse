@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,12 +15,19 @@ namespace Warehouse.Solution.Domain.Model
 
         }
         [Key]
-        public string CodigoUbigeo { get; set; }
-        public Guid IdEmpresa { get; set; }
-        public Guid IdEmpresaSucursal { get; set; }
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public string Id { get; set; }
+
+        [Column("CodigoDepartamento", TypeName = "char(2)")]
         public string CodigoDepartamento { get; set; }
+
+        [Column("CodigoProvincia", TypeName = "char(2)")]
         public string CodigoProvincia { get; set; }
+
+        [Column("CodigoDistrito", TypeName = "char(2)")]
         public string CodigoDistrito { get; set; }
+
+        [StringLength(50)]
         public string Descripcion { get; set; }
     }
 }

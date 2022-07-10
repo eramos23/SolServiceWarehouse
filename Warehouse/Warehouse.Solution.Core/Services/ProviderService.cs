@@ -55,7 +55,7 @@ namespace Warehouse.Solution.Core.Services
 
             if (!string.IsNullOrEmpty(filterDto.Texto))
                 query = query.Where(c => c.Nombre.Contains(filterDto.Texto)
-                || c.Docuemto.Contains(filterDto.Texto)
+                || c.NumeroDocumento.Contains(filterDto.Texto)
                 || c.Direccion.Contains(filterDto.Texto)
                 || c.Correo.Contains(filterDto.Texto)
                 || c.Telefono.Contains(filterDto.Texto));

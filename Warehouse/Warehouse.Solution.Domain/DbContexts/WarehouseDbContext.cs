@@ -18,11 +18,25 @@ namespace Warehouse.Solution.Domain.DbContexts
         public DbSet<TipoDocumentoIdentidad> TipoDocumentoIdentidad { get; set; }
         public DbSet<EntidadFinanciera> EntidadFinanciera { get; set; }
         public DbSet<UnidadMedida> UnidadMedida { get; set; }
+        public DbSet<FormaPago> FormaPago { get; set; }
+        public DbSet<ImpuestoMoneda> ImpuestoMoneda { get; set; }
+        public DbSet<Laboratorio> Laboratorio { get; set; }
+        public DbSet<TipoNotaCredito> TipoNotaCredito { get; set; }
+        public DbSet<MotivoNotaCredito> MotivoNotaCredito { get; set; }
+        public DbSet<TipoOperacion> TipoOperacion { get; set; }
+        public DbSet<Ubigeo> Ubigeo { get; set; }
 
         public DbSet<Empresa> Empresa { get; set; }
         public DbSet<EmpresaSucursal> EmpresaSucursal { get; set; }
         public DbSet<Proveedor> Proveedor { get; set; }
         public DbSet<Catalogo> Catalogo { get; set; }
+        public DbSet<Cliente> Cliente { get; set; }
+        public DbSet<EmpresaUnidadMedida> EmpresaUnidadMedida { get; set; }
+        public DbSet<Producto> Producto { get; set; }
+        public DbSet<ProductoCategoria> ProductoCategoria { get; set; }
+        public DbSet<ProductoMarca> ProductoMarca { get; set; }
+        public DbSet<ProductoUso> ProductoUso { get; set; }
+
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -31,6 +45,15 @@ namespace Warehouse.Solution.Domain.DbContexts
             modelBuilder.Entity<TipoComprobantePago>().ToTable("tipo_comprobante_pago");
             modelBuilder.Entity<UnidadMedida>().ToTable("unidad_medida");
             modelBuilder.Entity<EmpresaUnidadMedida>().ToTable("empresa_unidad_medida");
+            modelBuilder.Entity<FormaPago>().ToTable("forma_pago");
+            modelBuilder.Entity<ImpuestoMoneda>().ToTable("impuesto_moneda");
+            modelBuilder.Entity<MotivoNotaCredito>().ToTable("motivo_nota_credito");
+            modelBuilder.Entity<ProductoCategoria>().ToTable("producto_categoria");
+            modelBuilder.Entity<ProductoMarca>().ToTable("producto_marca");
+            modelBuilder.Entity<ProductoUso>().ToTable("producto_uso");
+            modelBuilder.Entity<TipoComprobantePago>().ToTable("tipo_comprobante_pago");
+            modelBuilder.Entity<TipoNotaCredito>().ToTable("tipo_nota_credito");
+            modelBuilder.Entity<TipoOperacion>().ToTable("tipo_operacion");
 
             //Muchos a muchos
             modelBuilder.Entity<EmpresaUnidadMedida>().HasKey(x => new { x.IdEmpresa, x.IdUnidadMedida });
@@ -41,85 +64,105 @@ namespace Warehouse.Solution.Domain.DbContexts
 
             modelBuilder.Entity<TipoDocumentoIdentidad>().HasData(new TipoDocumentoIdentidad[]
             {
-                new TipoDocumentoIdentidad{ Id = "0", Descripcion = "OTROS TIPOS DE DOCUMENTOS"},
-                new TipoDocumentoIdentidad{ Id = "1", Descripcion = "DOCUMENTO NACIONAL DE IDENTIDAD (DNI)"},
-                new TipoDocumentoIdentidad{ Id = "4", Descripcion = "CARNET DE EXTRANJERIA"},
-                new TipoDocumentoIdentidad{ Id = "6", Descripcion = "REGISTRO ÚNICO DE CONTRIBUYENTES"},
-                new TipoDocumentoIdentidad{ Id = "7", Descripcion = "PASAPORTE"},
-                new TipoDocumentoIdentidad{ Id = "A", Descripcion = "CÉDULA DIPLOMÁTICA DE IDENTIDAD"}
+                new TipoDocumentoIdentidad{ Id = "0", Nombre = "OTROS TIPOS DE DOCUMENTOS"},
+                new TipoDocumentoIdentidad{ Id = "1", Nombre = "DOCUMENTO NACIONAL DE IDENTIDAD (DNI)"},
+                new TipoDocumentoIdentidad{ Id = "4", Nombre = "CARNET DE EXTRANJERIA"},
+                new TipoDocumentoIdentidad{ Id = "6", Nombre = "REGISTRO ÚNICO DE CONTRIBUYENTES"},
+                new TipoDocumentoIdentidad{ Id = "7", Nombre = "PASAPORTE"},
+                new TipoDocumentoIdentidad{ Id = "A", Nombre = "CÉDULA DIPLOMÁTICA DE IDENTIDAD"}
             });
 
             modelBuilder.Entity<EntidadFinanciera>().HasData(new EntidadFinanciera[]
             {
-                new EntidadFinanciera { Id = "01",  Descripcion = "CENTRAL RESERVA DEL PERU"},
-                new EntidadFinanciera { Id = "02",  Descripcion = "DE CREDITO DEL PERU"},
-                new EntidadFinanciera { Id = "03",  Descripcion = "INTERNACIONAL DEL PERU"},
-                new EntidadFinanciera { Id = "05",  Descripcion = "LATINO"},
-                new EntidadFinanciera { Id = "07",  Descripcion = "CITIBANK DEL PERU S.A."},
-                new EntidadFinanciera { Id = "08",  Descripcion = "STANDARD CHARTERED"},
-                new EntidadFinanciera { Id = "09",  Descripcion = "SCOTIABANK PERU"},
-                new EntidadFinanciera { Id = "11",  Descripcion = "CONTINENTAL"},
-                new EntidadFinanciera { Id = "12",  Descripcion = "DE LIMA"},
-                new EntidadFinanciera { Id = "16",  Descripcion = "MERCANTIL"},
-                new EntidadFinanciera { Id = "18",  Descripcion = "NACION"},
-                new EntidadFinanciera { Id = "22",  Descripcion = "SANTANDER CENTRAL HISPANO"},
-                new EntidadFinanciera { Id = "23",  Descripcion = "DE COMERCIO"},
-                new EntidadFinanciera { Id = "25",  Descripcion = "REPUBLICA"},
-                new EntidadFinanciera { Id = "26",  Descripcion = "NBK BANK"},
-                new EntidadFinanciera { Id = "29",  Descripcion = "BANCOSUR"},
-                new EntidadFinanciera { Id = "35",  Descripcion = "FINANCIERO DEL PERU"},
-                new EntidadFinanciera { Id = "37",  Descripcion = "DEL PROGRESO"},
-                new EntidadFinanciera { Id = "38",  Descripcion = "INTERAMERICANO FINANZAS"},
-                new EntidadFinanciera { Id = "39",  Descripcion = "BANEX"},
-                new EntidadFinanciera { Id = "40",  Descripcion = "NUEVO MUNDO"},
-                new EntidadFinanciera { Id = "41",  Descripcion = "SUDAMERICANO"},
-                new EntidadFinanciera { Id = "42",  Descripcion = "DEL LIBERTADOR"},
-                new EntidadFinanciera { Id = "43",  Descripcion = "DEL TRABAJO"},
-                new EntidadFinanciera { Id = "44",  Descripcion = "SOLVENTA"},
-                new EntidadFinanciera { Id = "45",  Descripcion = "SERBANCO SA."},
-                new EntidadFinanciera { Id = "46",  Descripcion = "BANK OF BOSTON"},
-                new EntidadFinanciera { Id = "47",  Descripcion = "ORION"},
-                new EntidadFinanciera { Id = "48",  Descripcion = "DEL PAIS"},
-                new EntidadFinanciera { Id = "49",  Descripcion = "MI BANCO"},
-                new EntidadFinanciera { Id = "50",  Descripcion = "BNP PARIBAS"},
-                new EntidadFinanciera { Id = "53",  Descripcion = "HSBC BANK PERU S.A."},
-                new EntidadFinanciera { Id = "99",  Descripcion = "OTROS"}
+                new EntidadFinanciera { Id = "01", Nombre = "CENTRAL RESERVA DEL PERU"},
+                new EntidadFinanciera { Id = "02", Nombre = "DE CREDITO DEL PERU"},
+                new EntidadFinanciera { Id = "03", Nombre = "INTERNACIONAL DEL PERU"},
+                new EntidadFinanciera { Id = "05", Nombre = "LATINO"},
+                new EntidadFinanciera { Id = "07", Nombre = "CITIBANK DEL PERU S.A."},
+                new EntidadFinanciera { Id = "08", Nombre = "STANDARD CHARTERED"},
+                new EntidadFinanciera { Id = "09", Nombre = "SCOTIABANK PERU"},
+                new EntidadFinanciera { Id = "11", Nombre = "CONTINENTAL"},
+                new EntidadFinanciera { Id = "12", Nombre = "DE LIMA"},
+                new EntidadFinanciera { Id = "16", Nombre = "MERCANTIL"},
+                new EntidadFinanciera { Id = "18", Nombre = "NACION"},
+                new EntidadFinanciera { Id = "22", Nombre = "SANTANDER CENTRAL HISPANO"},
+                new EntidadFinanciera { Id = "23", Nombre = "DE COMERCIO"},
+                new EntidadFinanciera { Id = "25", Nombre = "REPUBLICA"},
+                new EntidadFinanciera { Id = "26", Nombre = "NBK BANK"},
+                new EntidadFinanciera { Id = "29", Nombre = "BANCOSUR"},
+                new EntidadFinanciera { Id = "35", Nombre = "FINANCIERO DEL PERU"},
+                new EntidadFinanciera { Id = "37", Nombre = "DEL PROGRESO"},
+                new EntidadFinanciera { Id = "38", Nombre = "INTERAMERICANO FINANZAS"},
+                new EntidadFinanciera { Id = "39", Nombre = "BANEX"},
+                new EntidadFinanciera { Id = "40", Nombre = "NUEVO MUNDO"},
+                new EntidadFinanciera { Id = "41", Nombre = "SUDAMERICANO"},
+                new EntidadFinanciera { Id = "42", Nombre = "DEL LIBERTADOR"},
+                new EntidadFinanciera { Id = "43", Nombre = "DEL TRABAJO"},
+                new EntidadFinanciera { Id = "44", Nombre = "SOLVENTA"},
+                new EntidadFinanciera { Id = "45", Nombre = "SERBANCO SA."},
+                new EntidadFinanciera { Id = "46", Nombre = "BANK OF BOSTON"},
+                new EntidadFinanciera { Id = "47", Nombre = "ORION"},
+                new EntidadFinanciera { Id = "48", Nombre = "DEL PAIS"},
+                new EntidadFinanciera { Id = "49", Nombre = "MI BANCO"},
+                new EntidadFinanciera { Id = "50", Nombre = "BNP PARIBAS"},
+                new EntidadFinanciera { Id = "53", Nombre = "HSBC BANK PERU S.A."},
+                new EntidadFinanciera { Id = "99", Nombre = "OTROS"}
             });
 
             modelBuilder.Entity<TipoComprobantePago>().HasData(new TipoComprobantePago[]
             {
-                new TipoComprobantePago { Id="00",  Descripcion = "Otros"},
-                new TipoComprobantePago { Id="01",  Descripcion = "Factura"},
-                new TipoComprobantePago { Id="02",  Descripcion = "Recibo por Honorarios"},
-                new TipoComprobantePago { Id="03",  Descripcion = "Boleta de Venta"},
-                new TipoComprobantePago { Id="04",  Descripcion = "Liquidación de compra"},
-                new TipoComprobantePago { Id="07",  Descripcion = "Nota de crédito"},
-                new TipoComprobantePago { Id="08",  Descripcion = "Nota de débito"},
-                new TipoComprobantePago { Id="09",  Descripcion = "Guía de remisión - Remitente"},
-                new TipoComprobantePago { Id="10",  Descripcion = "Recibo por Arrendamiento"},
-                new TipoComprobantePago { Id="12",  Descripcion = "Ticket o cinta emitido por máquina registradora"},
-                new TipoComprobantePago { Id="31",  Descripcion = "Guía de Remisión - Transportista"}
+                new TipoComprobantePago { Id="00", Nombre = "Otros"},
+                new TipoComprobantePago { Id="01", Nombre = "Factura"},
+                new TipoComprobantePago { Id="02", Nombre = "Recibo por Honorarios"},
+                new TipoComprobantePago { Id="03", Nombre = "Boleta de Venta"},
+                new TipoComprobantePago { Id="04", Nombre = "Liquidación de compra"},
+                new TipoComprobantePago { Id="07", Nombre = "Nota de crédito"},
+                new TipoComprobantePago { Id="08", Nombre = "Nota de débito"},
+                new TipoComprobantePago { Id="09", Nombre = "Guía de remisión - Remitente"},
+                new TipoComprobantePago { Id="10", Nombre = "Recibo por Arrendamiento"},
+                new TipoComprobantePago { Id="12", Nombre = "Ticket o cinta emitido por máquina registradora"},
+                new TipoComprobantePago { Id="31", Nombre = "Guía de Remisión - Transportista"}
             });
 
             modelBuilder.Entity<UnidadMedida>().HasData(new UnidadMedida[]
             {
-                new UnidadMedida { Id = "01", Descripcion ="KILOGRAMOS" },
-                new UnidadMedida { Id = "02", Descripcion ="LIBRAS" },
-                new UnidadMedida { Id = "03", Descripcion ="TONELADAS LARGAS" },
-                new UnidadMedida { Id = "04", Descripcion ="TONELADAS MÉTRICAS" },
-                new UnidadMedida { Id = "05", Descripcion ="TONELADAS CORTAS" },
-                new UnidadMedida { Id = "06", Descripcion ="GRAMOS" },
-                new UnidadMedida { Id = "07", Descripcion ="UNIDADES" },
-                new UnidadMedida { Id = "08", Descripcion ="LITROS" },
-                new UnidadMedida { Id = "09", Descripcion ="GALONES" },
-                new UnidadMedida { Id = "10", Descripcion ="BARRILES" },
-                new UnidadMedida { Id = "11", Descripcion ="LATAS" },
-                new UnidadMedida { Id = "12", Descripcion ="CAJAS" },
-                new UnidadMedida { Id = "13", Descripcion ="MILLARES" },
-                new UnidadMedida { Id = "14", Descripcion ="METROS CÚBICOS" },
-                new UnidadMedida { Id = "15", Descripcion ="METROS" },
-                new UnidadMedida { Id = "99", Descripcion ="OTROS (ESPECIFICAR)" }
+                new UnidadMedida { Id = "01", Nombre ="KILOGRAMOS" },
+                new UnidadMedida { Id = "02", Nombre ="LIBRAS" },
+                new UnidadMedida { Id = "03", Nombre ="TONELADAS LARGAS" },
+                new UnidadMedida { Id = "04", Nombre ="TONELADAS MÉTRICAS" },
+                new UnidadMedida { Id = "05", Nombre ="TONELADAS CORTAS" },
+                new UnidadMedida { Id = "06", Nombre ="GRAMOS" },
+                new UnidadMedida { Id = "07", Nombre ="UNIDADES" },
+                new UnidadMedida { Id = "08", Nombre ="LITROS" },
+                new UnidadMedida { Id = "09", Nombre ="GALONES" },
+                new UnidadMedida { Id = "10", Nombre ="BARRILES" },
+                new UnidadMedida { Id = "11", Nombre ="LATAS" },
+                new UnidadMedida { Id = "12", Nombre ="CAJAS" },
+                new UnidadMedida { Id = "13", Nombre ="MILLARES" },
+                new UnidadMedida { Id = "14", Nombre ="METROS CÚBICOS" },
+                new UnidadMedida { Id = "15", Nombre ="METROS" },
+                new UnidadMedida { Id = "99", Nombre ="OTROS (ESPECIFICAR)" }
             });
+            //modelBuilder.Entity<TipoOperacion>().HasData(new TipoOperacion[]
+            //{
+            //    new TipoOperacion { Id="01", Nombre="VENTA"},
+            //    new TipoOperacion { Id="02", Nombre="COMPRA"},
+            //    new TipoOperacion { Id="03", Nombre="CONSIGNACIÓN RECIBIDA"},
+            //    new TipoOperacion { Id="04", Nombre="CONSIGNACIÓN ENTREGADA"},
+            //    new TipoOperacion { Id="05", Nombre="DEVOLUCIÓN RECIBIDA"},
+            //    new TipoOperacion { Id="06", Nombre="DEVOLUCIÓN ENTREGADA"},
+            //    new TipoOperacion { Id="07", Nombre="PROMOCIÓN"},
+            //    new TipoOperacion { Id="08", Nombre="PREMIO"},
+            //    new TipoOperacion { Id="09", Nombre="DONACIÓN"},
+            //    new TipoOperacion { Id="10", Nombre="SALIDA A PRODUCCIÓN"},
+            //    new TipoOperacion { Id="11", Nombre="TRANSFERENCIA ENTRE ALMACENES"},
+            //    new TipoOperacion { Id="12", Nombre="RETIRO"},
+            //    new TipoOperacion { Id="13", Nombre="MERMAS"},
+            //    new TipoOperacion { Id="14", Nombre="DESMEDROS"},
+            //    new TipoOperacion { Id="15", Nombre="DESTRUCCIÓN"},
+            //    new TipoOperacion { Id="16", Nombre="SALDO INICIAL"},
+            //    new TipoOperacion { Id="99", Nombre="OTROS (ESPECIFICAR)"}
+            //});
 
             modelBuilder.Entity<Empresa>().HasData(new Empresa[]
             {
@@ -129,9 +172,9 @@ namespace Warehouse.Solution.Domain.DbContexts
 
             modelBuilder.Entity<EmpresaSucursal>().HasData(new EmpresaSucursal[]
             {
-                new EmpresaSucursal{ Id = new Guid("e84ee21d-48bc-4ef7-978a-a0ae02520904"), IdEmpresa = new Guid("9d79cde1-babd-44dc-ac5a-9379afa68a75"), Direccion = "Av. Los angeles 232", Descripcion = "Farmacia Principal de Los Olivos"},
-                new EmpresaSucursal{ Id = new Guid("4649554b-ab5e-4647-866e-1cc4e4b50ffa"), IdEmpresa = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"), Direccion = "Av. Caceres de Hurre 122", Descripcion = "Minimarket los Olivos 1"},
-                new EmpresaSucursal{ Id = new Guid("9414a1d9-c237-4e95-9d76-3290ecb1c551"), IdEmpresa = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"), Direccion = "Av. Proceres 121", Descripcion = "Minimarket los Olivos 2"}
+                new EmpresaSucursal{ Id = new Guid("e84ee21d-48bc-4ef7-978a-a0ae02520904"), IdEmpresa = new Guid("9d79cde1-babd-44dc-ac5a-9379afa68a75"), Direccion = "Av. Los angeles 232", Nombre = "Farmacia Principal de Los Olivos"},
+                new EmpresaSucursal{ Id = new Guid("4649554b-ab5e-4647-866e-1cc4e4b50ffa"), IdEmpresa = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"), Direccion = "Av. Caceres de Hurre 122", Nombre = "Minimarket los Olivos 1"},
+                new EmpresaSucursal{ Id = new Guid("9414a1d9-c237-4e95-9d76-3290ecb1c551"), IdEmpresa = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"), Direccion = "Av. Proceres 121", Nombre = "Minimarket los Olivos 2"}
 
             });
 
@@ -142,7 +185,6 @@ namespace Warehouse.Solution.Domain.DbContexts
 
             });
 
-
             modelBuilder.Entity<Proveedor>().HasData(new Proveedor[]
             {
                 new Proveedor{
@@ -151,7 +193,7 @@ namespace Warehouse.Solution.Domain.DbContexts
                     IdEmpresaSucursal = new Guid("e84ee21d-48bc-4ef7-978a-a0ae02520904"),
                     Nombre = "Proveedor de mecicamentos S.A.",
                     IdTipoDocumento = "6",
-                    Docuemto = "20718623451",
+                    NumeroDocumento = "20718623451",
                     Direccion = "Jr. Mira flores, calle 2 pabellon 52",
                     Correo = "proveedordemedicamentos@gmail.com",
                     Telefono = "10-12222-22",
@@ -160,6 +202,7 @@ namespace Warehouse.Solution.Domain.DbContexts
                     IdEstado = 1
                 }
             });
+
         }
     }
 }

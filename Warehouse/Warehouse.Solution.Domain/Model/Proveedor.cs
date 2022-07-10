@@ -19,14 +19,14 @@ namespace Warehouse.Solution.Domain.Model
         public Guid IdEmpresa { get; set; }
         public Guid IdEmpresaSucursal { get; set; }
 
-        [StringLength(200)]
+        [StringLength(100)]
         public string Nombre { get; set; }
 
         [Column("IdTipoDocumento", TypeName = "char(1)")]
         public string IdTipoDocumento { get; set; }
 
         [StringLength(20)]
-        public string Docuemto { get; set; }
+        public string NumeroDocumento { get; set; }
 
         [StringLength(200)]
         public string Direccion { get; set; }
@@ -38,7 +38,7 @@ namespace Warehouse.Solution.Domain.Model
         public string Telefono { get; set; }
 
         public int TipoProveedor { get; set; }
-        public string NombreTipoProveedor { get; set; }
+        public string NombreTipoProveedor { get; set; } //*
         public int IdEstado { get; set; }
 
         [ForeignKey("IdEstado")]

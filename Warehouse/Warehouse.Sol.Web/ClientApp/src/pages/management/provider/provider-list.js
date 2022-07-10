@@ -34,7 +34,7 @@ const ProviderList = () => {
             title: 'Tipo Documento',
             dataIndex: 'tipoDocumentoIdentidad',
             render: (tipoDocumento) => (
-                tipoDocumento.descripcion
+                tipoDocumento.nombre
             ),
             sorter: (a, b) => a.tipoDocumento.length - b.tipoDocumento.length
         },
@@ -71,13 +71,13 @@ const ProviderList = () => {
         form.resetFields(["IdEmpresaSucursal"]);
         axios.get(`Management/compani-branchs?id=`+value)
             .then(res => {
+                console.log(res.data.data)
                 setCompaniBranchs(res.data.data)
             })
         
     }
 
     const handleSeach = (value) => {
-        debugger
         setSearching(true)
         axios.get(`Provider/get-list`, { params: value })
             .then(res => {
@@ -161,7 +161,7 @@ const ProviderList = () => {
                                 >
                                     {
                                         companiBranchs.map((item) =>
-                                            <Option key={item.id} value={item.id}>{item.descripcion}</Option>
+                                            <Option key={item.id} value={item.id}>{item.nombre}</Option>
                                         )
                                     }
                                 </Select>

@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 
 namespace Warehouse.Solution.Domain.Model
 {
-    public partial class UnidadMedida
+    public class TipoOperacion
     {
-        public UnidadMedida()
+        public TipoOperacion()
         {
-            EmpresaUnidadMedidas = new List<EmpresaUnidadMedida>();
         }
+
         [Key]
         [Column("Id", TypeName = "char(2)")]
         public string Id { get; set; }
 
-        [StringLength(10)]
-        public string Abreviatura { get; set; }
-
+        public Guid IdEmpresa { get; set; }
+        public Guid IdEmpresaSucursal { get; set; }
+        
         [StringLength(100)]
         public string Nombre { get; set; }
-
-        public ICollection<EmpresaUnidadMedida> EmpresaUnidadMedidas { get; set; }
+        [StringLength(200)]
+        public string Observacion { get; set; }
     }
 }
