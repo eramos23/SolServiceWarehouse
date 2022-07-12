@@ -17,10 +17,12 @@ namespace Warehouse.Sol.Web.Controllers
     {
         private readonly ICompanyService _empresaService;
         private readonly ICompanyBranchService _empresaSucursalService;
-        public ManagementController(ICompanyService empresaService, ICompanyBranchService empresaSucursalService, IMapper mapper) : base(mapper)
+        private readonly IIdentityDocumentType _tipoDocumentoIdentidadService;
+        public ManagementController(ICompanyService empresaService, ICompanyBranchService empresaSucursalService, IIdentityDocumentType tipoDocumentoIdentidadService, IMapper mapper) : base(mapper)
         {
             _empresaService = empresaService;
             _empresaSucursalService = empresaSucursalService;
+            _tipoDocumentoIdentidadService = tipoDocumentoIdentidadService;
         }
 
         [ProducesResponseType(typeof(DataQuery<List<EmpresaDto>>), 200)]
@@ -38,7 +40,7 @@ namespace Warehouse.Sol.Web.Controllers
         }
 
         [ProducesResponseType(typeof(DataQuery<List<EmpresaSucursalDto>>), 200)]
-        [HttpGet("compani-branchs")]
+        [HttpGet("company-branchs")]
         public async Task<ActionResult> GetCompanyBranch(string id)
         {
             var resultService = await this._empresaSucursalService.GetAllByIdCompanyAsync(id);
@@ -48,6 +50,20 @@ namespace Warehouse.Sol.Web.Controllers
                 return Ok(result1);
             }
             var result = HelperStatus.ResponseHelper<List<EmpresaSucursalDto>>(this._mapper.Map<List<EmpresaSucursalDto>>(resultService), Status.Error, "algo salió mal");
+            return NotFound(result);
+        }
+
+        [ProducesResponseType(typeof(DataQuery<List<TipoDocumentoIdentidadDto>>), 200)]
+        [HttpGet("identity-documnet-type")]
+        public async Task<ActionResult> GetIdentityDocumentTypes()
+        {
+            var resultService = await this._tipoDocumentoIdentidadService.GetAllAsync();
+            if (resultService != null)
+            {
+                var result1 = HelperStatus.ResponseHelper(this._mapper.Map<List<TipoDocumentoIdentidadDto>>(resultService), Status.Ok);
+                return Ok(result1);
+            }
+            var result = HelperStatus.ResponseHelper<List<TipoDocumentoIdentidadDto>>(this._mapper.Map<List<TipoDocumentoIdentidadDto>>(resultService), Status.Error, "algo salió mal");
             return NotFound(result);
         }
     }

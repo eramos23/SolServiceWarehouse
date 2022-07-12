@@ -5,19 +5,16 @@ import CustomEmpty from "../../../components/Empty/NoData";
 import { Breadcrumb, Typography, Input, Select, Col, Row, Space, Table, Card, Button, Form, Divider, Tag, ConfigProvider } from 'antd';
 import axios from 'axios'
 
-const { Search } = Input;
 const { Option } = Select;
-
 const { Title } = Typography;
 
 const ProviderList = () => {
-    const [searching, setSearching] = useState(false);
-    const [companies, setCompanies] = useState([]);
-    const [providers, setProviders] = useState([]);
-    const [companiBranchs, setCompaniBranchs] = useState([]);
-
     const [form] = Form.useForm();
 
+    const [searching, setSearching] = useState(false);
+    const [companies, setCompanies] = useState([]);
+    const [companiBranchs, setCompaniBranchs] = useState([]);
+    const [providers, setProviders] = useState([]);
 
     const columns = [
         {
@@ -69,12 +66,11 @@ const ProviderList = () => {
 
     const handleChangeCompanies = (value) => {
         form.resetFields(["IdEmpresaSucursal"]);
-        axios.get(`Management/compani-branchs?id=`+value)
+        axios.get(`Management/company-branchs?id=`+value)
             .then(res => {
                 console.log(res.data.data)
                 setCompaniBranchs(res.data.data)
             })
-        
     }
 
     const handleSeach = (value) => {

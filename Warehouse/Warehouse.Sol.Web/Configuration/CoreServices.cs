@@ -17,6 +17,7 @@ namespace Warehouse.Sol.Web.Configuration
             services.AddScoped<ICompanyService, CompanyService>();
             services.AddScoped<ICompanyBranchService, CompanyBranchService>();
             services.AddScoped<IProviderService, ProviderService>();
+            services.AddScoped<IIdentityDocumentType, IdentityDocumentType>();
         }
     }
 }
