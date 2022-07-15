@@ -33,49 +33,79 @@ namespace Warehouse.Sol.Web.Controllers
             var resultService = await _service.GetAllAsync(filterDto);
             if (resultService != null)
             {
-                var result1 = HelperStatus.ResponseHelper(this._mapper.Map<List<ProveedorDto>>(resultService), Status.Ok);
+                var result1 = HelperStatus.ResponseHelper(this._mapper.Map<List<ProveedorDto>>(resultService), HttpStatusCode.OK);
                 return Ok(result1);
             }
-            var result = HelperStatus.ResponseHelper<List<ProveedorDto>>(this._mapper.Map<List<ProveedorDto>>(resultService), Status.Error, "Error al consultar Proveedores");
+            var result = HelperStatus.ResponseHelper<List<ProveedorDto>>(this._mapper.Map<List<ProveedorDto>>(resultService), HttpStatusCode.NotFound, "Error al consultar Proveedores");
             return NotFound(result);
         }
 
-        [HttpGet]
+        [HttpGet("get-single")]
         public async Task<ActionResult> GetById(string id)
         {
-            if (string.IsNullOrEmpty(id)) return BadRequest(HelperStatus.ResponseHelper(false, "HttpStatusCode.BadRequest", "Messages.Result_BadRequest"));
+            if (id == null) return BadRequest(HelperStatus.ResponseHelper(false, HttpStatusCode.BadRequest, "Messages.Result_BadRequest"));
 
             var resultService = await _service.GetByIdAsync(new Guid(id));
 
             if (resultService != null)
             {
-                var result = HelperStatus.ResponseHelper(_mapper.Map<ProveedorDto>(resultService), Status.Ok, string.Empty);
+                var result = HelperStatus.ResponseHelper(_mapper.Map<ProveedorDto>(resultService), HttpStatusCode.OK, string.Empty);
                 return Ok(result);
             }
 
-            return NotFound(HelperStatus.ResponseHelper<object>(null, string.Empty, string.Empty));
+            return NotFound(HelperStatus.ResponseHelper<object>(null, HttpStatusCode.NotFound, string.Empty));
         }
 
-        [HttpPost]
-        public async Task<ActionResult> Create([FromForm] ProveedorDto dto)
+        [HttpPost("create")]
+        public async Task<ActionResult> Create([FromBody] PostProveedorDto dto)
         {
-            if (dto == null) return BadRequest(HelperStatus.ResponseHelper(false, "HttpStatusCode.BadRequest", "Messages.Result_BadRequest"));
-            dto.IdEmpresa = new Guid("d968c670-304d-4a47-854d-142d6d585045");
-            dto.IdEmpresaSucursal = new Guid("c06833e2-14d5-4d2e-b27f-7b4bed3cd88c");
-
+            if (dto == null) return BadRequest(HelperStatus.ResponseHelper(false, HttpStatusCode.BadRequest, "Messages.Result_BadRequest"));
+            //dto.IdEmpresa = new Guid("d968c670-304d-4a47-854d-142d6d585045");
+            //dto.IdEmpresaSucursal = new Guid("c06833e2-14d5-4d2e-b27f-7b4bed3cd88c");
             var provider = _mapper.Map<Proveedor>(dto);
 
             var resultService = await _service.CrateAsync(provider);
             if (resultService)
             {
-                var providerCrearted = await _service.GetByIdAsync(provider.Id);
+                try
+                {
+                    var providerCrearted = await _service.GetByIdAsync(provider.Id);
+
+                    var result = HelperStatus.ResponseHelper(_mapper.Map<ProveedorDto>(providerCrearted), HttpStatusCode.Created, string.Empty);
+                    return StatusCode(StatusCodes.Status201Created, result);
+                }
+                catch (Exception ex)
+                {
+
+                    throw;
+                }
                 
-                var result = HelperStatus.ResponseHelper(_mapper.Map<ProveedorDto>(providerCrearted), "HttpStatusCode.Created", string.Empty);
-                return StatusCode(StatusCodes.Status201Created, result);
             }
 
-            return BadRequest(HelperStatus.ResponseHelper(false, "HttpStatusCode.BadRequest", "Messages.Result_NotCreated"));
+            return BadRequest(HelperStatus.ResponseHelper(false, HttpStatusCode.BadRequest, "Messages.Result_NotCreated"));
+
         }
 
+        [HttpPut("update/{id}")]
+        public async Task<ActionResult> Update(string id, [FromBody] PutProveedorDto dto)
+        {
+            if (new Guid(id) != dto.Id || dto == null) return BadRequest(HelperStatus.ResponseHelper(false, HttpStatusCode.NotFound, "Messages.Result_BadRequest"));
+
+            var compEspejo = await _service.GetByIdAsync(new Guid(id));
+
+            if (compEspejo == null) return NotFound(HelperStatus.ResponseHelper<object>(null, HttpStatusCode.NotFound, "Messages.Result_NotFound"));
+                        
+            var compEspejo1 = _mapper.Map<Proveedor>(dto);
+            var resultService = await _service.UpdateAsync(new Guid(id), compEspejo1);
+
+            if (resultService)
+            {
+                var result = HelperStatus.ResponseHelper(resultService);
+                return Ok(result);
+            }
+
+            var result1 = HelperStatus.ResponseHelper(false, HttpStatusCode.BadRequest, "Messages.Result_NotUpdated");
+            return BadRequest(result1);
+        }
     }
 }

@@ -24,7 +24,7 @@ namespace Warehouse.Solution.Core
             return  _dataManager.EntidadFinanciera.ToList();
         }
 
-        public Task<EntidadFinanciera> GetByIdAsync(string id)
+        public Task<EntidadFinanciera> GetByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }

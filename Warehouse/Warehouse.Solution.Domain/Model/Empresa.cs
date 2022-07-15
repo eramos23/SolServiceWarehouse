@@ -53,5 +53,7 @@ namespace Warehouse.Solution.Domain.Model
         public string urlImagen { get; set; }
         public ICollection<EmpresaSucursal> EmpresaSucursales { get; set; }
         public ICollection<EmpresaUnidadMedida> EmpresaUnidadMedidas { get; set; }
+        public ICollection<Proveedor> Proveedores { get; set; }
+
     }
 }

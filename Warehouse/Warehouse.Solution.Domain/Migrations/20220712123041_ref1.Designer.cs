@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Warehouse.Solution.Domain.DbContexts;
 
 namespace Warehouse.Solution.Domain.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    partial class WarehouseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220712123041_ref1")]
+    partial class ref1
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

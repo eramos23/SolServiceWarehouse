@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Warehouse.Solution.Domain.DbContexts;
 
 namespace Warehouse.Solution.Domain.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    partial class WarehouseDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220712112136_ref")]
+    partial class @ref
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -83,20 +85,6 @@ namespace Warehouse.Solution.Domain.Migrations
                             Abreviatura = "IACT",
                             Descripcion = "Registro inactivo",
                             Nombre = "Inactivo"
-                        },
-                        new
-                        {
-                            Id = 10,
-                            Abreviatura = "FACS",
-                            Descripcion = "Factura Stoack",
-                            Nombre = "Factura-Stock"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            Abreviatura = "GAST",
-                            Descripcion = "Gastos",
-                            Nombre = "Gastos"
                         });
                 });
 
@@ -274,7 +262,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         new
                         {
                             Id = new Guid("9d79cde1-babd-44dc-ac5a-9379afa68a75"),
-                            FechaCreacion = new DateTime(2022, 7, 12, 7, 30, 41, 414, DateTimeKind.Local).AddTicks(9631),
+                            FechaCreacion = new DateTime(2022, 7, 12, 6, 21, 36, 292, DateTimeKind.Local).AddTicks(2411),
                             FechaInicio = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "FARMACIA RAMOS S.A.",
                             Vigente = true
@@ -282,7 +270,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         new
                         {
                             Id = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"),
-                            FechaCreacion = new DateTime(2022, 7, 12, 7, 30, 41, 418, DateTimeKind.Local).AddTicks(4885),
+                            FechaCreacion = new DateTime(2022, 7, 12, 6, 21, 36, 296, DateTimeKind.Local).AddTicks(1638),
                             FechaInicio = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "MINIMARKETS RAMOS S.A.",
                             Vigente = true
@@ -332,7 +320,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         {
                             Id = new Guid("e84ee21d-48bc-4ef7-978a-a0ae02520904"),
                             Direccion = "Av. Los angeles 232",
-                            FechaCreacion = new DateTime(2022, 7, 12, 7, 30, 41, 418, DateTimeKind.Local).AddTicks(5397),
+                            FechaCreacion = new DateTime(2022, 7, 12, 6, 21, 36, 296, DateTimeKind.Local).AddTicks(2128),
                             IdEmpresa = new Guid("9d79cde1-babd-44dc-ac5a-9379afa68a75"),
                             Nombre = "Farmacia Principal de Los Olivos",
                             Vigente = true
@@ -341,7 +329,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         {
                             Id = new Guid("4649554b-ab5e-4647-866e-1cc4e4b50ffa"),
                             Direccion = "Av. Caceres de Hurre 122",
-                            FechaCreacion = new DateTime(2022, 7, 12, 7, 30, 41, 418, DateTimeKind.Local).AddTicks(6003),
+                            FechaCreacion = new DateTime(2022, 7, 12, 6, 21, 36, 296, DateTimeKind.Local).AddTicks(2720),
                             IdEmpresa = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"),
                             Nombre = "Minimarket los Olivos 1",
                             Vigente = true
@@ -350,7 +338,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         {
                             Id = new Guid("9414a1d9-c237-4e95-9d76-3290ecb1c551"),
                             Direccion = "Av. Proceres 121",
-                            FechaCreacion = new DateTime(2022, 7, 12, 7, 30, 41, 418, DateTimeKind.Local).AddTicks(6043),
+                            FechaCreacion = new DateTime(2022, 7, 12, 6, 21, 36, 296, DateTimeKind.Local).AddTicks(2726),
                             IdEmpresa = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"),
                             Nombre = "Minimarket los Olivos 2",
                             Vigente = true
@@ -889,9 +877,6 @@ namespace Warehouse.Solution.Domain.Migrations
                         .HasColumnType("char(1)")
                         .HasColumnName("IdTipoDocumento");
 
-                    b.Property<int>("IdTipoProveedor")
-                        .HasColumnType("int");
-
                     b.Property<Guid?>("IdUsuarioCrea")
                         .HasColumnType("char(36)");
 
@@ -902,6 +887,9 @@ namespace Warehouse.Solution.Domain.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("varchar(100)");
 
+                    b.Property<string>("NombreTipoProveedor")
+                        .HasColumnType("longtext");
+
                     b.Property<string>("NumeroDocumento")
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
@@ -909,6 +897,9 @@ namespace Warehouse.Solution.Domain.Migrations
                     b.Property<string>("Telefono")
                         .HasMaxLength(20)
                         .HasColumnType("varchar(20)");
+
+                    b.Property<int>("TipoProveedor")
+                        .HasColumnType("int");
 
                     b.Property<bool>("Vigente")
                         .HasColumnType("tinyint(1)");
@@ -923,8 +914,6 @@ namespace Warehouse.Solution.Domain.Migrations
 
                     b.HasIndex("IdTipoDocumento");
 
-                    b.HasIndex("IdTipoProveedor");
-
                     b.ToTable("proveedor");
 
                     b.HasData(
@@ -933,15 +922,16 @@ namespace Warehouse.Solution.Domain.Migrations
                             Id = new Guid("4e7da830-71a2-4758-9b21-ec7d0dda7984"),
                             Correo = "proveedordemedicamentos@gmail.com",
                             Direccion = "Jr. Mira flores, calle 2 pabellon 52",
-                            FechaCreacion = new DateTime(2022, 7, 12, 7, 30, 41, 418, DateTimeKind.Local).AddTicks(7275),
+                            FechaCreacion = new DateTime(2022, 7, 12, 6, 21, 36, 296, DateTimeKind.Local).AddTicks(3985),
                             IdEmpresa = new Guid("9d79cde1-babd-44dc-ac5a-9379afa68a75"),
                             IdEmpresaSucursal = new Guid("e84ee21d-48bc-4ef7-978a-a0ae02520904"),
                             IdEstado = 1,
                             IdTipoDocumento = "6",
-                            IdTipoProveedor = 10,
                             Nombre = "Proveedor de mecicamentos S.A.",
+                            NombreTipoProveedor = "FACTURACION-STOCK",
                             NumeroDocumento = "20718623451",
                             Telefono = "10-12222-22",
+                            TipoProveedor = 1,
                             Vigente = true
                         });
                 });
@@ -1377,12 +1367,6 @@ namespace Warehouse.Solution.Domain.Migrations
                         .WithMany()
                         .HasForeignKey("IdTipoDocumento");
 
-                    b.HasOne("Warehouse.Solution.Domain.Model.Catalogo", "TipoProveedor")
-                        .WithMany()
-                        .HasForeignKey("IdTipoProveedor")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("Empresa");
 
                     b.Navigation("EmpresaSucursal");
@@ -1390,8 +1374,6 @@ namespace Warehouse.Solution.Domain.Migrations
                     b.Navigation("Estado");
 
                     b.Navigation("TipoDocumentoIdentidad");
-
-                    b.Navigation("TipoProveedor");
                 });
 
             modelBuilder.Entity("Warehouse.Solution.Domain.Model.UnidadMedida", b =>

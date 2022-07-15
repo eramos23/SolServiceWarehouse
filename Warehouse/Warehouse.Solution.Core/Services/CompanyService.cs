@@ -23,9 +23,9 @@ namespace Warehouse.Solution.Core.Services
             return await _dataManager.EmpresaRepository.GetAll();
         }
 
-        public async Task<Empresa> GetByIdAsync(string id)
+        public async Task<Empresa> GetByIdAsync(Guid id)
         {
-            var company = await _dataManager.EmpresaRepository.FirstOrDefault(c => c.Id == new Guid(id));
+            var company = await _dataManager.EmpresaRepository.FirstOrDefault(c => c.Id == id);
             return company;
         }
     }

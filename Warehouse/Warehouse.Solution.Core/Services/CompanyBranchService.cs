@@ -27,9 +27,9 @@ namespace Warehouse.Solution.Core.Services
             return await _dataManager.EmpresaSucursalRepository.GetQueryable().Where(c => c.IdEmpresa == new Guid(idCompany)).ToListAsync();
         }
 
-        public Task<EmpresaSucursal> GetByIdAsync(string id)
+        public Task<EmpresaSucursal> GetByIdAsync(Guid id)
         {
-            return _dataManager.EmpresaSucursalRepository.FirstOrDefault(c => c.IdEmpresa == new Guid(id));
+            return _dataManager.EmpresaSucursalRepository.FirstOrDefault(c => c.IdEmpresa == id);
         }
     }
 }

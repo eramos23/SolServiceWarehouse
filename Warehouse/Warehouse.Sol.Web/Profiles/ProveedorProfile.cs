@@ -8,8 +8,14 @@ namespace Warehouse.Sol.Web.Profiles
     {
         public ProveedorProfile()
         {
-            CreateMap<ProveedorDto, Proveedor>();
+            CreateMap<PostProveedorDto, Proveedor>();
+            //CreateMap<Proveedor, PostProveedorDto>();
+
             CreateMap<Proveedor, ProveedorDto>();
+            CreateMap<ProveedorDto, Proveedor>();
+            
+            
+            CreateMap<PutProveedorDto, Proveedor>();
         }
     }
 }

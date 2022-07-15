@@ -37,8 +37,10 @@ namespace Warehouse.Solution.Domain.Model
         [StringLength(20)]
         public string Telefono { get; set; }
 
-        public int TipoProveedor { get; set; }
-        public string NombreTipoProveedor { get; set; } //*
+        public int IdTipoProveedor { get; set; }
+        [ForeignKey("IdTipoProveedor")]
+        public Catalogo TipoProveedor { get; set; }
+        //public string NombreTipoProveedor { get; set; } //*
         public int IdEstado { get; set; }
 
         [ForeignKey("IdEstado")]

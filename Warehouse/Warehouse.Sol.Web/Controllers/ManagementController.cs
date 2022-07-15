@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
+using System.Net;
 using System.Threading.Tasks;
 using Warehouse.Sol.Web.Configuration;
 using Warehouse.Sol.Web.Helper;
@@ -32,10 +33,10 @@ namespace Warehouse.Sol.Web.Controllers
             var resultService = await this._empresaService.GetAllAsync();
             if (resultService != null)
             {
-                var result1 = HelperStatus.ResponseHelper(this._mapper.Map<List<EmpresaDto>>(resultService), Status.Ok);
+                var result1 = HelperStatus.ResponseHelper(this._mapper.Map<List<EmpresaDto>>(resultService), HttpStatusCode.OK);
                 return Ok(result1);
             }
-            var result = HelperStatus.ResponseHelper<List<EmpresaDto>>(this._mapper.Map<List<EmpresaDto>>(resultService), Status.Error, "algo salió mal");
+            var result = HelperStatus.ResponseHelper<List<EmpresaDto>>(this._mapper.Map<List<EmpresaDto>>(resultService), HttpStatusCode.NotFound, "algo salió mal");
             return NotFound(result);
         }
 
@@ -46,10 +47,10 @@ namespace Warehouse.Sol.Web.Controllers
             var resultService = await this._empresaSucursalService.GetAllByIdCompanyAsync(id);
             if (resultService != null)
             {
-                var result1 = HelperStatus.ResponseHelper(this._mapper.Map<List<EmpresaSucursalDto>>(resultService), Status.Ok);
+                var result1 = HelperStatus.ResponseHelper(this._mapper.Map<List<EmpresaSucursalDto>>(resultService), HttpStatusCode.OK);
                 return Ok(result1);
             }
-            var result = HelperStatus.ResponseHelper<List<EmpresaSucursalDto>>(this._mapper.Map<List<EmpresaSucursalDto>>(resultService), Status.Error, "algo salió mal");
+            var result = HelperStatus.ResponseHelper<List<EmpresaSucursalDto>>(this._mapper.Map<List<EmpresaSucursalDto>>(resultService), HttpStatusCode.NotFound, "algo salió mal");
             return NotFound(result);
         }
 
@@ -60,10 +61,10 @@ namespace Warehouse.Sol.Web.Controllers
             var resultService = await this._tipoDocumentoIdentidadService.GetAllAsync();
             if (resultService != null)
             {
-                var result1 = HelperStatus.ResponseHelper(this._mapper.Map<List<TipoDocumentoIdentidadDto>>(resultService), Status.Ok);
+                var result1 = HelperStatus.ResponseHelper(this._mapper.Map<List<TipoDocumentoIdentidadDto>>(resultService), HttpStatusCode.OK);
                 return Ok(result1);
             }
-            var result = HelperStatus.ResponseHelper<List<TipoDocumentoIdentidadDto>>(this._mapper.Map<List<TipoDocumentoIdentidadDto>>(resultService), Status.Error, "algo salió mal");
+            var result = HelperStatus.ResponseHelper<List<TipoDocumentoIdentidadDto>>(this._mapper.Map<List<TipoDocumentoIdentidadDto>>(resultService), HttpStatusCode.NotFound, "algo salió mal");
             return NotFound(result);
         }
     }

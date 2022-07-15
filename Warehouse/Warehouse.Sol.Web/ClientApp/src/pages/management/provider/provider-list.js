@@ -16,7 +16,7 @@ const ProviderList = () => {
     const [companiBranchs, setCompaniBranchs] = useState([]);
     const [providers, setProviders] = useState([]);
 
-    const columns = [
+    const columns1 = [
         {
             title: 'Proveedor',
             dataIndex: 'nombre',
@@ -24,29 +24,32 @@ const ProviderList = () => {
         },
         {
             title: 'Tipo Proveedor',
-            dataIndex: 'nombreTipoProveedor',
-            sorter: (a, b) => a.tipoProveedor.length - b.tipoProveedor.length
+            dataIndex: 'tipoProveedor',
+            render: (tipoProveedor) => (
+                tipoProveedor?.nombre
+            ),
+            sorter: (a, b) => a.tipoProveedor?.nombre.length - b.tipoProveedor?.nombre.length
         },
         {
             title: 'Tipo Documento',
             dataIndex: 'tipoDocumentoIdentidad',
             render: (tipoDocumento) => (
-                tipoDocumento.nombre
+                tipoDocumento?.nombre
             ),
-            sorter: (a, b) => a.tipoDocumento.length - b.tipoDocumento.length
+            sorter: (a, b) => a.tipoDocumento?.nombre.length - b.tipoDocumento?.nombre.length
         },
         {
             title: 'Número Documento',
-            dataIndex: 'docuemto',
+            dataIndex: 'numeroDocumento',
             sorter: (a, b) => a.numeroDocumento.length - b.numeroDocumento.length
         },
         {
             title: 'Estado',
             dataIndex: 'estado',
-            sorter: (a, b) => a.estado.length - b.estado.length,
+            sorter: (a, b) => a.estado.nombre.length - b.estado.nombre.length,
             align: 'center',
             render: (estado) => (
-                <Tag color={estado.nombre == 'Activo' ? 'success' : 'error'} key={estado.nombre}>
+                <Tag color={estado.id == 1 ? 'success' : 'error'} key={estado.nombre}>
                     {estado.nombre}
                 </Tag>
             )
@@ -56,7 +59,11 @@ const ProviderList = () => {
             dataIndex: 'acciones',
             key: 'acciones',
             align: 'center',
-            render: (text) => <><Button size="small" icon={<EditTwoTone />} href="#" /> {"  "} <Button size="small" icon={<DeleteTwoTone twoToneColor="#ff4d4f" />} /></>
+            render: (text,data, key) =>
+                <>
+                    <Link to={`/Management/Provider/Edit/${data.id}`}><Button size="small" icon={<EditTwoTone />} /> {"  "}</Link>
+                    <Button size="small" icon={<DeleteTwoTone twoToneColor="#ff4d4f" />} />
+                </>
         },
     ];
     
@@ -195,11 +202,11 @@ const ProviderList = () => {
             <ConfigProvider renderEmpty={CustomEmpty}>
             <Card size="small">
                 <Table
-                    columns={columns}
+                    columns={columns1}
                     dataSource={providers}
                     size="small"
                     showSorterTooltip={false}
-                onChange={onChangeTable}
+                    onChange={onChangeTable}
                 />
                 </Card>
             </ConfigProvider>

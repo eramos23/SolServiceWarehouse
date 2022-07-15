@@ -22,7 +22,7 @@ namespace Warehouse.Solution.Core.Services
             return await _dataManager.TipoDocumentoIdentidadRepository.GetAll();
         }
 
-        public Task<TipoDocumentoIdentidad> GetByIdAsync(string id)
+        public Task<TipoDocumentoIdentidad> GetByIdAsync(Guid id)
         {
             throw new NotImplementedException();
         }

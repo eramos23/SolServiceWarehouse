@@ -182,6 +182,8 @@ namespace Warehouse.Solution.Domain.DbContexts
             {
                 new Catalogo{ Id=1, Abreviatura = "ACT", Nombre="Activo", Descripcion = "Registro activo"},
                 new Catalogo{ Id=2, Abreviatura = "IACT", Nombre="Inactivo", Descripcion = "Registro inactivo"},
+                new Catalogo{ Id=10, Abreviatura = "FACS", Nombre="Factura-Stock", Descripcion = "Factura Stoack"},
+                new Catalogo{ Id=11, Abreviatura = "GAST", Nombre="Gastos", Descripcion = "Gastos"},
 
             });
 
@@ -197,8 +199,8 @@ namespace Warehouse.Solution.Domain.DbContexts
                     Direccion = "Jr. Mira flores, calle 2 pabellon 52",
                     Correo = "proveedordemedicamentos@gmail.com",
                     Telefono = "10-12222-22",
-                    TipoProveedor = 1,
-                    NombreTipoProveedor = "FACTURACION-STOCK",
+                    IdTipoProveedor = 10,
+                    //NombreTipoProveedor = "FACTURACION-STOCK",
                     IdEstado = 1
                 }
             });

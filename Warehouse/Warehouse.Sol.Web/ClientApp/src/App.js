@@ -1,5 +1,6 @@
 import React from 'react';
-import { Route, Routes } from 'react-router';
+//import { Route, Routes } from 'react-router';
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { LayoutLocal } from './components/Layout';
 import Home from './components/Home';
 import Counter from './components/Counter';
@@ -13,7 +14,6 @@ import './custom.css'
 axios.defaults.baseURL = 'http://localhost:32553/'
 
 const AppRoute = () => {
-
     return (
         <LayoutLocal>
             <Routes>
@@ -22,6 +22,8 @@ const AppRoute = () => {
                 <Route path='/Demo' element={<Demo />} />
                 <Route path='/Management/Provider' element={<ProviderList />} />
                 <Route path='/Management/Provider/Create' element={<ProviderCreate />} />
+                <Route path='/Management/Provider/Edit/:id' element={<ProviderCreate />} />
+                <Route path='*' element={<h1>404 Not Fount</h1>} />
             </Routes>
         </LayoutLocal>
     );

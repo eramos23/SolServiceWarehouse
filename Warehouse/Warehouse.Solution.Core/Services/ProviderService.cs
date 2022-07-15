@@ -23,8 +23,27 @@ namespace Warehouse.Solution.Core.Services
 
         public async Task<bool> CrateAsync(Proveedor model)
         {
-            var result = await DataManager.ProveedorRepository.Add(model);
-            return result > 0;
+            try
+            {
+                var result = await DataManager.ProveedorRepository.Add(model);
+                return result > 0;
+            }
+            catch (Exception ex)
+            {
+
+                return false;
+            }
+            
+        }
+        public async Task<bool> UpdateAsync(Guid id, Proveedor model)
+        {
+            var entity = await GetByIdAsync(id);
+            if (model != null)
+            {
+                var affectedRecords = await DataManager.ProveedorRepository.UpdateEntity(model, entity);
+                return affectedRecords > 0;
+            }
+            return false;
         }
 
         public async Task<bool> DeleteAsync(Guid id)
@@ -45,7 +64,8 @@ namespace Warehouse.Solution.Core.Services
         {
             IQueryable<Proveedor> query = DataManager.ProveedorRepository.GetQueryable()
                                                     .Include(c => c.TipoDocumentoIdentidad)
-                                                    .Include(c => c.Estado);
+                                                    .Include(c => c.Estado)
+                                                    .Include(c => c.TipoProveedor);
 
             if (!string.IsNullOrEmpty(filterDto.IdEmpresa))
                 query = query.Where(c => c.IdEmpresa == new Guid(filterDto.IdEmpresa));
@@ -67,19 +87,9 @@ namespace Warehouse.Solution.Core.Services
         {
             var compInter = await DataManager.DbContext.Proveedor
                                     .Include(ci => ci.TipoDocumentoIdentidad)            
+                                    .Include(pro => pro.TipoProveedor)
                                     .FirstOrDefaultAsync(ci => ci.Id == id);
             return compInter;
-        }
-
-        public async Task<bool> UpdateAsync(Guid id, Proveedor model)
-        {
-            var entity = await GetByIdAsync(id);
-            if (model != null)
-            {
-                var affectedRecords = await DataManager.ProveedorRepository.UpdateEntity(model, entity);
-                return affectedRecords > 0;
-            }
-            return false;
         }
     }
 }

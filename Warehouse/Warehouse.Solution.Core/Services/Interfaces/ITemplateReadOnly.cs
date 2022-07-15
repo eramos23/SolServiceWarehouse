@@ -9,7 +9,7 @@ namespace Warehouse.Solution.Core.Interfaces
     public interface ITemplateReadOnly<T>
     {
         Task<IEnumerable<T>> GetAllAsync();
-        Task<T> GetByIdAsync(string id);
+        Task<T> GetByIdAsync(Guid id);
 
     }
 }
