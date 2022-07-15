@@ -205,6 +205,7 @@ namespace Warehouse.Solution.Domain.DbContexts
                 }
             });
 
+            modelBuilder.Entity<Proveedor>().HasQueryFilter(g => g.Vigente);
         }
     }
 }

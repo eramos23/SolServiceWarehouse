@@ -107,5 +107,26 @@ namespace Warehouse.Sol.Web.Controllers
             var result1 = HelperStatus.ResponseHelper(false, HttpStatusCode.BadRequest, "Messages.Result_NotUpdated");
             return BadRequest(result1);
         }
+
+        [HttpDelete("delete/{id}")]
+        public async Task<ActionResult> Delete(string id)
+        {
+            if (string.IsNullOrEmpty(id)) return BadRequest(HelperStatus.ResponseHelper(false, HttpStatusCode.BadRequest, "Messages.Result_BadRequest"));
+            var espejo = await _service.GetByIdAsync(new Guid(id));
+
+            if (espejo == null) return NotFound(HelperStatus.ResponseHelper<object>(null, HttpStatusCode.NotFound, "Messages.Result_NotFound"));
+
+            //ResultDto<bool> result;
+
+            var resultService = await _service.DeleteAsync(new Guid(id));
+            if (resultService)
+            {
+                var result = HelperStatus.ResponseHelper(resultService);
+                return Ok(result);
+            }
+
+            var result1 = HelperStatus.ResponseHelper(false, HttpStatusCode.BadRequest, "Messages.Result_NotDeleted");
+            return BadRequest(result1);
+        }
     }
 }

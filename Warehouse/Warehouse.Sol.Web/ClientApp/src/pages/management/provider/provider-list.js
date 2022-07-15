@@ -2,7 +2,7 @@
 import { HomeOutlined, SearchOutlined, PlusOutlined, EditTwoTone, DeleteTwoTone } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import CustomEmpty from "../../../components/Empty/NoData";
-import { Breadcrumb, Typography, Input, Select, Col, Row, Space, Table, Card, Button, Form, Divider, Tag, ConfigProvider } from 'antd';
+import { Breadcrumb, Typography, Input, Select, Col, Row, Space, Table, Card, Button, Form, Divider, Tag, ConfigProvider, message, Popconfirm } from 'antd';
 import axios from 'axios'
 
 const { Option } = Select;
@@ -62,13 +62,35 @@ const ProviderList = () => {
             render: (text,data, key) =>
                 <>
                     <Link to={`/Management/Provider/Edit/${data.id}`}><Button size="small" icon={<EditTwoTone />} /> {"  "}</Link>
-                    <Button size="small" icon={<DeleteTwoTone twoToneColor="#ff4d4f" />} />
+                    <Popconfirm
+                        title="¿Quieres eliminar este registro?"
+                        onConfirm={() => onDelete(data.id)}
+                        okText="Si"
+                        cancelText="Cancelar"
+                    >
+                        <Button size="small" icon={<DeleteTwoTone twoToneColor="#ff4d4f" />} />
+                    </Popconfirm>
                 </>
         },
     ];
     
     const onChangeTable = (pagination, filters, sorter, extra) => {
         console.log('params', pagination, filters, sorter, extra);
+    };
+
+    const onDelete = (id) => {
+        axios.delete(`Provider/delete/${id}`)
+            .then(res => {
+                if (res.data.apiStatus === 200) {
+                    handleSeach()
+                    message.success({
+                        content: 'Se elimió correctamente!',
+                        duration: 2
+                    });
+                }
+            }).catch(error => {
+                console.log(error)
+            })
     };
 
     const handleChangeCompanies = (value) => {

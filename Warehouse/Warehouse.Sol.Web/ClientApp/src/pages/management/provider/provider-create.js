@@ -58,12 +58,12 @@ const ProviderList = () => {
             })
     }
 
-    const onEdit = (data) => {
+    const onEdit = (idProvider, data) => {
         message.loading({
             content: 'Actualizando información...',
             key,
         })
-        axios.put(`Provider/update/${id}`, data)
+        axios.put(`Provider/update/${idProvider}`, data)
             .then(res => {
                 setSaving(false)
                 if (res.data.apiStatus === 200) {
@@ -84,7 +84,7 @@ const ProviderList = () => {
         
         setSaving(true)
         if (providerForm.Id) {
-            onEdit(data)
+            onEdit(providerForm.Id, data)
         } else {
             onSave(data)
         }
