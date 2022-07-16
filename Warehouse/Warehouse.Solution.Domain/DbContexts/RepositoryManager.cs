@@ -46,6 +46,8 @@ namespace Warehouse.Solution.Domain.DbContexts
 
         public IRepository<Producto> ProductoRepository => this._productoRepository ?? new Respository<Producto>(this.Context);
 
+        public IRepository<ProductoCategoria> ProductoCategoriaRepository => this._productoCategoriaRepository ?? new Respository<ProductoCategoria>(this.Context);
+
         public void Dispose()
         {
             if (this.Context != null)

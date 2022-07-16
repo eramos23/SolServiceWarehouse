@@ -8,45 +8,29 @@ import axios from 'axios'
 const { Option } = Select;
 const { Title } = Typography;
 const SMART = {
-    base: "Provider",
+    base: "Category",
     company: "Management/companies",
     companyBranchs: "Management/company-branchs"
 }
 
-const ProviderList = () => {
+const CategoryList = () => {
     const [form] = Form.useForm();
 
     const [searching, setSearching] = useState(false);
     const [companies, setCompanies] = useState([]);
     const [companiBranchs, setCompaniBranchs] = useState([]);
-    const [providers, setProviders] = useState([]);
+    const [categories, setCategories] = useState([]);
 
-    const columns1 = [
+    const columns = [
         {
-            title: 'Proveedor',
+            title: 'Nombre',
             dataIndex: 'nombre',
             sorter: (a, b) => a.nombre.length - b.nombre.length
         },
         {
-            title: 'Tipo Proveedor',
-            dataIndex: 'tipoProveedor',
-            render: (tipoProveedor) => (
-                tipoProveedor?.nombre
-            ),
-            sorter: (a, b) => a.tipoProveedor?.nombre.length - b.tipoProveedor?.nombre.length
-        },
-        {
-            title: 'Tipo Documento',
-            dataIndex: 'tipoDocumentoIdentidad',
-            render: (tipoDocumento) => (
-                tipoDocumento?.nombre
-            ),
-            sorter: (a, b) => a.tipoDocumento?.nombre.length - b.tipoDocumento?.nombre.length
-        },
-        {
-            title: 'Número Documento',
-            dataIndex: 'numeroDocumento',
-            sorter: (a, b) => a.numeroDocumento.length - b.numeroDocumento.length
+            title: 'Observación',
+            dataIndex: 'observacion',
+            sorter: (a, b) => a.nombre.length - b.nombre.length
         },
         {
             title: 'Estado',
@@ -66,7 +50,7 @@ const ProviderList = () => {
             align: 'center',
             render: (text,data, key) =>
                 <>
-                    <Link to={`/Management/Provider/Edit/${data.id}`}><Button size="small" icon={<EditTwoTone />} /> {"  "}</Link>
+                    <Link to={`/Management/Category/Edit/${data.id}`}><Button size="small" icon={<EditTwoTone />} /> {"  "}</Link>
                     <Popconfirm
                         title="¿Quieres eliminar este registro?"
                         onConfirm={() => onDelete(data.id)}
@@ -112,11 +96,12 @@ const ProviderList = () => {
     }
 
     const handleSeach = (value) => {
+        debugger
         setSearching(true)
         axios.get(SMART.base, { params: value })
             .then(res => {
                 setSearching(false)
-                setProviders(res.data.data.map((item, i) => {
+                setCategories(res.data.data.map((item, i) => {
                     return {
                         key: i,
                         ...item
@@ -148,10 +133,10 @@ const ProviderList = () => {
                     <HomeOutlined />
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>Administración</Breadcrumb.Item>
-                <Breadcrumb.Item>Proveedor</Breadcrumb.Item>
+                <Breadcrumb.Item>Categoria</Breadcrumb.Item>
                 <Breadcrumb.Item>Listar</Breadcrumb.Item>
             </Breadcrumb>
-            <Title level={3}>Listado de Proveedorees</Title>
+            <Title level={3}>Listado de Categorías</Title>
             <ConfigProvider renderEmpty={CustomEmpty}>
             <Card size="small">
                 <Form
@@ -221,7 +206,7 @@ const ProviderList = () => {
                         </Col>
                         <Col sx={24} lg={3} className="width100">
                             <Form.Item>
-                                <Link to='/Management/Provider/Create'>
+                                <Link to='/Management/Category/Create'>
                                     <Button className="btn-right" type="primary" icon={<PlusOutlined />}>
                                         Crear
                                     </Button>
@@ -237,8 +222,8 @@ const ProviderList = () => {
             <ConfigProvider renderEmpty={CustomEmpty}>
             <Card size="small">
                 <Table
-                    columns={columns1}
-                    dataSource={providers}
+                    columns={columns}
+                    dataSource={categories}
                     size="small"
                     showSorterTooltip={false}
                     onChange={onChangeTable}
@@ -249,4 +234,4 @@ const ProviderList = () => {
     );
 };
 
-export default ProviderList
+export default CategoryList

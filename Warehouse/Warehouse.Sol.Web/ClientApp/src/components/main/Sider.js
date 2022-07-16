@@ -27,8 +27,8 @@ const items = [
     getItem('Administración', 'sub1', <DesktopOutlined />, [
         getItem(<Link to='/Management/Provider'>Proveedor</Link>, '3'),
         getItem('Entidad Financiera', '4'),
-        getItem('Producto', '5'),
-        getItem('Categoria de Producto', '6'),
+        getItem(<Link to='/Management/Product'>Producto</Link>, '5'),
+        getItem(<Link to='/Management/Category'>Categoria</Link>, '6'),
         getItem('Marca', '7'),
         getItem('Unidad', '8')
     ]),

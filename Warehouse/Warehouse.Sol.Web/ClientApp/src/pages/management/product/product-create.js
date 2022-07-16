@@ -15,7 +15,7 @@ const SMART = {
 }
 
 
-const ProviderCreate = () => {
+const ProductCreate = () => {
     const [form] = Form.useForm();
     const [saving, setSaving] = useState(false);
     const [modeLabel, setModeLabel] = useState("Crear");
@@ -157,10 +157,10 @@ const ProviderCreate = () => {
                     <HomeOutlined />
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>Administración</Breadcrumb.Item>
-                <Breadcrumb.Item><Link to='/Management/Provider'>Proveedor</Link></Breadcrumb.Item>
+                <Breadcrumb.Item><Link to='/Management/Product'>Producto</Link></Breadcrumb.Item>
                 <Breadcrumb.Item>{modeLabel}</Breadcrumb.Item>
             </Breadcrumb>
-            <Title level={3}>Crear Proveedor</Title>
+            <Title level={3}>Crear Producto</Title>
             <ConfigProvider renderEmpty={CustomEmpty}>
             <Card size="small">
 
@@ -226,12 +226,21 @@ const ProviderCreate = () => {
 
                         <Col sx={24} lg={8} className="width100">
                             <Form.Item label="Nombre" name="Nombre" rules={[requiredField]}>
-                                    <Input placeholder="Ingrese el nombre" maxLength="100" allowClear />
+                                <Input placeholder="Ingrese el nombre" maxLength="100" allowClear />
                             </Form.Item>
                         </Col>
                         <Col sx={24} lg={8} className="width100">
-                            <Form.Item label="Tipo Documento" name="IdTipoDocumento" rules={[requiredField]}>
-                                <Select className="width100" >
+                                <Form.Item label="Código de Barra" name="CodigoBarra">
+                                <Input placeholder="Ingrese el codigo de barra" maxLength="200" allowClear />
+                            </Form.Item>
+                        </Col>
+                        <Col sx={24} lg={8} className="width100">
+                                <Form.Item label="Categorias" name="Categorias" rules={[requiredField]}>
+                                    <Select className="width100"
+                                        mode="multiple"
+                                        allowClear
+                                        placeholder="Seleccione las categorias"
+                                    >
                                     {
                                         documentTypes.map((item) =>
                                             <Option key={item.id} value={item.id}>{item.nombre}</Option>
@@ -334,4 +343,4 @@ const ProviderCreate = () => {
     );
 };
 
-export default ProviderCreate
+export default ProductCreate

@@ -8,12 +8,12 @@ import axios from 'axios'
 const { Option } = Select;
 const { Title } = Typography;
 const SMART = {
-    base: "Provider",
+    base: "Product",
     company: "Management/companies",
     companyBranchs: "Management/company-branchs"
 }
 
-const ProviderList = () => {
+const ProductList = () => {
     const [form] = Form.useForm();
 
     const [searching, setSearching] = useState(false);
@@ -66,7 +66,7 @@ const ProviderList = () => {
             align: 'center',
             render: (text,data, key) =>
                 <>
-                    <Link to={`/Management/Provider/Edit/${data.id}`}><Button size="small" icon={<EditTwoTone />} /> {"  "}</Link>
+                    <Link to={`/Management/Product/Edit/${data.id}`}><Button size="small" icon={<EditTwoTone />} /> {"  "}</Link>
                     <Popconfirm
                         title="¿Quieres eliminar este registro?"
                         onConfirm={() => onDelete(data.id)}
@@ -148,10 +148,10 @@ const ProviderList = () => {
                     <HomeOutlined />
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>Administración</Breadcrumb.Item>
-                <Breadcrumb.Item>Proveedor</Breadcrumb.Item>
+                <Breadcrumb.Item>Producto</Breadcrumb.Item>
                 <Breadcrumb.Item>Listar</Breadcrumb.Item>
             </Breadcrumb>
-            <Title level={3}>Listado de Proveedorees</Title>
+            <Title level={3}>Listado de Productos</Title>
             <ConfigProvider renderEmpty={CustomEmpty}>
             <Card size="small">
                 <Form
@@ -221,7 +221,7 @@ const ProviderList = () => {
                         </Col>
                         <Col sx={24} lg={3} className="width100">
                             <Form.Item>
-                                <Link to='/Management/Provider/Create'>
+                                <Link to='/Management/Product/Create'>
                                     <Button className="btn-right" type="primary" icon={<PlusOutlined />}>
                                         Crear
                                     </Button>
@@ -249,4 +249,4 @@ const ProviderList = () => {
     );
 };
 
-export default ProviderList
+export default ProductList

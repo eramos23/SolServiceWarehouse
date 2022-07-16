@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Warehouse.Solution.Domain.Model
 {
-    public class ProductoMarca
+    public class ProductoMarca : HistoryModel
     {
         public ProductoMarca()
         {

@@ -206,6 +206,10 @@ namespace Warehouse.Solution.Domain.DbContexts
             });
 
             modelBuilder.Entity<Proveedor>().HasQueryFilter(g => g.Vigente);
+            modelBuilder.Entity<Producto>().HasQueryFilter(g => g.Vigente);
+            modelBuilder.Entity<ProductoCategoria>().HasQueryFilter(g => g.Vigente);
+            modelBuilder.Entity<ProductoMarca>().HasQueryFilter(g => g.Vigente);
+            modelBuilder.Entity<ProductoUso>().HasQueryFilter(g => g.Vigente);
         }
     }
 }

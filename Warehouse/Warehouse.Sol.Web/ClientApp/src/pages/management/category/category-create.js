@@ -8,21 +8,18 @@ import axios from 'axios'
 const { Option } = Select;
 const { Title } = Typography;
 const SMART = {
-    base: "Provider",
+    base: "Category",
     company: "Management/companies",
-    companyBranchs: "Management/company-branchs",
-    identityDocumentType: 'Management/identity-documnet-type'
+    companyBranchs: "Management/company-branchs"
 }
 
 
-const ProviderCreate = () => {
+const CategoryCreate = () => {
     const [form] = Form.useForm();
     const [saving, setSaving] = useState(false);
     const [modeLabel, setModeLabel] = useState("Crear");
     const [companies, setCompanies] = useState([]);
     const [companiBranchs, setCompaniBranchs] = useState([]);
-    const [documentTypes, setDocumentTypes] = useState([]);
-    const [provider, setProvider] = useState({});
     const { id } = useParams()
     
     const key = 'updatable';
@@ -70,12 +67,12 @@ const ProviderCreate = () => {
             })
     }
 
-    const onEdit = (idProvider, data) => {
+    const onEdit = (idCategory, data) => {
         message.loading({
             content: 'Actualizando información...',
             key,
         })
-        axios.put(`${SMART.base}/${idProvider}`, data)
+        axios.put(`${SMART.base}/${idCategory}`, data)
             .then(res => {
                 setSaving(false)
                 if (res.data.apiStatus === 200) {
@@ -96,11 +93,11 @@ const ProviderCreate = () => {
     }
 
     const onFinish = (data) => {
-        let providerForm = form.getFieldsValue(["Id"])
+        let categoryForm = form.getFieldsValue(["Id"])
         
         setSaving(true)
-        if (providerForm.Id) {
-            onEdit(providerForm.Id, data)
+        if (categoryForm.Id) {
+            onEdit(categoryForm.Id, data)
         } else {
             onSave(data)
         }
@@ -118,7 +115,6 @@ const ProviderCreate = () => {
         ]
         return Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(([{ data: companies }, { data: documentType }]) => {
             setCompanies(companies.data)
-            setDocumentTypes(documentType.data)
         });
     }
 
@@ -133,17 +129,13 @@ const ProviderCreate = () => {
                         return data
                     }).then((data) => {
                         setModeLabel("Editar")
+                        debugger
                         form.setFieldsValue({
                             Id: data.id,
                             IdEmpresa: data.idEmpresa,
                             IdEmpresaSucursal: data.idEmpresaSucursal,
                             Nombre: data.nombre,
-                            IdTipoDocumento: data.tipoDocumentoIdentidad?.id,
-                            NumeroDocumento: data.numeroDocumento,
-                            Direccion: data.direccion,
-                            Correo: data.correo,
-                            Telefono: data.telefono,
-                            IdTipoProveedor: data.tipoProveedor?.id.toString(),
+                            Observacion: data.observacion,
                             IdEstado: data.idEstado.toString()
                         });
                     })
@@ -157,10 +149,10 @@ const ProviderCreate = () => {
                     <HomeOutlined />
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>Administración</Breadcrumb.Item>
-                <Breadcrumb.Item><Link to='/Management/Provider'>Proveedor</Link></Breadcrumb.Item>
+                <Breadcrumb.Item><Link to='/Management/Category'>Categoría</Link></Breadcrumb.Item>
                 <Breadcrumb.Item>{modeLabel}</Breadcrumb.Item>
             </Breadcrumb>
-            <Title level={3}>Crear Proveedor</Title>
+            <Title level={3}>Crear Categoria</Title>
             <ConfigProvider renderEmpty={CustomEmpty}>
             <Card size="small">
 
@@ -173,7 +165,6 @@ const ProviderCreate = () => {
                     }}
                     name="control-hooks"
                     initialValues={{
-                        ["IdTipoProveedor"]: "10",
                         ["IdEstado"]: "1"
                     }}
                 >
@@ -224,68 +215,18 @@ const ProviderCreate = () => {
                             </Form.Item>
                         </Col>
 
-                        <Col sx={24} lg={8} className="width100">
+                        <Col sx={24} lg={12} className="width100">
                             <Form.Item label="Nombre" name="Nombre" rules={[requiredField]}>
                                     <Input placeholder="Ingrese el nombre" maxLength="100" allowClear />
                             </Form.Item>
                         </Col>
-                        <Col sx={24} lg={8} className="width100">
-                            <Form.Item label="Tipo Documento" name="IdTipoDocumento" rules={[requiredField]}>
-                                <Select className="width100" >
-                                    {
-                                        documentTypes.map((item) =>
-                                            <Option key={item.id} value={item.id}>{item.nombre}</Option>
-                                        )
-                                    }
-                                </Select>
-                            </Form.Item>
-                        </Col>
-                        <Col sx={24} lg={8} className="width100">
-                            <Form.Item label="Número Documento" name="NumeroDocumento" rules={[requiredField]}>
-                                    <Input placeholder="Ingrese el documento" allowClear maxLength="20" />
+                        <Col sx={24} lg={12} className="width100">
+                                <Form.Item label="Observación" name="Observacion">
+                                <Input placeholder="Ingrese una observación" maxLength="200" allowClear />
                             </Form.Item>
                         </Col>
 
-                        <Col sx={24} lg={8} className="width100">
-                            <Form.Item label="Dirección" name="Direccion">
-                                    <Input placeholder="Ingrese la dirección" allowClear maxLength="200" />
-                            </Form.Item>
-                        </Col>
-                        <Col sx={24} lg={8} className="width100">
-                            <Form.Item
-                                label="Correo"
-                                name="Correo"
-                                rules={[
-                                    {
-                                        type: 'email',
-                                        message: 'Formato de correo incorrecto'
-                                    }
-                                ]}
-                            >
-                                    <Input placeholder="Ingrese el correo" allowClear maxLength="50" />
-                            </Form.Item>
-                        </Col>
-                        <Col sx={24} lg={8} className="width100">
-                                <Form.Item
-                                    label="Telefono"
-                                    name="Telefono"
-                                >
-                                    <Input placeholder="Ingrese el telefono" allowClear maxLength="20" />
-                            </Form.Item>
-                        </Col>
-                        <Col sx={24} lg={8} className="width100">
-                            <Form.Item
-                                    label="Tipo Proveedor"
-                                    name="IdTipoProveedor"
-                                    rules={[requiredField]}
-                                >
-                                <Select className="width100">
-                                    <Option key="10" value="10">Factura-Stock</Option>
-                                    <Option key="11" value="11">Gastos</Option>
-                                </Select>
-                            </Form.Item>
-                        </Col>
-                        <Col sx={24} lg={8} className="width100">
+                        <Col sx={24} lg={12} className="width100">
                             <Form.Item label="Estado" name="IdEstado">
                                 <Select className="width100">
                                     <Option value="1">Activo</Option>
@@ -293,7 +234,7 @@ const ProviderCreate = () => {
                                 </Select>
                             </Form.Item>
                         </Col>
-                        <Col sx={24} lg={8} className="width100">
+                        <Col sx={24} lg={12} className="width100">
                             <Form.Item label="Id" name="Id" hidden>
                                 <Input type="hidden" />
                             </Form.Item>
@@ -305,7 +246,7 @@ const ProviderCreate = () => {
 
                         <Col sx={24} lg={3} className="width100">
                             <Form.Item>
-                                <Link to='/Management/Provider'>
+                                <Link to='/Management/Category'>
                                     <Button className="btn-right">
                                         Volver
                                     </Button>
@@ -334,4 +275,4 @@ const ProviderCreate = () => {
     );
 };
 
-export default ProviderCreate
+export default CategoryCreate

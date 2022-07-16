@@ -85,11 +85,11 @@ namespace Warehouse.Solution.Core.Services
 
         public async Task<Proveedor> GetByIdAsync(Guid id)
         {
-            var compInter = await DataManager.DbContext.Proveedor
+            var provider = await DataManager.DbContext.Proveedor
                                     .Include(ci => ci.TipoDocumentoIdentidad)            
                                     .Include(pro => pro.TipoProveedor)
                                     .FirstOrDefaultAsync(ci => ci.Id == id);
-            return compInter;
+            return provider;
         }
     }
 }
