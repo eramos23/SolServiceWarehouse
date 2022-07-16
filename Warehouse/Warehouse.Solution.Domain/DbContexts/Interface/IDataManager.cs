@@ -11,6 +11,7 @@ namespace Warehouse.Solution.Domain.DbContexts.Interface
         IRepository<EmpresaSucursal> EmpresaSucursalRepository { get; }
         IRepository<Catalogo> CatalogoRepository { get; }
         IRepository<TipoDocumentoIdentidad> TipoDocumentoIdentidadRepository { get; }
+        IRepository<Producto> ProductoRepository { get; }
         WarehouseDbContext DbContext { get; }
     }
 }

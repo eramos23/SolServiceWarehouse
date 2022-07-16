@@ -29,5 +29,6 @@ namespace Warehouse.Solution.Dto
         public int StockEgreso { get; set; }
         public int stockSaldo { get; set; }
         public int CierreAnual { get; set; }
+        public CatalogoDto Estado { get; set; }
     }
 }

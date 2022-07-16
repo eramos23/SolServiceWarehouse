@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -39,6 +40,11 @@ namespace Warehouse.Solution.Domain.Model
         public int StockEgreso { get; set; }
         public int stockSaldo { get; set; }
         public int CierreAnual { get; set; }
+        public int IdEstado { get; set; }
+        [ForeignKey("IdEstado")]
+        public Catalogo Estado { get; set; }
+        
 
+        
     }
 }

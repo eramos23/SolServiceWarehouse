@@ -20,6 +20,12 @@ namespace Warehouse.Solution.Domain.DbContexts
         private readonly IRepository<EmpresaSucursal> _empresaSucursalRepository;
         private readonly IRepository<Catalogo> _catalogoRepository;
         private readonly IRepository<TipoDocumentoIdentidad> _tipoDocumentoIdentidadRepository;
+        private readonly IRepository<Producto> _productoRepository;
+        private readonly IRepository<ProductoCategoria> _productoCategoriaRepository;
+        private readonly IRepository<ProductoUso> _productoUsoRepository;
+        private readonly IRepository<UnidadMedida> _unidadMedidaRepository;
+        private readonly IRepository<ProductoMarca> _productoMarcaRepository;
+        private readonly IRepository<Laboratorio> _laboratorioRepository;
 
         public RepositoryManager(WarehouseDbContext context)
         {
@@ -37,6 +43,8 @@ namespace Warehouse.Solution.Domain.DbContexts
         public WarehouseDbContext DbContext => this.Context;
 
         public IRepository<TipoDocumentoIdentidad> TipoDocumentoIdentidadRepository => this._tipoDocumentoIdentidadRepository ?? new Respository<TipoDocumentoIdentidad>(this.Context);
+
+        public IRepository<Producto> ProductoRepository => this._productoRepository ?? new Respository<Producto>(this.Context);
 
         public void Dispose()
         {

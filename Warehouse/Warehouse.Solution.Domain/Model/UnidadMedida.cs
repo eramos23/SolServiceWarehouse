@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Warehouse.Solution.Domain.Model
 {
-    public partial class UnidadMedida
+    public class UnidadMedida
     {
         public UnidadMedida()
         {

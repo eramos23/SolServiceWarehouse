@@ -6,10 +6,11 @@ using System.Threading.Tasks;
 using Warehouse.Solution.Core.Interfaces;
 using Warehouse.Solution.Domain.Model;
 using Warehouse.Solution.Dto;
+using Warehouse.Solution.Dto.Filters;
 
 namespace Warehouse.Solution.Core.Services.Interfaces
 {
-    public interface IProductService : ITemplateCrud<Producto, ProductoDto>
+    public interface IProductService : ITemplateCrud<Producto, ProductFilterDto>
     {
     }
 }
