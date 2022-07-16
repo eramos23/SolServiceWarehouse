@@ -7,6 +7,11 @@ import axios from 'axios'
 
 const { Option } = Select;
 const { Title } = Typography;
+const SMART = {
+    base: "Provider",
+    company: "Management/companies",
+    companyBranchs: "Management/company-branchs"
+}
 
 const ProviderList = () => {
     const [form] = Form.useForm();
@@ -79,32 +84,36 @@ const ProviderList = () => {
     };
 
     const onDelete = (id) => {
-        axios.delete(`Provider/delete/${id}`)
+        axios.delete(`${SMART.base}/${id}`)
             .then(res => {
                 if (res.data.apiStatus === 200) {
-                    handleSeach()
+                    let values = form.getFieldsValue();
+                    handleSeach(values)
                     message.success({
-                        content: 'Se elimió correctamente!',
+                        content: res.data.apiMessage,
                         duration: 2
                     });
                 }
             }).catch(error => {
+                message.error({
+                    content: "Ocurrió un error al intentar eliminar.",
+                    duration: 4
+                })
                 console.log(error)
             })
     };
 
     const handleChangeCompanies = (value) => {
         form.resetFields(["IdEmpresaSucursal"]);
-        axios.get(`Management/company-branchs?id=`+value)
+        axios.get(`${SMART.companyBranchs}?id=${value}`)
             .then(res => {
-                console.log(res.data.data)
                 setCompaniBranchs(res.data.data)
             })
     }
 
     const handleSeach = (value) => {
         setSearching(true)
-        axios.get(`Provider/get-list`, { params: value })
+        axios.get(SMART.base, { params: value })
             .then(res => {
                 setSearching(false)
                 setProviders(res.data.data.map((item, i) => {
@@ -114,11 +123,15 @@ const ProviderList = () => {
                     }
                 }))
             })
+            .catch(error => {
+                throw new Error(`${error.config.url} not found`);
+                console.log(error)
+            })
 
     }
 
     useEffect(() => {
-        axios.get(`Management/companies`)
+        axios.get(SMART.company)
             .then(res => {
                 setCompanies(res.data.data)
             })
@@ -126,11 +139,7 @@ const ProviderList = () => {
     }, [])
     return (
         <div>
-            <Breadcrumb
-                style={{
-                    margin: '16px 0',
-                }}
-            >
+            <Breadcrumb className="breadcrumb-margin">
                 <Breadcrumb.Item href="/">
                     <HomeOutlined />
                 </Breadcrumb.Item>
@@ -199,7 +208,7 @@ const ProviderList = () => {
                         </Col>
                         <Col sx={24} lg={3} className="width100">
                             <Form.Item>
-                                <Button style={{ float: 'right', width: '100%' }} htmlType="submit" type="primary" icon={<SearchOutlined />} loading={searching}>
+                                    <Button className="btn-right" htmlType="submit" type="primary" icon={<SearchOutlined />} loading={searching}>
                                     Buscar
                                 </Button>
                             </Form.Item>
@@ -209,7 +218,7 @@ const ProviderList = () => {
                         <Col sx={24} lg={3} className="width100">
                             <Form.Item>
                                 <Link to='/Management/Provider/Create'>
-                                    <Button style={{ float: 'right', width: '100%' }} type="primary" icon={<PlusOutlined />}>
+                                    <Button className="btn-right" type="primary" icon={<PlusOutlined />}>
                                         Crear
                                     </Button>
                                 </Link>

@@ -7,6 +7,13 @@ import axios from 'axios'
 
 const { Option } = Select;
 const { Title } = Typography;
+const SMART = {
+    base: "Provider",
+    company: "Management/companies",
+    companyBranchs: "Management/company-branchs",
+    identityDocumentType: 'Management/identity-documnet-type'
+}
+
 
 const ProviderList = () => {
     const [form] = Form.useForm();
@@ -27,7 +34,7 @@ const ProviderList = () => {
 
     const handleChangeCompanies = (value) => {
         form.resetFields(["IdEmpresaSucursal"]);
-        axios.get(`Management/company-branchs?id=${value}`)
+        axios.get(`${SMART.companyBranchs}?id=${value}`)
             .then(res => {
                 setCompaniBranchs(res.data.data)
             })
@@ -38,7 +45,7 @@ const ProviderList = () => {
             content: 'Guardando información...',
             key,
         })
-        axios.post(`Provider/create`, data)
+        axios.post(SMART.base, data)
             .then(res => {
                 setSaving(false)
                 if (res.data.apiStatus === 201) {
@@ -48,12 +55,17 @@ const ProviderList = () => {
                     });
 
                     message.success({
-                        content: 'La información se guardó correctamente!',
+                        content: res.data.apiMessage,
                         key,
                         duration: 2,
                     });
                 }
             }).catch(error => {
+                setSaving(false)
+                message.error({
+                    content: "Ocurrió un error al intentar guardar.",
+                    duration: 4
+                })
                 console.log(error)
             })
     }
@@ -63,18 +75,22 @@ const ProviderList = () => {
             content: 'Actualizando información...',
             key,
         })
-        axios.put(`Provider/update/${idProvider}`, data)
+        axios.put(`${SMART.base}/${idProvider}`, data)
             .then(res => {
                 setSaving(false)
                 if (res.data.apiStatus === 200) {
-
                     message.success({
-                        content: 'La información se actualizó correctamente!',
+                        content: res.data.apiMessage,
                         key,
                         duration: 2,
                     });
                 }
             }).catch(error => {
+                setSaving(false)
+                message.error({
+                    content: "Ocurrió un error al intentar actualizar.",
+                    duration: 4
+                })
                 console.log(error)
             })
     }
@@ -97,8 +113,8 @@ const ProviderList = () => {
 
     const getInit = () => {
         let endpoints = [
-            'Management/companies',
-            'Management/identity-documnet-type'
+            SMART.company,
+            SMART.identityDocumentType
         ]
         return Promise.all(endpoints.map((endpoint) => axios.get(endpoint))).then(([{ data: companies }, { data: documentType }]) => {
             setCompanies(companies.data)
@@ -109,7 +125,7 @@ const ProviderList = () => {
     useEffect(() => {
         getInit().then(() => {
             if (id) {
-                axios.get(`Provider/get-single?id=${id}`)
+                axios.get(`${SMART.base}/${id}`)
                     .then(res => {
                         let data = res.data.data
 
@@ -136,11 +152,7 @@ const ProviderList = () => {
     }, [])
     return (
         <div>
-            <Breadcrumb
-                style={{
-                    margin: '16px 0',
-                }}
-            >
+            <Breadcrumb className="breadcrumb-margin">
                 <Breadcrumb.Item href="/">
                     <HomeOutlined />
                 </Breadcrumb.Item>
@@ -286,29 +298,30 @@ const ProviderList = () => {
                                 <Input type="hidden" />
                             </Form.Item>
                         </Col>
-
-                        <Col sx={24} lg={15} className="width100">
+                    </Row>
+                    <Row gutter={[10, 0]} className="mt-4">
+                        <Col sx={24} lg={id ? 18 : 15} className="width100">
                         </Col>
 
                         <Col sx={24} lg={3} className="width100">
                             <Form.Item>
                                 <Link to='/Management/Provider'>
-                                    <Button style={{ float: 'right', width: '100%' }}>
+                                    <Button className="btn-right">
                                         Volver
                                     </Button>
                                 </Link>
                             </Form.Item>
                         </Col>
-                            <Col sx={24} lg={3} className="width100">
-                                <Form.Item hidden={id? true : false}>
-                                    <Button style={{ float: 'right', width: '100%' }} icon={<PlusOutlined />} onClick={onNew}>
+                        <Col sx={24} lg={3} className="width100" style={{ display: id ? 'none' : '' }}>
+                            <Form.Item hidden={id ? true : false}>
+                                <Button className="btn-right" icon={<PlusOutlined />} onClick={onNew}>
                                     Nuevo
                                 </Button>
                             </Form.Item>
                         </Col>
                         <Col sx={24} lg={3} className="width100">
-                                <Form.Item>
-                                    <Button htmlType="submit" style={{ float: 'right', width: '100%' }} type="primary" icon={<SaveOutlined />} loading={saving}>
+                            <Form.Item>
+                                <Button htmlType="submit" className="btn-right" type="primary" icon={<SaveOutlined />} loading={saving}>
                                     Guardar
                                 </Button>
                             </Form.Item>
