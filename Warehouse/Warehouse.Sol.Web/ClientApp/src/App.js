@@ -13,6 +13,8 @@ import CategoryList from './pages/management/category/category-list'
 import CategoryCreate from './pages/management/category/category-create'
 import ProductUseList from './pages/management/product-use/product-use-list'
 import ProductUseCreate from './pages/management/product-use/product-use-create'
+import ProductBrandList from './pages/management/product-brand/product-brand-list'
+import ProductBrandCreate from './pages/management/product-brand/product-brand-create'
 
 
 import axios from 'axios'
@@ -36,6 +38,10 @@ const AppRoute = () => {
                 <Route path='/Management/ProductUse' element={<ProductUseList />} />
                 <Route path='/Management/ProductUse/Create' element={<ProductUseCreate />} />
                 <Route path='/Management/ProductUse/Edit/:id' element={<ProductUseCreate />} />
+
+                <Route path='/Management/ProductBrand' element={<ProductBrandList />} />
+                <Route path='/Management/ProductBrand/Create' element={<ProductBrandCreate />} />
+                <Route path='/Management/ProductBrand/Edit/:id' element={<ProductBrandCreate />} />
 
                 <Route path='/Management/Provider' element={<ProviderList />} />
                 <Route path='/Management/Provider/Create' element={<ProviderCreate />} />

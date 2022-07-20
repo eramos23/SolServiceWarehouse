@@ -8,7 +8,7 @@ import axios from 'axios'
 const { Option } = Select;
 const { Title } = Typography;
 const SMART = {
-    base: "Category",
+    base: "ProductBrand",
     company: "Management/companies",
     companyBranchs: "Management/company-branchs"
 }
@@ -149,10 +149,10 @@ const ProductBrandCreate = () => {
                     <HomeOutlined />
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>Administración</Breadcrumb.Item>
-                <Breadcrumb.Item><Link to='/Management/Category'>Categoría</Link></Breadcrumb.Item>
+                <Breadcrumb.Item><Link to='/Management/ProductBrand'>Marca</Link></Breadcrumb.Item>
                 <Breadcrumb.Item>{modeLabel}</Breadcrumb.Item>
             </Breadcrumb>
-            <Title level={3}>Crear Categoria</Title>
+            <Title level={3}>Crear Marca</Title>
             <ConfigProvider renderEmpty={CustomEmpty}>
             <Card size="small">
 
@@ -246,7 +246,7 @@ const ProductBrandCreate = () => {
 
                         <Col sx={24} lg={3} className="width100">
                             <Form.Item>
-                                <Link to='/Management/Category'>
+                                <Link to='/Management/ProductBrand'>
                                     <Button className="btn-right">
                                         Volver
                                     </Button>

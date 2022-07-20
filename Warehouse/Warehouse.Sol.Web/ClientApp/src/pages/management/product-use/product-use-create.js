@@ -148,7 +148,7 @@ const ProductUseCreate = () => {
                     <HomeOutlined />
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>Administración</Breadcrumb.Item>
-                <Breadcrumb.Item><Link to='/Management/Category'>Categoría</Link></Breadcrumb.Item>
+                <Breadcrumb.Item><Link to='/Management/ProductUse'>Uso de Producto</Link></Breadcrumb.Item>
                 <Breadcrumb.Item>{modeLabel}</Breadcrumb.Item>
             </Breadcrumb>
             <Title level={3}>Crear Categoria</Title>

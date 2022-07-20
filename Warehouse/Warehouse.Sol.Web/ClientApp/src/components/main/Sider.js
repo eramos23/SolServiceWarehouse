@@ -30,7 +30,7 @@ const items = [
         getItem(<Link to='/Management/Product'>Producto</Link>, '5'),
         getItem(<Link to='/Management/Category'>Categoria</Link>, '6'),
         getItem(<Link to='/Management/ProductUse'>Uso de Producto</Link>, '66'),
-        getItem('Marca', '7'),
+        getItem(<Link to='/Management/ProductBrand'>Marca</Link>, '7'),
         getItem('Unidad', '8')
     ]),
     getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '9'), getItem('Team 2', '10')]),

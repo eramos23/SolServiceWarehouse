@@ -8,7 +8,7 @@ import axios from 'axios'
 const { Option } = Select;
 const { Title } = Typography;
 const SMART = {
-    base: "Category",
+    base: "ProductBrand",
     company: "Management/companies",
     companyBranchs: "Management/company-branchs"
 }
@@ -19,7 +19,7 @@ const ProductBrandList = () => {
     const [searching, setSearching] = useState(false);
     const [companies, setCompanies] = useState([]);
     const [companiBranchs, setCompaniBranchs] = useState([]);
-    const [categories, setCategories] = useState([]);
+    const [productBrands, setProductBrands] = useState([]);
 
     const columns = [
         {
@@ -50,7 +50,7 @@ const ProductBrandList = () => {
             align: 'center',
             render: (text,data, key) =>
                 <>
-                    <Link to={`/Management/Category/Edit/${data.id}`}><Button size="small" icon={<EditTwoTone />} /> {"  "}</Link>
+                    <Link to={`/Management/ProductBrand/Edit/${data.id}`}><Button size="small" icon={<EditTwoTone />} /> {"  "}</Link>
                     <Popconfirm
                         title="¿Quieres eliminar este registro?"
                         onConfirm={() => onDelete(data.id)}
@@ -96,12 +96,11 @@ const ProductBrandList = () => {
     }
 
     const handleSeach = (value) => {
-        debugger
         setSearching(true)
         axios.get(SMART.base, { params: value })
             .then(res => {
                 setSearching(false)
-                setCategories(res.data.data.map((item, i) => {
+                setProductBrands(res.data.data.map((item, i) => {
                     return {
                         key: i,
                         ...item
@@ -133,7 +132,7 @@ const ProductBrandList = () => {
                     <HomeOutlined />
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>Administración</Breadcrumb.Item>
-                <Breadcrumb.Item>Categoria</Breadcrumb.Item>
+                <Breadcrumb.Item>Marca</Breadcrumb.Item>
                 <Breadcrumb.Item>Listar</Breadcrumb.Item>
             </Breadcrumb>
             <Title level={3}>Listado de Categorías</Title>
@@ -206,7 +205,7 @@ const ProductBrandList = () => {
                         </Col>
                         <Col sx={24} lg={3} className="width100">
                             <Form.Item>
-                                <Link to='/Management/Category/Create'>
+                                <Link to='/Management/ProductBrand/Create'>
                                     <Button className="btn-right" type="primary" icon={<PlusOutlined />}>
                                         Crear
                                     </Button>
@@ -223,7 +222,7 @@ const ProductBrandList = () => {
             <Card size="small">
                 <Table
                     columns={columns}
-                    dataSource={categories}
+                        dataSource={productBrands}
                     size="small"
                     showSorterTooltip={false}
                     onChange={onChangeTable}
