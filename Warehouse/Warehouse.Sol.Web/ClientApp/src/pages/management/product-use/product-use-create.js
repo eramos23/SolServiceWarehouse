@@ -67,12 +67,12 @@ const ProductUseCreate = () => {
             })
     }
 
-    const onEdit = (idCategory, data) => {
+    const onEdit = (idUse, data) => {
         message.loading({
             content: 'Actualizando información...',
             key,
         })
-        axios.put(`${SMART.base}/${idCategory}`, data)
+        axios.put(`${SMART.base}/${idUse}`, data)
             .then(res => {
                 setSaving(false)
                 if (res.data.apiStatus === 200) {
@@ -93,11 +93,11 @@ const ProductUseCreate = () => {
     }
 
     const onFinish = (data) => {
-        let categoryForm = form.getFieldsValue(["Id"])
+        let useForm = form.getFieldsValue(["Id"])
         
         setSaving(true)
-        if (categoryForm.Id) {
-            onEdit(categoryForm.Id, data)
+        if (useForm.Id) {
+            onEdit(useForm.Id, data)
         } else {
             onSave(data)
         }
@@ -151,7 +151,7 @@ const ProductUseCreate = () => {
                 <Breadcrumb.Item><Link to='/Management/ProductUse'>Uso de Producto</Link></Breadcrumb.Item>
                 <Breadcrumb.Item>{modeLabel}</Breadcrumb.Item>
             </Breadcrumb>
-            <Title level={3}>Crear Categoria</Title>
+            <Title level={3}>Crear Uso de Producto</Title>
             <ConfigProvider renderEmpty={CustomEmpty}>
             <Card size="small">
 

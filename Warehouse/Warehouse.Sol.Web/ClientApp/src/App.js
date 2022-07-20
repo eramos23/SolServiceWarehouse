@@ -15,6 +15,8 @@ import ProductUseList from './pages/management/product-use/product-use-list'
 import ProductUseCreate from './pages/management/product-use/product-use-create'
 import ProductBrandList from './pages/management/product-brand/product-brand-list'
 import ProductBrandCreate from './pages/management/product-brand/product-brand-create'
+import LaboratoryList from './pages/management/laboratory/laboratory-list'
+import LaboratoryCreate from './pages/management/laboratory/laboratory-create'
 
 
 import axios from 'axios'
@@ -43,9 +45,14 @@ const AppRoute = () => {
                 <Route path='/Management/ProductBrand/Create' element={<ProductBrandCreate />} />
                 <Route path='/Management/ProductBrand/Edit/:id' element={<ProductBrandCreate />} />
 
-                <Route path='/Management/Provider' element={<ProviderList />} />
-                <Route path='/Management/Provider/Create' element={<ProviderCreate />} />
-                <Route path='/Management/Provider/Edit/:id' element={<ProviderCreate />} />
+                <Route path='/Management/ProductBrand' element={<ProductBrandList />} />
+                <Route path='/Management/ProductBrand/Create' element={<ProductBrandCreate />} />
+                <Route path='/Management/ProductBrand/Edit/:id' element={<ProductBrandCreate />} />
+
+
+                <Route path='/Management/Laboratory' element={<LaboratoryList />} />
+                <Route path='/Management/Laboratory/Create' element={<LaboratoryCreate />} />
+                <Route path='/Management/Laboratory/Edit/:id' element={<LaboratoryCreate />} />
 
                 <Route path='/Management/Product' element={<ProductList />} />
                 <Route path='/Management/Product/Create' element={<ProductCreate />} />

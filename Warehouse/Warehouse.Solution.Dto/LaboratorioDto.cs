@@ -12,6 +12,7 @@ namespace Warehouse.Solution.Dto
         public Guid IdEmpresa { get; set; }
         public Guid IdEmpresaSucursal { get; set; }
         public string Nombre { get; set; }
+        public int IdEstado { get; set; }
         public CatalogoDto Estado { get; set; }
     }
 

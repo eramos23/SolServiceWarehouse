@@ -8,13 +8,13 @@ import axios from 'axios'
 const { Option } = Select;
 const { Title } = Typography;
 const SMART = {
-    base: "ProductBrand",
+    base: "laboratory",
     company: "Management/companies",
     companyBranchs: "Management/company-branchs"
 }
 
 
-const ProductBrandCreate = () => {
+const laboratoryCreate = () => {
     const [form] = Form.useForm();
     const [saving, setSaving] = useState(false);
     const [modeLabel, setModeLabel] = useState("Crear");
@@ -67,12 +67,12 @@ const ProductBrandCreate = () => {
             })
     }
 
-    const onEdit = (idBrand, data) => {
+    const onEdit = (idLaboratory, data) => {
         message.loading({
             content: 'Actualizando información...',
             key,
         })
-        axios.put(`${SMART.base}/${idBrand}`, data)
+        axios.put(`${SMART.base}/${idLaboratory}`, data)
             .then(res => {
                 setSaving(false)
                 if (res.data.apiStatus === 200) {
@@ -93,11 +93,11 @@ const ProductBrandCreate = () => {
     }
 
     const onFinish = (data) => {
-        let brandForm = form.getFieldsValue(["Id"])
+        let laboratoryForm = form.getFieldsValue(["Id"])
         
         setSaving(true)
-        if (brandForm.Id) {
-            onEdit(brandForm.Id, data)
+        if (laboratoryForm.Id) {
+            onEdit(laboratoryForm.Id, data)
         } else {
             onSave(data)
         }
@@ -129,13 +129,11 @@ const ProductBrandCreate = () => {
                         return data
                     }).then((data) => {
                         setModeLabel("Editar")
-                        debugger
                         form.setFieldsValue({
                             Id: data.id,
                             IdEmpresa: data.idEmpresa,
                             IdEmpresaSucursal: data.idEmpresaSucursal,
                             Nombre: data.nombre,
-                            Observacion: data.observacion,
                             IdEstado: data.idEstado.toString()
                         });
                     })
@@ -149,10 +147,10 @@ const ProductBrandCreate = () => {
                     <HomeOutlined />
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>Administración</Breadcrumb.Item>
-                <Breadcrumb.Item><Link to='/Management/ProductBrand'>Marca</Link></Breadcrumb.Item>
+                <Breadcrumb.Item><Link to='/Management/Laboratory'>Laboratorio</Link></Breadcrumb.Item>
                 <Breadcrumb.Item>{modeLabel}</Breadcrumb.Item>
             </Breadcrumb>
-            <Title level={3}>Crear Marca</Title>
+            <Title level={3}>Crear Laboratorio</Title>
             <ConfigProvider renderEmpty={CustomEmpty}>
             <Card size="small">
 
@@ -220,11 +218,6 @@ const ProductBrandCreate = () => {
                                     <Input placeholder="Ingrese el nombre" maxLength="100" allowClear />
                             </Form.Item>
                         </Col>
-                        <Col sx={24} lg={12} className="width100">
-                                <Form.Item label="Observación" name="Observacion">
-                                <Input placeholder="Ingrese una observación" maxLength="200" allowClear />
-                            </Form.Item>
-                        </Col>
 
                         <Col sx={24} lg={12} className="width100">
                             <Form.Item label="Estado" name="IdEstado">
@@ -246,7 +239,7 @@ const ProductBrandCreate = () => {
 
                         <Col sx={24} lg={3} className="width100">
                             <Form.Item>
-                                <Link to='/Management/ProductBrand'>
+                                <Link to='/Management/Laboratory'>
                                     <Button className="btn-right">
                                         Volver
                                     </Button>
@@ -275,4 +268,4 @@ const ProductBrandCreate = () => {
     );
 };
 
-export default ProductBrandCreate
+export default laboratoryCreate
