@@ -13,6 +13,7 @@ namespace Warehouse.Solution.Dto
         public Guid IdEmpresaSucursal { get; set; }
         public string Nombre { get; set; }
         public string Observacion { get; set; }
+        public CatalogoDto Estado { get; set; }
         public int IdEstado { get; set; }
     }
 
@@ -23,7 +24,7 @@ namespace Warehouse.Solution.Dto
         public Guid IdEmpresaSucursal { get; set; }
         public string Nombre { get; set; }
         public string Observacion { get; set; }
-        public CatalogoDto Estado { get; set; }
+        public int IdEstado { get; set; }
     }
 
     public class PutProductoMarcaDto
@@ -33,6 +34,6 @@ namespace Warehouse.Solution.Dto
         public Guid IdEmpresaSucursal { get; set; }
         public string Nombre { get; set; }
         public string Observacion { get; set; }
-        public CatalogoDto Estado { get; set; }
+        public int IdEstado { get; set; }
     }
 }

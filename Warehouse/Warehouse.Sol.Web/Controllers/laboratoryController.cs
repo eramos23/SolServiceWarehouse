@@ -21,8 +21,8 @@ namespace Warehouse.Sol.Web.Controllers
     [Produces("application/json")]
     public class laboratoryController : BaseController
     {
-        private readonly ILaboratorioService _service;
-        public laboratoryController(ILaboratorioService service, IMapper mapper) : base(mapper)
+        private readonly ILaboratoryService _service;
+        public laboratoryController(ILaboratoryService service, IMapper mapper) : base(mapper)
         {
             _service = service;
         }

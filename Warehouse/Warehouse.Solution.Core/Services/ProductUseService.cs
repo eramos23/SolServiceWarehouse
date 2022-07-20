@@ -11,44 +11,43 @@ using Warehouse.Solution.Dto.Filters;
 
 namespace Warehouse.Solution.Core.Services
 {
-    public class ProductoUnidadMedidaService : IProductoUnidadMedidaService
+    public class ProductUseService : IProductUseService
     {
         private readonly IDataManager DataManager;
-        public ProductoUnidadMedidaService(IDataManager dataManager)
+        public ProductUseService(IDataManager dataManager)
         {
             DataManager = dataManager;
         }
 
-        public async Task<ProductoUnidadMedida> GetByIdAsync(Guid id)
+        public async Task<ProductoUso> GetByIdAsync(Guid id)
         {
-            var unitMeasurement = await DataManager.DbContext.UnidadMedida
+            var productUse = await DataManager.DbContext.ProductoUso
                                     .FirstOrDefaultAsync(ci => ci.Id == id);
-            return unitMeasurement;
+            return productUse;
         }
 
-        public async Task<List<ProductoUnidadMedida>> GetAllAsync(Filter filterDto)
+        public async Task<List<ProductoUso>> GetAllAsync(Filter filterDto)
         {
-            IQueryable<ProductoUnidadMedida> query = DataManager.ProductoUnidadMedidaRepository.GetQueryable()
+            IQueryable<ProductoUso> query = DataManager.ProductoUsoRepository.GetQueryable()
                                                     .Include(c => c.Estado);
-            /*
             if (!string.IsNullOrEmpty(filterDto.IdEmpresa))
                 query = query.Where(c => c.IdEmpresa == new Guid(filterDto.IdEmpresa));
 
             if (!string.IsNullOrEmpty(filterDto.IdEmpresaSucursal))
                 query = query.Where(c => c.IdEmpresaSucursal == new Guid(filterDto.IdEmpresaSucursal));
-            */
+
             if (!string.IsNullOrEmpty(filterDto.Texto))
                 query = query.Where(c => c.Nombre.Contains(filterDto.Texto)
-                || c.Descripcion.Contains(filterDto.Texto));
+                || c.Observacion.Contains(filterDto.Texto));
 
             return await query.ToListAsync();
         }
 
-        public async Task<bool> CrateAsync(ProductoUnidadMedida model)
+        public async Task<bool> CrateAsync(ProductoUso model)
         {
             try
             {
-                var result = await DataManager.ProductoUnidadMedidaRepository.Add(model);
+                var result = await DataManager.ProductoUsoRepository.Add(model);
                 return result > 0;
             }
             catch (Exception ex)
@@ -58,12 +57,12 @@ namespace Warehouse.Solution.Core.Services
             }
         }
 
-        public async Task<bool> UpdateAsync(Guid id, ProductoUnidadMedida model)
+        public async Task<bool> UpdateAsync(Guid id, ProductoUso model)
         {
             var entity = await GetByIdAsync(id);
             if (model != null)
             {
-                var affectedRecords = await DataManager.ProductoUnidadMedidaRepository.UpdateEntity(model, entity);
+                var affectedRecords = await DataManager.ProductoUsoRepository.UpdateEntity(model, entity);
                 return affectedRecords > 0;
             }
             return false;
@@ -82,5 +81,7 @@ namespace Warehouse.Solution.Core.Services
 
             return false;
         }
+
     }
 }
+

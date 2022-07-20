@@ -18,12 +18,12 @@ namespace Warehouse.Sol.Web.Configuration
             services.AddScoped<ICompanyBranchService, CompanyBranchService>();
             services.AddScoped<IProviderService, ProviderService>();
             services.AddScoped<IIdentityDocumentType, IdentityDocumentType>();
-            services.AddScoped<IProductoCategoriaService, ProductoCategoriaService>();
+            services.AddScoped<IProductCategoryService, ProductCategoryService>();
             services.AddScoped<IProductService, ProductService>();
-            services.AddScoped<IProductoUsoService, ProductoUsoService>();
-            services.AddScoped<IProductoUnidadMedidaService, ProductoUnidadMedidaService>();
-            services.AddScoped<IProductoMarcaService, ProductoMarcaService>();
-            services.AddScoped<ILaboratorioService, LaboratorioService>();
+            services.AddScoped<IProductUseService, ProductUseService>();
+            services.AddScoped<IProductUnitMeasureService, ProductUnitMeasureService>();
+            services.AddScoped<IProductBrandService, ProductBrandService>();
+            services.AddScoped<ILaboratoryService, LaboratoryService>();
 
         }
     }

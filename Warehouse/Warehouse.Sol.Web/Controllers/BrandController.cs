@@ -21,8 +21,8 @@ namespace Warehouse.Sol.Web.Controllers
     [Produces("application/json")]
     public class BrandController : BaseController
     {
-        private readonly IProductoMarcaService _service;
-        public BrandController(IProductoMarcaService service, IMapper mapper) : base(mapper)
+        private readonly IProductBrandService _service;
+        public BrandController(IProductBrandService service, IMapper mapper) : base(mapper)
         {
             _service = service;
         }

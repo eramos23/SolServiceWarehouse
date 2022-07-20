@@ -11,24 +11,25 @@ using Warehouse.Solution.Dto.Filters;
 
 namespace Warehouse.Solution.Core.Services
 {
-    public class LaboratorioService : ILaboratorioService
+    public class ProductCategoryService : IProductCategoryService
     {
         private readonly IDataManager DataManager;
-        public LaboratorioService(IDataManager dataManager)
+        public ProductCategoryService(IDataManager dataManager)
         {
             DataManager = dataManager;
         }
-        public async Task<Laboratorio> GetByIdAsync(Guid id)
-        {
-            var laboratory = await DataManager.DbContext.Laboratorio
-                                    .FirstOrDefaultAsync(ci => ci.Id == id);
-            return laboratory;
-        }
-        public async Task<List<Laboratorio>> GetAllAsync(Filter filterDto)
-        {
-            IQueryable<Laboratorio> query = DataManager.LaboratorioRepository.GetQueryable()
-                                                    .Include(c => c.Estado);
 
+        public async Task<ProductoCategoria> GetByIdAsync(Guid id)
+        {
+            var category = await DataManager.DbContext.ProductoCategoria
+                                    .FirstOrDefaultAsync(ci => ci.Id == id);
+            return category;
+        }
+
+        public async Task<List<ProductoCategoria>> GetAllAsync(Filter filterDto)
+        {
+            IQueryable<ProductoCategoria> query = DataManager.ProductoCategoriaRepository.GetQueryable()
+                                                    .Include(c => c.Estado);
             if (!string.IsNullOrEmpty(filterDto.IdEmpresa))
                 query = query.Where(c => c.IdEmpresa == new Guid(filterDto.IdEmpresa));
 
@@ -36,16 +37,17 @@ namespace Warehouse.Solution.Core.Services
                 query = query.Where(c => c.IdEmpresaSucursal == new Guid(filterDto.IdEmpresaSucursal));
 
             if (!string.IsNullOrEmpty(filterDto.Texto))
-                query = query.Where(c => c.Nombre.Contains(filterDto.Texto));
+                query = query.Where(c => c.Nombre.Contains(filterDto.Texto)
+                || c.Observacion.Contains(filterDto.Texto));
 
             return await query.ToListAsync();
         }
 
-        public async Task<bool> CrateAsync(Laboratorio model)
+        public async Task<bool> CrateAsync(ProductoCategoria model)
         {
             try
             {
-                var result = await DataManager.LaboratorioRepository.Add(model);
+                var result = await DataManager.ProductoCategoriaRepository.Add(model);
                 return result > 0;
             }
             catch (Exception ex)
@@ -55,12 +57,12 @@ namespace Warehouse.Solution.Core.Services
             }
         }
 
-        public async Task<bool> UpdateAsync(Guid id, Laboratorio model)
+        public async Task<bool> UpdateAsync(Guid id, ProductoCategoria model)
         {
             var entity = await GetByIdAsync(id);
             if (model != null)
             {
-                var affectedRecords = await DataManager.LaboratorioRepository.UpdateEntity(model, entity);
+                var affectedRecords = await DataManager.ProductoCategoriaRepository.UpdateEntity(model, entity);
                 return affectedRecords > 0;
             }
             return false;

@@ -9,8 +9,7 @@ using Warehouse.Solution.Dto.Filters;
 
 namespace Warehouse.Solution.Core.Services.Interfaces
 {
-    public interface IProductoUsoService : ITemplateCrud<ProductoUso, Filter>
+    public interface IProductUnitMeasureService : ITemplateCrud<ProductoUnidadMedida, Filter>
     {
-
     }
 }

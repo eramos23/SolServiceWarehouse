@@ -9,7 +9,8 @@ using Warehouse.Solution.Dto.Filters;
 
 namespace Warehouse.Solution.Core.Services.Interfaces
 {
-    public interface ILaboratorioService : ITemplateCrud<Laboratorio, Filter>
+    public interface IProductUseService : ITemplateCrud<ProductoUso, Filter>
     {
+
     }
 }

@@ -21,8 +21,8 @@ namespace Warehouse.Sol.Web.Controllers
     [Produces("application/json")]
     public class ProductUseController : BaseController
     {
-        private readonly IProductoUsoService _service;
-        public ProductUseController(IProductoUsoService service, IMapper mapper) : base(mapper)
+        private readonly IProductUseService _service;
+        public ProductUseController(IProductUseService service, IMapper mapper) : base(mapper)
         {
             _service = service;
         }

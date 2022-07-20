@@ -21,8 +21,8 @@ namespace Warehouse.Sol.Web.Controllers
     [Produces("application/json")]
     public class CategoryController : BaseController
     {
-        private readonly IProductoCategoriaService _service;
-        public CategoryController(IProductoCategoriaService service, IMapper mapper) : base(mapper)
+        private readonly IProductCategoryService _service;
+        public CategoryController(IProductCategoryService service, IMapper mapper) : base(mapper)
         {
             _service = service;
         }

@@ -21,8 +21,8 @@ namespace Warehouse.Sol.Web.Controllers
     [Produces("application/json")]
     public class UnitMeasurementController : BaseController
     {
-        private readonly IProductoUnidadMedidaService _service;
-        public UnitMeasurementController(IProductoUnidadMedidaService service, IMapper mapper) : base(mapper)
+        private readonly IProductUnitMeasureService _service;
+        public UnitMeasurementController(IProductUnitMeasureService service, IMapper mapper) : base(mapper)
         {
             _service = service;
         }
