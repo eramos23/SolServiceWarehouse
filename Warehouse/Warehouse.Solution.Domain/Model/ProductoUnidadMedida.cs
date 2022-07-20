@@ -8,21 +8,29 @@ using System.Threading.Tasks;
 
 namespace Warehouse.Solution.Domain.Model
 {
-    public class Laboratorio : HistoryModel
+    public class ProductoUnidadMedida : HistoryModel
     {
-        public Laboratorio()
+        public ProductoUnidadMedida()
         {
-
+            EmpresaUnidadMedidas = new List<EmpresaUnidadMedida>();
         }
+        
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public Guid Id { get; set; }
-        public Guid IdEmpresa { get; set; }
-        public Guid IdEmpresaSucursal { get; set; }
+
+        [StringLength(10)]
+        public string Codigo { get; set; }
+
         [StringLength(100)]
         public string Nombre { get; set; }
+
+        public string Descripcion { get; set; }
         public int IdEstado { get; set; }
 
         [ForeignKey("IdEstado")]
         public Catalogo Estado { get; set; }
+        public List<EmpresaUnidadMedida> EmpresaUnidadMedidas { get; set; }
+        public List<Producto> Productos { get; set; }
     }
 }

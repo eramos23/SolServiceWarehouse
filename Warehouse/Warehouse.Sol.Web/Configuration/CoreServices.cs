@@ -20,6 +20,10 @@ namespace Warehouse.Sol.Web.Configuration
             services.AddScoped<IIdentityDocumentType, IdentityDocumentType>();
             services.AddScoped<IProductoCategoriaService, ProductoCategoriaService>();
             services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<IProductoUsoService, ProductoUsoService>();
+            services.AddScoped<IProductoUnidadMedidaService, ProductoUnidadMedidaService>();
+            services.AddScoped<IProductoMarcaService, ProductoMarcaService>();
+            services.AddScoped<ILaboratorioService, LaboratorioService>();
 
         }
     }

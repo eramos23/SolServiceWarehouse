@@ -9,8 +9,8 @@ using Warehouse.Solution.Domain.DbContexts;
 namespace Warehouse.Solution.Domain.Migrations
 {
     [DbContext(typeof(WarehouseDbContext))]
-    [Migration("20220715154434_lista-vigentes")]
-    partial class listavigentes
+    [Migration("20220717014516_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -18,6 +18,21 @@ namespace Warehouse.Solution.Domain.Migrations
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 64)
                 .HasAnnotation("ProductVersion", "5.0.17");
+
+            modelBuilder.Entity("ProductoProductoCategoria", b =>
+                {
+                    b.Property<Guid>("CategoriasId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("ProductosId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("CategoriasId", "ProductosId");
+
+                    b.HasIndex("ProductosId");
+
+                    b.ToTable("ProductoProductoCategoria");
+                });
 
             modelBuilder.Entity("ProductoProductoMarca", b =>
                 {
@@ -32,6 +47,21 @@ namespace Warehouse.Solution.Domain.Migrations
                     b.HasIndex("ProductosId");
 
                     b.ToTable("ProductoProductoMarca");
+                });
+
+            modelBuilder.Entity("ProductoProductoUnidadMedida", b =>
+                {
+                    b.Property<Guid>("ProductosId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid>("UnidadesMedidaId")
+                        .HasColumnType("char(36)");
+
+                    b.HasKey("ProductosId", "UnidadesMedidaId");
+
+                    b.HasIndex("UnidadesMedidaId");
+
+                    b.ToTable("ProductoProductoUnidadMedida");
                 });
 
             modelBuilder.Entity("ProductoProductoUso", b =>
@@ -55,13 +85,17 @@ namespace Warehouse.Solution.Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    b.Property<string>("Abreviatura")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
+                    b.Property<string>("Codigo")
+                        .HasMaxLength(5)
+                        .HasColumnType("varchar(5)");
 
                     b.Property<string>("Descripcion")
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
+
+                    b.Property<string>("Grupo")
+                        .HasMaxLength(20)
+                        .HasColumnType("varchar(20)");
 
                     b.Property<string>("Nombre")
                         .HasMaxLength(100)
@@ -75,29 +109,33 @@ namespace Warehouse.Solution.Domain.Migrations
                         new
                         {
                             Id = 1,
-                            Abreviatura = "ACT",
+                            Codigo = "ACT",
                             Descripcion = "Registro activo",
+                            Grupo = "Estados",
                             Nombre = "Activo"
                         },
                         new
                         {
                             Id = 2,
-                            Abreviatura = "IACT",
+                            Codigo = "IACT",
                             Descripcion = "Registro inactivo",
+                            Grupo = "Estados",
                             Nombre = "Inactivo"
                         },
                         new
                         {
                             Id = 10,
-                            Abreviatura = "FACS",
+                            Codigo = "FACS",
                             Descripcion = "Factura Stoack",
+                            Grupo = "TipoProveedor",
                             Nombre = "Factura-Stock"
                         },
                         new
                         {
                             Id = 11,
-                            Abreviatura = "GAST",
+                            Codigo = "GAST",
                             Descripcion = "Gastos",
+                            Grupo = "TipoProveedor",
                             Nombre = "Gastos"
                         });
                 });
@@ -276,7 +314,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         new
                         {
                             Id = new Guid("9d79cde1-babd-44dc-ac5a-9379afa68a75"),
-                            FechaCreacion = new DateTime(2022, 7, 15, 10, 44, 34, 254, DateTimeKind.Local).AddTicks(5859),
+                            FechaCreacion = new DateTime(2022, 7, 16, 20, 45, 16, 26, DateTimeKind.Local).AddTicks(7287),
                             FechaInicio = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "FARMACIA RAMOS S.A.",
                             Vigente = true
@@ -284,7 +322,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         new
                         {
                             Id = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"),
-                            FechaCreacion = new DateTime(2022, 7, 15, 10, 44, 34, 259, DateTimeKind.Local).AddTicks(9530),
+                            FechaCreacion = new DateTime(2022, 7, 16, 20, 45, 16, 26, DateTimeKind.Local).AddTicks(7949),
                             FechaInicio = new DateTime(1, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Nombre = "MINIMARKETS RAMOS S.A.",
                             Vigente = true
@@ -334,7 +372,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         {
                             Id = new Guid("e84ee21d-48bc-4ef7-978a-a0ae02520904"),
                             Direccion = "Av. Los angeles 232",
-                            FechaCreacion = new DateTime(2022, 7, 15, 10, 44, 34, 260, DateTimeKind.Local).AddTicks(184),
+                            FechaCreacion = new DateTime(2022, 7, 16, 20, 45, 16, 26, DateTimeKind.Local).AddTicks(8239),
                             IdEmpresa = new Guid("9d79cde1-babd-44dc-ac5a-9379afa68a75"),
                             Nombre = "Farmacia Principal de Los Olivos",
                             Vigente = true
@@ -343,7 +381,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         {
                             Id = new Guid("4649554b-ab5e-4647-866e-1cc4e4b50ffa"),
                             Direccion = "Av. Caceres de Hurre 122",
-                            FechaCreacion = new DateTime(2022, 7, 15, 10, 44, 34, 260, DateTimeKind.Local).AddTicks(1012),
+                            FechaCreacion = new DateTime(2022, 7, 16, 20, 45, 16, 26, DateTimeKind.Local).AddTicks(8824),
                             IdEmpresa = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"),
                             Nombre = "Minimarket los Olivos 1",
                             Vigente = true
@@ -352,7 +390,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         {
                             Id = new Guid("9414a1d9-c237-4e95-9d76-3290ecb1c551"),
                             Direccion = "Av. Proceres 121",
-                            FechaCreacion = new DateTime(2022, 7, 15, 10, 44, 34, 260, DateTimeKind.Local).AddTicks(1021),
+                            FechaCreacion = new DateTime(2022, 7, 16, 20, 45, 16, 26, DateTimeKind.Local).AddTicks(8831),
                             IdEmpresa = new Guid("3785474b-f656-4d49-99c6-c144708d6a62"),
                             Nombre = "Minimarket los Olivos 2",
                             Vigente = true
@@ -370,8 +408,23 @@ namespace Warehouse.Solution.Domain.Migrations
                     b.Property<Guid?>("EmpresaId")
                         .HasColumnType("char(36)");
 
-                    b.Property<string>("UnidadMedidaId")
-                        .HasColumnType("char(2)");
+                    b.Property<DateTime?>("FechaCreacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("FechaModificacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<Guid?>("IdUsuarioCrea")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("IdUsuarioModifica")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("UnidadMedidaId")
+                        .HasColumnType("char(36)");
+
+                    b.Property<bool>("Vigente")
+                        .HasColumnType("tinyint(1)");
 
                     b.HasKey("IdEmpresa", "IdUnidadMedida");
 
@@ -642,10 +695,25 @@ namespace Warehouse.Solution.Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<DateTime?>("FechaCreacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("FechaModificacion")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<Guid>("IdEmpresa")
                         .HasColumnType("char(36)");
 
                     b.Property<Guid>("IdEmpresaSucursal")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("IdEstado")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("IdUsuarioCrea")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("IdUsuarioModifica")
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Nombre")
@@ -655,7 +723,12 @@ namespace Warehouse.Solution.Domain.Migrations
                     b.Property<Guid?>("ProductoId")
                         .HasColumnType("char(36)");
 
+                    b.Property<bool>("Vigente")
+                        .HasColumnType("tinyint(1)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("IdEstado");
 
                     b.HasIndex("ProductoId");
 
@@ -693,9 +766,6 @@ namespace Warehouse.Solution.Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
-                    b.Property<Guid?>("CategoriaId")
-                        .HasColumnType("char(36)");
-
                     b.Property<int>("CierreAnual")
                         .HasColumnType("int");
 
@@ -714,6 +784,9 @@ namespace Warehouse.Solution.Domain.Migrations
 
                     b.Property<Guid>("IdEmpresaSucursal")
                         .HasColumnType("char(36)");
+
+                    b.Property<int>("IdEstado")
+                        .HasColumnType("int");
 
                     b.Property<Guid?>("IdUsuarioCrea")
                         .HasColumnType("char(36)");
@@ -763,7 +836,7 @@ namespace Warehouse.Solution.Domain.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoriaId");
+                    b.HasIndex("IdEstado");
 
                     b.ToTable("Producto");
                 });
@@ -786,6 +859,9 @@ namespace Warehouse.Solution.Domain.Migrations
                     b.Property<Guid>("IdEmpresaSucursal")
                         .HasColumnType("char(36)");
 
+                    b.Property<int>("IdEstado")
+                        .HasColumnType("int");
+
                     b.Property<Guid?>("IdUsuarioCrea")
                         .HasColumnType("char(36)");
 
@@ -805,6 +881,8 @@ namespace Warehouse.Solution.Domain.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("IdEstado");
+
                     b.ToTable("producto_categoria");
                 });
 
@@ -814,10 +892,25 @@ namespace Warehouse.Solution.Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<DateTime?>("FechaCreacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("FechaModificacion")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<Guid>("IdEmpresa")
                         .HasColumnType("char(36)");
 
                     b.Property<Guid>("IdEmpresaSucursal")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("IdEstado")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("IdUsuarioCrea")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("IdUsuarioModifica")
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Nombre")
@@ -828,9 +921,78 @@ namespace Warehouse.Solution.Domain.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
+                    b.Property<bool>("Vigente")
+                        .HasColumnType("tinyint(1)");
+
                     b.HasKey("Id");
 
+                    b.HasIndex("IdEstado");
+
                     b.ToTable("producto_marca");
+                });
+
+            modelBuilder.Entity("Warehouse.Solution.Domain.Model.ProductoUnidadMedida", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Codigo")
+                        .HasMaxLength(10)
+                        .HasColumnType("varchar(10)");
+
+                    b.Property<string>("Descripcion")
+                        .HasColumnType("longtext");
+
+                    b.Property<DateTime?>("FechaCreacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("FechaModificacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<int>("IdEstado")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("IdUsuarioCrea")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("IdUsuarioModifica")
+                        .HasColumnType("char(36)");
+
+                    b.Property<string>("Nombre")
+                        .HasMaxLength(100)
+                        .HasColumnType("varchar(100)");
+
+                    b.Property<bool>("Vigente")
+                        .HasColumnType("tinyint(1)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("IdEstado");
+
+                    b.ToTable("producto_unidad_medida");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("e84ee21d-48bc-4ef7-978a-a0ae02520901"),
+                            Codigo = "KGM",
+                            Descripcion = "KILOGRAMO",
+                            FechaCreacion = new DateTime(2022, 7, 16, 20, 45, 16, 23, DateTimeKind.Local).AddTicks(2287),
+                            IdEstado = 1,
+                            Nombre = "Kilogramo",
+                            Vigente = true
+                        },
+                        new
+                        {
+                            Id = new Guid("e84ee21d-48bc-4ef7-978a-a0ae02520902"),
+                            Codigo = "LBR",
+                            Descripcion = "KILOGRAMO",
+                            FechaCreacion = new DateTime(2022, 7, 16, 20, 45, 16, 26, DateTimeKind.Local).AddTicks(6313),
+                            IdEstado = 1,
+                            Nombre = "Libras",
+                            Vigente = true
+                        });
                 });
 
             modelBuilder.Entity("Warehouse.Solution.Domain.Model.ProductoUso", b =>
@@ -839,10 +1001,25 @@ namespace Warehouse.Solution.Domain.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("char(36)");
 
+                    b.Property<DateTime?>("FechaCreacion")
+                        .HasColumnType("datetime(6)");
+
+                    b.Property<DateTime?>("FechaModificacion")
+                        .HasColumnType("datetime(6)");
+
                     b.Property<Guid>("IdEmpresa")
                         .HasColumnType("char(36)");
 
                     b.Property<Guid>("IdEmpresaSucursal")
+                        .HasColumnType("char(36)");
+
+                    b.Property<int>("IdEstado")
+                        .HasColumnType("int");
+
+                    b.Property<Guid?>("IdUsuarioCrea")
+                        .HasColumnType("char(36)");
+
+                    b.Property<Guid?>("IdUsuarioModifica")
                         .HasColumnType("char(36)");
 
                     b.Property<string>("Nombre")
@@ -853,7 +1030,12 @@ namespace Warehouse.Solution.Domain.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("varchar(200)");
 
+                    b.Property<bool>("Vigente")
+                        .HasColumnType("tinyint(1)");
+
                     b.HasKey("Id");
+
+                    b.HasIndex("IdEstado");
 
                     b.ToTable("producto_uso");
                 });
@@ -935,7 +1117,7 @@ namespace Warehouse.Solution.Domain.Migrations
                             Id = new Guid("4e7da830-71a2-4758-9b21-ec7d0dda7984"),
                             Correo = "proveedordemedicamentos@gmail.com",
                             Direccion = "Jr. Mira flores, calle 2 pabellon 52",
-                            FechaCreacion = new DateTime(2022, 7, 15, 10, 44, 34, 260, DateTimeKind.Local).AddTicks(4770),
+                            FechaCreacion = new DateTime(2022, 7, 16, 20, 45, 16, 26, DateTimeKind.Local).AddTicks(9985),
                             IdEmpresa = new Guid("9d79cde1-babd-44dc-ac5a-9379afa68a75"),
                             IdEmpresaSucursal = new Guid("e84ee21d-48bc-4ef7-978a-a0ae02520904"),
                             IdEstado = 1,
@@ -1159,110 +1341,19 @@ namespace Warehouse.Solution.Domain.Migrations
                     b.ToTable("Ubigeo");
                 });
 
-            modelBuilder.Entity("Warehouse.Solution.Domain.Model.UnidadMedida", b =>
+            modelBuilder.Entity("ProductoProductoCategoria", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("char(2)")
-                        .HasColumnName("Id");
+                    b.HasOne("Warehouse.Solution.Domain.Model.ProductoCategoria", null)
+                        .WithMany()
+                        .HasForeignKey("CategoriasId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Property<string>("Abreviatura")
-                        .HasMaxLength(10)
-                        .HasColumnType("varchar(10)");
-
-                    b.Property<string>("Nombre")
-                        .HasMaxLength(100)
-                        .HasColumnType("varchar(100)");
-
-                    b.Property<Guid?>("ProductoId")
-                        .HasColumnType("char(36)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ProductoId");
-
-                    b.ToTable("unidad_medida");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = "01",
-                            Nombre = "KILOGRAMOS"
-                        },
-                        new
-                        {
-                            Id = "02",
-                            Nombre = "LIBRAS"
-                        },
-                        new
-                        {
-                            Id = "03",
-                            Nombre = "TONELADAS LARGAS"
-                        },
-                        new
-                        {
-                            Id = "04",
-                            Nombre = "TONELADAS MÉTRICAS"
-                        },
-                        new
-                        {
-                            Id = "05",
-                            Nombre = "TONELADAS CORTAS"
-                        },
-                        new
-                        {
-                            Id = "06",
-                            Nombre = "GRAMOS"
-                        },
-                        new
-                        {
-                            Id = "07",
-                            Nombre = "UNIDADES"
-                        },
-                        new
-                        {
-                            Id = "08",
-                            Nombre = "LITROS"
-                        },
-                        new
-                        {
-                            Id = "09",
-                            Nombre = "GALONES"
-                        },
-                        new
-                        {
-                            Id = "10",
-                            Nombre = "BARRILES"
-                        },
-                        new
-                        {
-                            Id = "11",
-                            Nombre = "LATAS"
-                        },
-                        new
-                        {
-                            Id = "12",
-                            Nombre = "CAJAS"
-                        },
-                        new
-                        {
-                            Id = "13",
-                            Nombre = "MILLARES"
-                        },
-                        new
-                        {
-                            Id = "14",
-                            Nombre = "METROS CÚBICOS"
-                        },
-                        new
-                        {
-                            Id = "15",
-                            Nombre = "METROS"
-                        },
-                        new
-                        {
-                            Id = "99",
-                            Nombre = "OTROS (ESPECIFICAR)"
-                        });
+                    b.HasOne("Warehouse.Solution.Domain.Model.Producto", null)
+                        .WithMany()
+                        .HasForeignKey("ProductosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("ProductoProductoMarca", b =>
@@ -1276,6 +1367,21 @@ namespace Warehouse.Solution.Domain.Migrations
                     b.HasOne("Warehouse.Solution.Domain.Model.Producto", null)
                         .WithMany()
                         .HasForeignKey("ProductosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("ProductoProductoUnidadMedida", b =>
+                {
+                    b.HasOne("Warehouse.Solution.Domain.Model.Producto", null)
+                        .WithMany()
+                        .HasForeignKey("ProductosId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Warehouse.Solution.Domain.Model.ProductoUnidadMedida", null)
+                        .WithMany()
+                        .HasForeignKey("UnidadesMedidaId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1330,7 +1436,7 @@ namespace Warehouse.Solution.Domain.Migrations
                         .WithMany("EmpresaUnidadMedidas")
                         .HasForeignKey("EmpresaId");
 
-                    b.HasOne("Warehouse.Solution.Domain.Model.UnidadMedida", "UnidadMedida")
+                    b.HasOne("Warehouse.Solution.Domain.Model.ProductoUnidadMedida", "UnidadMedida")
                         .WithMany("EmpresaUnidadMedidas")
                         .HasForeignKey("UnidadMedidaId");
 
@@ -1341,18 +1447,72 @@ namespace Warehouse.Solution.Domain.Migrations
 
             modelBuilder.Entity("Warehouse.Solution.Domain.Model.Laboratorio", b =>
                 {
+                    b.HasOne("Warehouse.Solution.Domain.Model.Catalogo", "Estado")
+                        .WithMany()
+                        .HasForeignKey("IdEstado")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("Warehouse.Solution.Domain.Model.Producto", null)
                         .WithMany("Laboratorios")
                         .HasForeignKey("ProductoId");
+
+                    b.Navigation("Estado");
                 });
 
             modelBuilder.Entity("Warehouse.Solution.Domain.Model.Producto", b =>
                 {
-                    b.HasOne("Warehouse.Solution.Domain.Model.ProductoCategoria", "Categoria")
-                        .WithMany("Productos")
-                        .HasForeignKey("CategoriaId");
+                    b.HasOne("Warehouse.Solution.Domain.Model.Catalogo", "Estado")
+                        .WithMany()
+                        .HasForeignKey("IdEstado")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Categoria");
+                    b.Navigation("Estado");
+                });
+
+            modelBuilder.Entity("Warehouse.Solution.Domain.Model.ProductoCategoria", b =>
+                {
+                    b.HasOne("Warehouse.Solution.Domain.Model.Catalogo", "Estado")
+                        .WithMany()
+                        .HasForeignKey("IdEstado")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Estado");
+                });
+
+            modelBuilder.Entity("Warehouse.Solution.Domain.Model.ProductoMarca", b =>
+                {
+                    b.HasOne("Warehouse.Solution.Domain.Model.Catalogo", "Estado")
+                        .WithMany()
+                        .HasForeignKey("IdEstado")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Estado");
+                });
+
+            modelBuilder.Entity("Warehouse.Solution.Domain.Model.ProductoUnidadMedida", b =>
+                {
+                    b.HasOne("Warehouse.Solution.Domain.Model.Catalogo", "Estado")
+                        .WithMany()
+                        .HasForeignKey("IdEstado")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Estado");
+                });
+
+            modelBuilder.Entity("Warehouse.Solution.Domain.Model.ProductoUso", b =>
+                {
+                    b.HasOne("Warehouse.Solution.Domain.Model.Catalogo", "Estado")
+                        .WithMany()
+                        .HasForeignKey("IdEstado")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Estado");
                 });
 
             modelBuilder.Entity("Warehouse.Solution.Domain.Model.Proveedor", b =>
@@ -1396,13 +1556,6 @@ namespace Warehouse.Solution.Domain.Migrations
                     b.Navigation("TipoProveedor");
                 });
 
-            modelBuilder.Entity("Warehouse.Solution.Domain.Model.UnidadMedida", b =>
-                {
-                    b.HasOne("Warehouse.Solution.Domain.Model.Producto", null)
-                        .WithMany("UnidadesMedida")
-                        .HasForeignKey("ProductoId");
-                });
-
             modelBuilder.Entity("Warehouse.Solution.Domain.Model.Empresa", b =>
                 {
                     b.Navigation("EmpresaSucursales");
@@ -1415,16 +1568,9 @@ namespace Warehouse.Solution.Domain.Migrations
             modelBuilder.Entity("Warehouse.Solution.Domain.Model.Producto", b =>
                 {
                     b.Navigation("Laboratorios");
-
-                    b.Navigation("UnidadesMedida");
                 });
 
-            modelBuilder.Entity("Warehouse.Solution.Domain.Model.ProductoCategoria", b =>
-                {
-                    b.Navigation("Productos");
-                });
-
-            modelBuilder.Entity("Warehouse.Solution.Domain.Model.UnidadMedida", b =>
+            modelBuilder.Entity("Warehouse.Solution.Domain.Model.ProductoUnidadMedida", b =>
                 {
                     b.Navigation("EmpresaUnidadMedidas");
                 });

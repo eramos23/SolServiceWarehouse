@@ -23,7 +23,7 @@ namespace Warehouse.Solution.Domain.Model
         public string Nombre { get; set; }
         public List<ProductoCategoria> Categorias { get; set; }
         public List<ProductoUso> Usos { get; set; }
-        public List<UnidadMedida> UnidadesMedida { get; set; }
+        public List<ProductoUnidadMedida> UnidadesMedida { get; set; }
         public List<ProductoMarca> Marcas { get; set; }
         public List<Laboratorio> Laboratorios { get; set; }
         [StringLength(200)]

@@ -29,6 +29,7 @@ const items = [
         getItem('Entidad Financiera', '4'),
         getItem(<Link to='/Management/Product'>Producto</Link>, '5'),
         getItem(<Link to='/Management/Category'>Categoria</Link>, '6'),
+        getItem(<Link to='/Management/ProductUse'>Uso de Producto</Link>, '66'),
         getItem('Marca', '7'),
         getItem('Unidad', '8')
     ]),

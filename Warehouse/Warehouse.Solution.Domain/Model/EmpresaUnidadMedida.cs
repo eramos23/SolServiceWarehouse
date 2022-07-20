@@ -6,13 +6,13 @@ using System.Threading.Tasks;
 
 namespace Warehouse.Solution.Domain.Model
 {
-    public partial class EmpresaUnidadMedida
+    public partial class EmpresaUnidadMedida : HistoryModel
     {
         public Guid IdEmpresa { get; set; }
         public Guid IdUnidadMedida { get; set; }
 
         public Empresa Empresa { get; set; }
-        public UnidadMedida UnidadMedida { get; set; }
+        public ProductoUnidadMedida UnidadMedida { get; set; }
 
     }
 }

@@ -13,6 +13,10 @@ namespace Warehouse.Solution.Domain.DbContexts.Interface
         IRepository<TipoDocumentoIdentidad> TipoDocumentoIdentidadRepository { get; }
         IRepository<Producto> ProductoRepository { get; }
         IRepository<ProductoCategoria> ProductoCategoriaRepository { get; }
+        IRepository<ProductoUso> ProductoUsoRepository { get; }
+        IRepository<ProductoMarca> ProductoMarcaRepository { get; }
+        IRepository<Laboratorio> LaboratorioRepository { get; }
+        IRepository<ProductoUnidadMedida> ProductoUnidadMedidaRepository { get; }
         WarehouseDbContext DbContext { get; }
     }
 }

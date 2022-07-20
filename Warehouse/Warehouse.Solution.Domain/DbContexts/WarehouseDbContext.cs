@@ -17,7 +17,7 @@ namespace Warehouse.Solution.Domain.DbContexts
         }
         public DbSet<TipoDocumentoIdentidad> TipoDocumentoIdentidad { get; set; }
         public DbSet<EntidadFinanciera> EntidadFinanciera { get; set; }
-        public DbSet<UnidadMedida> UnidadMedida { get; set; }
+        public DbSet<ProductoUnidadMedida> UnidadMedida { get; set; }
         public DbSet<FormaPago> FormaPago { get; set; }
         public DbSet<ImpuestoMoneda> ImpuestoMoneda { get; set; }
         public DbSet<Laboratorio> Laboratorio { get; set; }
@@ -43,7 +43,7 @@ namespace Warehouse.Solution.Domain.DbContexts
             modelBuilder.Entity<TipoDocumentoIdentidad>().ToTable("tipo_documento_identidad");
             modelBuilder.Entity<EntidadFinanciera>().ToTable("entidad_financiera");
             modelBuilder.Entity<TipoComprobantePago>().ToTable("tipo_comprobante_pago");
-            modelBuilder.Entity<UnidadMedida>().ToTable("unidad_medida");
+            modelBuilder.Entity<ProductoUnidadMedida>().ToTable("producto_unidad_medida");
             modelBuilder.Entity<EmpresaUnidadMedida>().ToTable("empresa_unidad_medida");
             modelBuilder.Entity<FormaPago>().ToTable("forma_pago");
             modelBuilder.Entity<ImpuestoMoneda>().ToTable("impuesto_moneda");
@@ -124,24 +124,10 @@ namespace Warehouse.Solution.Domain.DbContexts
                 new TipoComprobantePago { Id="31", Nombre = "Guía de Remisión - Transportista"}
             });
 
-            modelBuilder.Entity<UnidadMedida>().HasData(new UnidadMedida[]
+            modelBuilder.Entity<ProductoUnidadMedida>().HasData(new ProductoUnidadMedida[]
             {
-                new UnidadMedida { Id = "01", Nombre ="KILOGRAMOS" },
-                new UnidadMedida { Id = "02", Nombre ="LIBRAS" },
-                new UnidadMedida { Id = "03", Nombre ="TONELADAS LARGAS" },
-                new UnidadMedida { Id = "04", Nombre ="TONELADAS MÉTRICAS" },
-                new UnidadMedida { Id = "05", Nombre ="TONELADAS CORTAS" },
-                new UnidadMedida { Id = "06", Nombre ="GRAMOS" },
-                new UnidadMedida { Id = "07", Nombre ="UNIDADES" },
-                new UnidadMedida { Id = "08", Nombre ="LITROS" },
-                new UnidadMedida { Id = "09", Nombre ="GALONES" },
-                new UnidadMedida { Id = "10", Nombre ="BARRILES" },
-                new UnidadMedida { Id = "11", Nombre ="LATAS" },
-                new UnidadMedida { Id = "12", Nombre ="CAJAS" },
-                new UnidadMedida { Id = "13", Nombre ="MILLARES" },
-                new UnidadMedida { Id = "14", Nombre ="METROS CÚBICOS" },
-                new UnidadMedida { Id = "15", Nombre ="METROS" },
-                new UnidadMedida { Id = "99", Nombre ="OTROS (ESPECIFICAR)" }
+                new ProductoUnidadMedida { Id=new Guid("e84ee21d-48bc-4ef7-978a-a0ae02520901"), Codigo = "KGM", Nombre="Kilogramo", Descripcion = "KILOGRAMO", IdEstado = 1},
+                new ProductoUnidadMedida { Id=new Guid("e84ee21d-48bc-4ef7-978a-a0ae02520902"), Codigo = "LBR", Nombre="Libras", Descripcion = "KILOGRAMO", IdEstado = 1},
             });
             //modelBuilder.Entity<TipoOperacion>().HasData(new TipoOperacion[]
             //{
@@ -180,10 +166,12 @@ namespace Warehouse.Solution.Domain.DbContexts
 
             modelBuilder.Entity<Catalogo>().HasData(new Catalogo[]
             {
-                new Catalogo{ Id=1, Abreviatura = "ACT", Nombre="Activo", Descripcion = "Registro activo"},
-                new Catalogo{ Id=2, Abreviatura = "IACT", Nombre="Inactivo", Descripcion = "Registro inactivo"},
-                new Catalogo{ Id=10, Abreviatura = "FACS", Nombre="Factura-Stock", Descripcion = "Factura Stoack"},
-                new Catalogo{ Id=11, Abreviatura = "GAST", Nombre="Gastos", Descripcion = "Gastos"},
+                new Catalogo{ Id=1, Grupo = "Estados", Codigo = "ACT", Nombre="Activo", Descripcion = "Registro activo"},
+                new Catalogo{ Id=2, Grupo = "Estados", Codigo = "IACT", Nombre="Inactivo", Descripcion = "Registro inactivo"},
+                new Catalogo{ Id=10, Grupo = "TipoProveedor", Codigo = "FACS", Nombre="Factura-Stock", Descripcion = "Factura Stoack"},
+                new Catalogo{ Id=11, Grupo = "TipoProveedor", Codigo = "GAST", Nombre="Gastos", Descripcion = "Gastos"},
+                //new Catalogo{ Id=20, Grupo = "UnidadMedida", Codigo = "KGM", Nombre="Kilogramo", Descripcion = "KILOGRAMO"},
+                //new Catalogo{ Id=21, Grupo = "UnidadMedida", Codigo = "LBR", Nombre="Libras", Descripcion = "KILOGRAMO"},
 
             });
 
@@ -210,6 +198,9 @@ namespace Warehouse.Solution.Domain.DbContexts
             modelBuilder.Entity<ProductoCategoria>().HasQueryFilter(g => g.Vigente);
             modelBuilder.Entity<ProductoMarca>().HasQueryFilter(g => g.Vigente);
             modelBuilder.Entity<ProductoUso>().HasQueryFilter(g => g.Vigente);
+            modelBuilder.Entity<Laboratorio>().HasQueryFilter(g => g.Vigente);
+            modelBuilder.Entity<ProductoUnidadMedida>().HasQueryFilter(g => g.Vigente);
+            modelBuilder.Entity<EmpresaUnidadMedida>().HasQueryFilter(g => g.Vigente);
         }
     }
 }
