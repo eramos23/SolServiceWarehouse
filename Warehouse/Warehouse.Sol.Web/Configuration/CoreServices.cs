@@ -21,9 +21,10 @@ namespace Warehouse.Sol.Web.Configuration
             services.AddScoped<IProductCategoryService, ProductCategoryService>();
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<IProductUseService, ProductUseService>();
-            services.AddScoped<IProductUnitMeasureService, ProductUnitMeasureService>();
+            services.AddScoped<IUnitMeasureService, UnitMeasureService>();
             services.AddScoped<IProductBrandService, ProductBrandService>();
             services.AddScoped<ILaboratoryService, LaboratoryService>();
+            services.AddScoped<ICompanyUnitMeasureService, CompanyUnitMeasureService>();
 
         }
     }

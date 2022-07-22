@@ -3,7 +3,7 @@
     public static class Messages
     {
         public const string Result_BadRequest = "Modelo no cumple los requerimientos";
-        public const string Result_Empty = "Vacio";
+        public const string Result_Empty = "No hay Registros";
         public const string Result_NotCreated = "No se pudo crear la entidad";
         public const string Result_NotDeleted = "No se pudo eliminar la entidad";
         public const string Result_NotFound = "No encontrado";

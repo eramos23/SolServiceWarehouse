@@ -6,31 +6,33 @@ using System.Threading.Tasks;
 
 namespace Warehouse.Solution.Dto
 {
-    public class ProductoUnidadMedidaDto
+    public class EmpresaUnidadMedidaDto
     {
         public Guid Id { get; set; }
+        public Guid IdEmpresa { get; set; }
+        public Guid IdUnidadMedida { get; set; }
         public string Codigo { get; set; }
         public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public int IdEstado { get; set; }
-        public CatalogoDto Estado { get; set; }
+        public bool EnUso { get; set; }
     }
 
-    public class PostProductoUnidadMedidaDto
+    public class PostEmpresaUnidadMedidaDto
     {
         public Guid Id { get; set; }
+        public Guid IdEmpresa { get; set; }
+        public Guid IdUnidadMedida { get; set; }
         public string Codigo { get; set; }
         public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public int IdEstado { get; set; }
+        public bool EnUso { get; set; }
     }
 
-    public class PutProductoUnidadMedidaDto
+    public class PutEmpresaUnidadMedidaDto
     {
         public Guid Id { get; set; }
+        public Guid IdEmpresa { get; set; }
+        public Guid IdUnidadMedida { get; set; }
         public string Codigo { get; set; }
         public string Nombre { get; set; }
-        public string Descripcion { get; set; }
-        public int IdEstado { get; set; }
+        public bool EnUso { get; set; }
     }
 }

@@ -32,7 +32,7 @@ const items = [
         getItem(<Link to='/Management/ProductUse'>Uso de Producto</Link>, '66'),
         getItem(<Link to='/Management/ProductBrand'>Marca</Link>, '7'),
         getItem(<Link to='/Management/Laboratory'>Lavoratorio</Link>, '77'),
-        getItem('Unidad', '8')
+        getItem(<Link to='/Management/UnitMeasure'>Unida de Medida</Link>, '8')
     ]),
     getItem('Team', 'sub2', <TeamOutlined />, [getItem('Team 1', '9'), getItem('Team 2', '10')]),
     getItem(<Link to='/Demo'>Demo</Link>, '11', <FileOutlined />),

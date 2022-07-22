@@ -21,30 +21,30 @@ namespace Warehouse.Sol.Web.Controllers
     [Produces("application/json")]
     public class UnitMeasurementController : BaseController
     {
-        private readonly IProductUnitMeasureService _service;
-        public UnitMeasurementController(IProductUnitMeasureService service, IMapper mapper) : base(mapper)
+        private readonly IUnitMeasureService _service;
+        public UnitMeasurementController(IUnitMeasureService service, IMapper mapper) : base(mapper)
         {
             _service = service;
         }
 
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DataQuery<List<ProductoUnidadMedidaDto>>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DataQuery<List<UnidadMedidaDto>>))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(DataQuery<object>))]
         [HttpGet]
         public async Task<ActionResult> GetAll([FromQuery] Filter filterDto)
         {
-            DataQuery<List<ProductoUnidadMedidaDto>> result;
+            DataQuery<List<UnidadMedidaDto>> result;
 
             var list = await _service.GetAllAsync(filterDto);
             if (list != null)
             {
-                result = HelperStatus.ResponseHelper(this._mapper.Map<List<ProductoUnidadMedidaDto>>(list), HttpStatusCode.OK);
+                result = HelperStatus.ResponseHelper(this._mapper.Map<List<UnidadMedidaDto>>(list), HttpStatusCode.OK);
                 return Ok(result);
             }
-            result = HelperStatus.ResponseHelper(new List<ProductoUnidadMedidaDto>(), HttpStatusCode.NotFound, Messages.Result_Empty);
+            result = HelperStatus.ResponseHelper(new List<UnidadMedidaDto>(), HttpStatusCode.NotFound, Messages.Result_Empty);
             return NotFound(result);
         }
 
-        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DataQuery<ProductoUnidadMedidaDto>))]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(DataQuery<UnidadMedidaDto>))]
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(DataQuery<object>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(DataQuery<bool>))]
         [HttpGet("{id}")]
@@ -52,34 +52,34 @@ namespace Warehouse.Sol.Web.Controllers
         {
             if (string.IsNullOrEmpty(id)) return BadRequest(HelperStatus.ResponseHelper(false, HttpStatusCode.BadRequest, Messages.Result_BadRequest));
 
-            DataQuery<ProductoUnidadMedidaDto> result;
+            DataQuery<UnidadMedidaDto> result;
 
             var resultService = await _service.GetByIdAsync(new Guid(id));
 
             if (resultService != null)
             {
-                result = HelperStatus.ResponseHelper(_mapper.Map<ProductoUnidadMedidaDto>(resultService), HttpStatusCode.OK);
+                result = HelperStatus.ResponseHelper(_mapper.Map<UnidadMedidaDto>(resultService), HttpStatusCode.OK);
                 return Ok(result);
             }
 
             return NotFound(HelperStatus.ResponseHelper<object>(null, HttpStatusCode.NotFound, Messages.Result_NotFound));
         }
 
-        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(DataQuery<ProductoUnidadMedidaDto>))]
+        [ProducesResponseType(StatusCodes.Status201Created, Type = typeof(DataQuery<UnidadMedidaDto>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(DataQuery<bool>))]
         [HttpPost]
-        public async Task<ActionResult> Create([FromBody] PostProductoUnidadMedidaDto dto)
+        public async Task<ActionResult> Create([FromBody] PostUnidadMedidaDto dto)
         {
             if (dto == null) return BadRequest(HelperStatus.ResponseHelper(false, HttpStatusCode.BadRequest, Messages.Result_BadRequest));
-            DataQuery<ProductoUnidadMedidaDto> result;
-            var category = _mapper.Map<ProductoUnidadMedida>(dto);
+            DataQuery<UnidadMedidaDto> result;
+            var category = _mapper.Map<UnidadMedida>(dto);
 
             var resultService = await _service.CrateAsync(category);
             if (resultService)
             {
                 var providerCrearted = await _service.GetByIdAsync(category.Id);
 
-                result = HelperStatus.ResponseHelper(_mapper.Map<ProductoUnidadMedidaDto>(providerCrearted), HttpStatusCode.Created, Messages.Result_Created);
+                result = HelperStatus.ResponseHelper(_mapper.Map<UnidadMedidaDto>(providerCrearted), HttpStatusCode.Created, Messages.Result_Created);
                 return StatusCode(StatusCodes.Status201Created, result);
             }
 
@@ -91,7 +91,7 @@ namespace Warehouse.Sol.Web.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound, Type = typeof(DataQuery<object>))]
         [ProducesResponseType(StatusCodes.Status400BadRequest, Type = typeof(DataQuery<bool>))]
         [HttpPut("{id}")]
-        public async Task<ActionResult> Update(string id, [FromBody] PutProductoUnidadMedidaDto dto)
+        public async Task<ActionResult> Update(string id, [FromBody] PutUnidadMedidaDto dto)
         {
             if (new Guid(id) != dto.Id || dto == null) return BadRequest(HelperStatus.ResponseHelper(false, HttpStatusCode.NotFound, Messages.Result_BadRequest));
 
@@ -100,7 +100,7 @@ namespace Warehouse.Sol.Web.Controllers
             if (data == null) return NotFound(HelperStatus.ResponseHelper<object>(null, HttpStatusCode.NotFound, Messages.Result_NotFound));
 
             DataQuery<bool> result;
-            var dataDto = _mapper.Map<ProductoUnidadMedida>(dto);
+            var dataDto = _mapper.Map<UnidadMedida>(dto);
             var resultService = await _service.UpdateAsync(new Guid(id), dataDto);
 
             if (resultService)

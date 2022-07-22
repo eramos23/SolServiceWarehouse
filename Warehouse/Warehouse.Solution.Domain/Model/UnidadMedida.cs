@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace Warehouse.Solution.Domain.Model
 {
-    public class ProductoUnidadMedida : HistoryModel
+    public class UnidadMedida : HistoryModel
     {
-        public ProductoUnidadMedida()
+        public UnidadMedida()
         {
             EmpresaUnidadMedidas = new List<EmpresaUnidadMedida>();
         }

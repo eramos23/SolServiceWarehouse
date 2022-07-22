@@ -18,6 +18,9 @@ import ProductBrandCreate from './pages/management/product-brand/product-brand-c
 import LaboratoryList from './pages/management/laboratory/laboratory-list'
 import LaboratoryCreate from './pages/management/laboratory/laboratory-create'
 
+import UnitMeasureList from './pages/management/unit-measure/unit-measure-list'
+import UnitMeasureCreate from './pages/management/unit-measure/unit-measure-create'
+
 
 import axios from 'axios'
 
@@ -32,6 +35,10 @@ const AppRoute = () => {
                 <Route path='/' element={<Home />} />
                 <Route path='/Counter' element={<Counter />} />
                 <Route path='/Demo' element={<Demo />} />
+
+                <Route path='/Management/Provider' element={<ProviderList />} />
+                <Route path='/Management/Provider/Create' element={<ProviderCreate />} />
+                <Route path='/Management/Provider/Edit/:id' element={<ProviderCreate />} />
 
                 <Route path='/Management/Category' element={<CategoryList />} />
                 <Route path='/Management/Category/Create' element={<CategoryCreate />} />
@@ -49,7 +56,6 @@ const AppRoute = () => {
                 <Route path='/Management/ProductBrand/Create' element={<ProductBrandCreate />} />
                 <Route path='/Management/ProductBrand/Edit/:id' element={<ProductBrandCreate />} />
 
-
                 <Route path='/Management/Laboratory' element={<LaboratoryList />} />
                 <Route path='/Management/Laboratory/Create' element={<LaboratoryCreate />} />
                 <Route path='/Management/Laboratory/Edit/:id' element={<LaboratoryCreate />} />
@@ -57,6 +63,10 @@ const AppRoute = () => {
                 <Route path='/Management/Product' element={<ProductList />} />
                 <Route path='/Management/Product/Create' element={<ProductCreate />} />
                 <Route path='/Management/Product/Edit/:id' element={<ProductCreate />} />
+
+                <Route path='/Management/UnitMeasure' element={<UnitMeasureList />} />
+                <Route path='/Management/UnitMeasure/Create' element={<UnitMeasureCreate />} />
+                <Route path='/Management/UnitMeasure/Edit/:id' element={<UnitMeasureCreate />} />
 
                 <Route path='*' element={<h1>404 Not Fount</h1>} />
             </Routes>

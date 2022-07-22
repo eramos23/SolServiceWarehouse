@@ -15,7 +15,7 @@ namespace Warehouse.Solution.Dto
         public string Nombre { get; set; }
         public List<ProductoCategoriaDto> Categorias { get; set; }
         public List<ProductoUsoDto> Usos { get; set; }
-        public List<ProductoUnidadMedidaDto> UnidadesMedida { get; set; }
+        public List<UnidadMedidaDto> UnidadesMedida { get; set; }
         public List<ProductoMarcaDto> Marcas { get; set; }
         public List<LaboratorioDto> Laboratorios { get; set; }
         public string RegistroSanitario { get; set; }

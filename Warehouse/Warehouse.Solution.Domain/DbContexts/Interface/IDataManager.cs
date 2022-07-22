@@ -16,7 +16,8 @@ namespace Warehouse.Solution.Domain.DbContexts.Interface
         IRepository<ProductoUso> ProductoUsoRepository { get; }
         IRepository<ProductoMarca> ProductoMarcaRepository { get; }
         IRepository<Laboratorio> LaboratorioRepository { get; }
-        IRepository<ProductoUnidadMedida> ProductoUnidadMedidaRepository { get; }
+        IRepository<UnidadMedida> ProductoUnidadMedidaRepository { get; }
+        IRepository<EmpresaUnidadMedida> EmpresaUnidadMedidaRepository { get; }
         WarehouseDbContext DbContext { get; }
     }
 }

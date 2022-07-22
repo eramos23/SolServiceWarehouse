@@ -1,19 +1,19 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { HomeOutlined, SearchOutlined, PlusOutlined, EditTwoTone, DeleteTwoTone } from '@ant-design/icons';
+import { HomeOutlined, SearchOutlined, PlusOutlined, EditTwoTone, DeleteTwoTone, CheckOutlined, CloseOutlined } from '@ant-design/icons';
 import { Link } from 'react-router-dom';
 import CustomEmpty from "../../../components/Empty/NoData";
-import { Breadcrumb, Typography, Input, Select, Col, Row, Space, Table, Card, Button, Form, Divider, Tag, ConfigProvider, message, Popconfirm } from 'antd';
+import { Breadcrumb, Typography, Input, Select, Col, Row, Space, Table, Card, Button, Form, Divider, Tag, ConfigProvider, message, Popconfirm, Switch } from 'antd';
 import axios from 'axios'
 
 const { Option } = Select;
 const { Title } = Typography;
 const SMART = {
-    base: "Category",
+    base: "CompanyUnitMeasure",
     company: "Management/companies",
     companyBranchs: "Management/company-branchs"
 }
 
-const CategoryList = () => {
+const UnitMeasureList = () => {
     const [form] = Form.useForm();
 
     const [searching, setSearching] = useState(false);
@@ -23,24 +23,32 @@ const CategoryList = () => {
 
     const columns = [
         {
+            title: 'Codigo',
+            dataIndex: 'codigo',
+            sorter: (a, b) => a.codigo.length - b.codigo.length
+        },
+        {
             title: 'Nombre',
             dataIndex: 'nombre',
             sorter: (a, b) => a.nombre.length - b.nombre.length
         },
         {
-            title: 'Observación',
-            dataIndex: 'observacion',
-            sorter: (a, b) => a.nombre.length - b.nombre.length
+            title: 'Descripcion',
+            dataIndex: 'descripcion',
+            sorter: (a, b) => a.descripcion.length - b.descripcion.length
         },
         {
-            title: 'Estado',
-            dataIndex: 'estado',
-            sorter: (a, b) => a.estado.nombre.length - b.estado.nombre.length,
+            title: 'En Uso',
+            dataIndex: 'enUso',
+            sorter: (a, b) => a.enUso - b.enUso,
             align: 'center',
-            render: (estado) => (
-                <Tag color={estado.id == 1 ? 'success' : 'error'} key={estado.nombre}>
-                    {estado.nombre}
-                </Tag>
+            render: (enUso) => (
+                <Switch size="small"
+                    checkedChildren={<CheckOutlined />}
+                    unCheckedChildren={<CloseOutlined />}
+                    defaultChecked={enUso ? true : false}
+                    onClick={() => onUse() }
+                />
             )
         },
         {
@@ -50,21 +58,27 @@ const CategoryList = () => {
             align: 'center',
             render: (text,data, key) =>
                 <>
-                    <Link to={`/Management/Category/Edit/${data.id}`}><Button size="small" icon={<EditTwoTone />} /> {"  "}</Link>
-                    <Popconfirm
-                        title="¿Quieres eliminar este registro?"
-                        onConfirm={() => onDelete(data.id)}
-                        okText="Si"
-                        cancelText="Cancelar"
-                    >
-                        <Button size="small" icon={<DeleteTwoTone twoToneColor="#ff4d4f" />} />
-                    </Popconfirm>
+                    <Link to={`/Management/CompanyUnitMeasure/Edit/${data.id}`}><Button size="small" icon={<EditTwoTone />} /> {"  "}</Link>
+                    {data.id || 
+                        <Popconfirm
+                            title="¿Quieres eliminar este registro?"
+                            onConfirm={() => onDelete(data.id)}
+                            okText="Si"
+                            cancelText="Cancelar"
+                        >
+                            <Button size="small" icon={<DeleteTwoTone twoToneColor="#ff4d4f" />} />
+                        </Popconfirm>
+                    }
                 </>
         },
     ];
     
     const onChangeTable = (pagination, filters, sorter, extra) => {
         console.log('params', pagination, filters, sorter, extra);
+    };
+
+    const onUse = (data, aldo) => {
+        debugger
     };
 
     const onDelete = (id) => {
@@ -125,6 +139,7 @@ const CategoryList = () => {
             })
         handleSeach()
     }, [])
+
     return (
         <div>
             <Breadcrumb className="breadcrumb-margin">
@@ -132,10 +147,10 @@ const CategoryList = () => {
                     <HomeOutlined />
                 </Breadcrumb.Item>
                 <Breadcrumb.Item>Administración</Breadcrumb.Item>
-                <Breadcrumb.Item>Categoria</Breadcrumb.Item>
+                <Breadcrumb.Item>Unidad de Medida</Breadcrumb.Item>
                 <Breadcrumb.Item>Listar</Breadcrumb.Item>
             </Breadcrumb>
-            <Title level={3}>Listado de Categorías</Title>
+            <Title level={3}>Listado de Unidades de Medida</Title>
             <ConfigProvider renderEmpty={CustomEmpty}>
             <Card size="small">
                 <Form
@@ -233,4 +248,4 @@ const CategoryList = () => {
     );
 };
 
-export default CategoryList
+export default UnitMeasureList

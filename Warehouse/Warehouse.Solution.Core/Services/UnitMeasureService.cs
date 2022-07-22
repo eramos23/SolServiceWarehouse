@@ -11,24 +11,24 @@ using Warehouse.Solution.Dto.Filters;
 
 namespace Warehouse.Solution.Core.Services
 {
-    public class ProductUnitMeasureService : IProductUnitMeasureService
+    public class UnitMeasureService : IUnitMeasureService
     {
         private readonly IDataManager DataManager;
-        public ProductUnitMeasureService(IDataManager dataManager)
+        public UnitMeasureService(IDataManager dataManager)
         {
             DataManager = dataManager;
         }
 
-        public async Task<ProductoUnidadMedida> GetByIdAsync(Guid id)
+        public async Task<UnidadMedida> GetByIdAsync(Guid id)
         {
             var unitMeasurement = await DataManager.DbContext.UnidadMedida
                                     .FirstOrDefaultAsync(ci => ci.Id == id);
             return unitMeasurement;
         }
 
-        public async Task<List<ProductoUnidadMedida>> GetAllAsync(Filter filterDto)
+        public async Task<List<UnidadMedida>> GetAllAsync(Filter filterDto)
         {
-            IQueryable<ProductoUnidadMedida> query = DataManager.ProductoUnidadMedidaRepository.GetQueryable()
+            IQueryable<UnidadMedida> query = DataManager.ProductoUnidadMedidaRepository.GetQueryable()
                                                     .Include(c => c.Estado);
             /*
             if (!string.IsNullOrEmpty(filterDto.IdEmpresa))
@@ -44,7 +44,7 @@ namespace Warehouse.Solution.Core.Services
             return await query.ToListAsync();
         }
 
-        public async Task<bool> CrateAsync(ProductoUnidadMedida model)
+        public async Task<bool> CrateAsync(UnidadMedida model)
         {
             try
             {
@@ -58,7 +58,7 @@ namespace Warehouse.Solution.Core.Services
             }
         }
 
-        public async Task<bool> UpdateAsync(Guid id, ProductoUnidadMedida model)
+        public async Task<bool> UpdateAsync(Guid id, UnidadMedida model)
         {
             var entity = await GetByIdAsync(id);
             if (model != null)
